@@ -14,6 +14,7 @@ set buildReport=ctc_build.log
 set tmpFile=tmp.tmp
 set symFile=MON.sym
 set covFile=MON.dat
+set eCode=0
 
 rem make sure Bullseye Coverage is off
 cov01 -qs | grep -c "enabled" > %tmpFile%
@@ -33,14 +34,21 @@ if exist %symFile% rm -f %symFile%
 if exist %covFile% rm -f %covFile%
 nmake.exe clean
 echo - build
-nmake.exe
+nmake.exe > %buildReport% 2>&1
+if not exist %executable% (
+    echo - build failed
+    cat %buildReport%
+    set eCode=1
+    goto end
+) else (
+    rm -f %buildReport%
+)
 
 echo - run
 call %executable%
 echo - report
 call ctcreport.exe -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o html_ctc >NUL
-@REM call ctcreport.exe -nsb -measures f,mcdc -o html_ctc >NUL
-if %_covEnabled% == 1 (
-    echo - restore Bullseye Coverage
-    call cov01 -q --on
-)
+:end
+if %_covEnabled% == 1 call cov01 -q --on
+
+exit /b %eCode%

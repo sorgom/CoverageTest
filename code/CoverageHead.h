@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #ifndef COVERAGEHEAD_H
 #define COVERAGEHEAD_H
 

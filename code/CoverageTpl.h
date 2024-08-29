@@ -1,0 +1,16 @@
+#ifndef COVERAGETPL_H
+#define COVERAGETPL_H
+
+template <int I, bool B>
+class CoverageTpl
+{
+public:
+    CoverageTpl() = default;
+    inline static bool isNeg() { return IsNeg || I < 0; }
+    inline static int val() { return IsNeg ? Val : -Val; }
+private:
+    static const bool IsNeg = B && I < 0;
+    static const int Val = B ? I : -I;
+};
+
+#endif // _H
