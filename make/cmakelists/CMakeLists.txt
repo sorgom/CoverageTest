@@ -42,9 +42,7 @@ set(CMAKE_CXX_COMPILER "ctc")
 # Damit auch die Header Dateien mit einbezogen werden, muss in der ctc.ini
 # EXCLUDE = 
 # also leer stehen 
-set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\modules\\*\" -v -i m cl -c")
-
-# add_definitions(-Dfar= " " -Dnear= " " -DCPM32_USE_CLIB -DSW_RELEASE=0 -DSW_UPDATE=0 -DSW_REPAIR=0 -DSW_BUILD=0)
+set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\code\\*\" -i m cl -c")
 
 find_library (
     CtcWin

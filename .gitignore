@@ -43,3 +43,4 @@ MON.*
 Makefile
 *.make
 *.vcxproj.user
+*.log

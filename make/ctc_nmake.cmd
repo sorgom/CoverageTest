@@ -47,7 +47,8 @@ if not exist %executable% (
 echo - run
 call %executable%
 echo - report
-call ctcreport.exe -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o html_ctc >NUL
+call ctcreport.exe -nsb -t 25 -restrict-to-files "*/code/*" -measures f,mcdc -o html_ctc >NUL
+echo - report returned: %errorlevel%
 :end
 if %_covEnabled% == 1 call cov01 -q --on
 

@@ -9,7 +9,9 @@ cd %myDir%
 set codeDir=%repoDir%\code
 set solution=CoverageTest.sln
 set trg=CoverageTest
-set buildParams=-p:TrackFileAccess=false
+set msbuildParams=-p:TrackFileAccess=false
+@REM set ctclaunchParams=-C \"NO_EXCLUDE+*\\code\\*\" -v -i m cl 
+set ctclaunchParams=-i m
 set executable=exe\CoverageTest.exe
 set buildReport=ctc_build.log
 set tmpFile=tmp.tmp
@@ -26,7 +28,7 @@ call msbuild /t:clean %solution% >NUL 2>&1
 if exist %symFile% rm -f %symFile%
 if exist %covFile% rm -f %covFile%
 echo - build
-call ctclaunch -i m msbuild %solution% /t:%trg% %buildParams% > %buildReport% 2>&1
+call ctclaunch %ctclaunchParams% msbuild %solution% /t:%trg% %msbuildParams% > %buildReport% 2>&1
 if not exist %executable% (
     echo - build failed
     cat %buildReport%
