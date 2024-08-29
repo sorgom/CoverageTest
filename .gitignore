@@ -40,3 +40,6 @@ bin
 build
 html_*
 MON.*
+Makefile
+*.make
+*.vcxproj.user

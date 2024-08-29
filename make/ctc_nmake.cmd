@@ -16,7 +16,7 @@ set symFile=MON.sym
 set covFile=MON.dat
 
 rem make sure Bullseye Coverage is off
-cov01 -qs | grep -c "Coverage build enabled" > %tmpFile%
+cov01 -qs | grep -c "enabled" > %tmpFile%
 set /p _covEnabled=<%tmpFile%
 rm -f %tmpFile%
 call cov01 -q --off
