@@ -10,17 +10,19 @@ workspace 'CoverageTest'
     configurations { 'ci', 'debug' }
     language 'C++'
     
+    location '../build'
+
     includedirs { '../test', '../code' }
 
     filter { 'action:vs*' }
-        objdir  '../build/obj/vs/%{prj.name}/%{cfg.name}'
-        targetdir '../build/exe'
+        objdir  'obj/vs/%{prj.name}/%{cfg.name}'
+        targetdir 'exe'
         warnings 'high'
         buildoptions { buildoptions_vs }
 
     filter { 'action:gmake*' }
-        objdir '../build/obj/gcc/%{prj.name}/%{cfg.name}'
-        targetdir '../build/bin'
+        objdir 'obj/gcc/%{prj.name}/%{cfg.name}'
+        targetdir 'bin'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:ci' }

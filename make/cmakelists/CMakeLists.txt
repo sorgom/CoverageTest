@@ -43,6 +43,7 @@ set(CMAKE_CXX_COMPILER "ctc")
 # EXCLUDE = 
 # also leer stehen 
 set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\code\\*\" -i m cl -c")
+# set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\code\\*\" cl -c")
 
 find_library (
     CtcWin

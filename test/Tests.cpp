@@ -1,5 +1,6 @@
 #include <CoverageHead.h>
-#include <CoverageMacro.h>
+#include <CoverageOneFunc.h>
+// #include <CoverageMacro.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>
 
@@ -67,21 +68,21 @@ void Test03()
 
 void Test04()
 {
-    cout << "- Test04" << endl;
+    // cout << "- Test04" << endl;
 
-    int i = 0;
-    bool b = false;
+    // int i = 0;
+    // bool b = false;
 
-    CoverageMacro cm;
+    // CoverageMacro cm;
 
-    b = cm.getBool();
-    i = cm.getInt1();
-    i = cm.getInt2();
+    // b = cm.getBool();
+    // i = cm.getInt1();
+    // i = cm.getInt2();
 
-    CoverageMacroMcp cmm;
-    cmm.setInt2(0);
+    // CoverageMacroMcp cmm;
+    // cmm.setInt2(0);
 
-    use(b, i);
+    // use(b, i);
 }
 
 int main()
