@@ -76,14 +76,12 @@ public:
     }
 
     //  for loop
-    int sum(const int lim) const
+    void forLoop(const int lim) const
     {
-        int sum = 0;
         for (int i = 0;	(i < mInt) and (i < lim); ++i)
         {
-            sum += i;
+            use(i);
         }
-        return sum;
     }
 
     //  switch case single return
@@ -140,6 +138,18 @@ public:
         
         use(c1, c2, c3, c4);
 
+        //  const mcp constructors
+        //  ternary
+        const int c5 { a > b ? a : b };
+        //  simple boolean
+        const bool c6 { a > 0 };
+        //  boolean and
+        const bool c7 {c2 and b > 0};
+        //  boolean or
+        const bool c8 {c2 or b > 0};
+        
+        use(c5, c6, c7, c8);
+
         //  non const assignment constructors
         //  ternary
         int v1 = a > b ? a : b;
@@ -149,6 +159,18 @@ public:
         bool v3 = v2 and b > 0;
         //  boolean or
         bool v4 = v2 or b > 0;
+
+        //  non const mcp constructors
+        //  ternary
+        int v5 { a > b ? a : b };
+        //  simple boolean
+        bool v6 { a > 0 };
+        //  boolean and
+        bool v7 { v2 and b > 0 };
+        //  boolean or
+        bool v8 { v2 or b > 0 };
+
+        use(v5, v6, v7, v8);
 
         //  non const assignments
         //  ternary
@@ -163,7 +185,7 @@ public:
         use(v1, v2, v3, v4);
     }
 
-    int ifelse(const int i, const bool b = false) const
+    int ifElse(const int i, const bool b = false) const
     {
         int ret = -1;
         // bool var
@@ -192,6 +214,24 @@ public:
         }
         return ret;
     }
+
+    void tryCatch(const int i) const
+    {
+        try
+        {
+            if (i == mInt)
+            {
+                throw 0;
+            }
+        }
+        catch (int e)
+        {
+            use(e);
+        }
+    }
+
+    inline bool getBool() const { return mBool; }
+    inline int getInt() const { return mInt; }
 
 private:
     const bool mBool;

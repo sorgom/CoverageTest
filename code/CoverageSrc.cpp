@@ -75,14 +75,12 @@ bool CoverageSrc::noVal() const
 }
 
 //  for loop
-int CoverageSrc::sum(const int lim) const
+void CoverageSrc::forLoop(const int lim) const
 {
-    int sum = 0;
     for (int i = 0; (i < mInt) and (i < lim); ++i)
     {
-	    sum += i;
+	    use(i);
     }
-    return sum;
 }
 
 //  switch case single return
@@ -164,7 +162,7 @@ void CoverageSrc::assignments(const int a, const int b) const
     use(v1, v2, v3, v4);
 }
 
-int CoverageSrc::ifelse(const int i, const bool b) const
+int CoverageSrc::ifElse(const int i, const bool b) const
 {
     int ret = -1;
     // bool var
@@ -192,4 +190,19 @@ int CoverageSrc::ifelse(const int i, const bool b) const
 	    ret = 3;
     }
     return ret;
+}
+
+void CoverageSrc::tryCatch(const int i) const
+{
+    try
+    {
+        if (i == mInt)
+        {
+            throw 0;
+        }
+    }
+    catch (int e)
+    {
+        use(e);
+    }
 }

@@ -15,7 +15,27 @@ void Test01()
     CoverageHead ch2(22);
     CoverageHead ch3(33, true);
 
-    use(ch1, ch2, ch3);
+    int i = 0;
+    bool b = false;
+
+    b = ch1 == ch2;
+    b = ch1 != ch3;
+    b = ch1 < ch2;
+
+    i = ch1.realVal();
+    b = ch2.hasVal1();
+    b = ch3.hasVal2();
+    b = ch1.hasVal3();
+    b = ch2.noVal();
+
+    ch1.forLoop(10);
+    i = ch3.switchCaseSingle(1);
+    i = ch1.switchCaseMulti(1);
+    ch2.assignments(1, 2);
+
+    i = ch2.ifElse(0, true);
+    ch3.tryCatch(22);
+    ch1.tryCatch(ch1.getInt());
 }
 
 void Test02()

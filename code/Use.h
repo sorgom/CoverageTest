@@ -10,6 +10,4 @@ template <typename... Args>
 inline void use(const Args&... args)
 {}
 
-// #define eq ==
-
 #endif // _H
