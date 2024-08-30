@@ -13,14 +13,14 @@ workspace 'CoverageTest'
     includedirs { '../test', '../code' }
 
     filter { 'action:vs*' }
-        objdir 'obj/vs/%{prj.name}/%{cfg.name}'
-        targetdir 'exe'
+        objdir  '../build/obj/vs/%{prj.name}/%{cfg.name}'
+        targetdir '../build/exe'
         warnings 'high'
         buildoptions { buildoptions_vs }
 
     filter { 'action:gmake*' }
-        objdir 'obj/gcc/%{prj.name}/%{cfg.name}'
-        targetdir 'bin'
+        objdir '../build/obj/gcc/%{prj.name}/%{cfg.name}'
+        targetdir '../build/bin'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:ci' }
