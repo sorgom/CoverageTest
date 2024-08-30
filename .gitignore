@@ -43,4 +43,6 @@ MON.*
 Makefile
 *.make
 *.vcxproj.user
+*.vcxproj.filters
 *.log
+tmp*

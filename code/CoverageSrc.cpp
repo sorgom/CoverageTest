@@ -1,34 +1,35 @@
 
 #include <CoverageSrc.h>
+#include <Use.h>
 
-CoverageSrc::CoverageSrc(bool b):
+CoverageSrc::CoverageSrc(const bool b):
     mBool(b),
     // ternary constructor
     mInt(b ? 1 : 0)
 {}
 
-CoverageSrc::CoverageSrc(int i):
+CoverageSrc::CoverageSrc(const int i):
     // simple boolean constructor
     mBool(i != 0),
     mInt(i)
 {}
 
-CoverageSrc::CoverageSrc(int i, bool b):
+CoverageSrc::CoverageSrc(const int i, const bool b):
     // constructor and
-    mBool(b && i != 0),
+    mBool(b and i != 0),
     mInt(i)
 {}
 
 //  return and
 bool CoverageSrc::operator==(const CoverageSrc& other) const
 {
-    return mBool == other.mBool && mInt == other.mInt;
+    return mBool == other.mBool and mInt == other.mInt;
 }
 
 //  return or
 bool CoverageSrc::operator!=(const CoverageSrc& other) const
 {
-    return mBool != other.mBool || mInt != other.mInt;
+    return mBool != other.mBool or mInt != other.mInt;
 }
 
 //  return simple bool
@@ -44,7 +45,7 @@ int CoverageSrc::realVal() const
 }
 
 //  boolean parameter
-bool CoverageSrc::isTrue(bool b)
+bool CoverageSrc::isTrue(const bool b)
 {
     return b;
 }
@@ -64,20 +65,20 @@ bool CoverageSrc::hasVal2() const
 //  boolean call and
 bool CoverageSrc::hasVal3() const
 {
-    return isTrue(mBool && mInt > 0);
+    return isTrue(mBool and mInt > 0);
 }
 
 //  boolean call or
 bool CoverageSrc::noVal() const
 {
-    return isTrue((!mBool) || mInt == 0);
+    return isTrue((!mBool) or mInt == 0);
 }
 
 //  for loop
-int CoverageSrc::sum(int lim) const
+int CoverageSrc::sum(const int lim) const
 {
     int sum = 0;
-    for (int i = 0; (i < mInt) && (i < lim); ++i)
+    for (int i = 0; (i < mInt) and (i < lim); ++i)
     {
 	    sum += i;
     }
@@ -85,10 +86,10 @@ int CoverageSrc::sum(int lim) const
 }
 
 //  switch case single return
-int CoverageSrc::switchCaseSingle(const int val) const
+int CoverageSrc::switchCaseSingle(const int i) const
 {
     int res = -1;
-    switch (val)
+    switch (i)
     {
 	case 0:
 	    res = 0;
@@ -104,9 +105,9 @@ int CoverageSrc::switchCaseSingle(const int val) const
 }
 
 //  switch case multiple return (not allowed with SIL4)
-int CoverageSrc::switchCaseMulti(const int val) const
+int CoverageSrc::switchCaseMulti(const int i) const
 {
-    switch (val)
+    switch (i)
     {
 	case 0:
 	    return 0;
@@ -124,7 +125,7 @@ int CoverageSrc::switchCaseMulti(const int val) const
     #pragma BullseyeCoverage on
 }
 
-void CoverageSrc::assignments(int a, int b) const
+void CoverageSrc::assignments(const int a, const int b) const
 {
     //  const assignment constructors
     //  ternary
@@ -132,9 +133,11 @@ void CoverageSrc::assignments(int a, int b) const
     //  simple boolean
     const bool c2 = a > 0;
     //  boolean and
-    const bool c3 = c2 && b > 0;
+    const bool c3 = c2 and b > 0;
     //  boolean or
-    const bool c4 = c2 || b > 0;
+    const bool c4 = c2 or b > 0;
+
+    use(c1, c2, c3, c4);
 
     //  non const assignment constructors
     //  ternary
@@ -142,9 +145,11 @@ void CoverageSrc::assignments(int a, int b) const
     //  simple boolean
     bool v2 = a > 0;
     //  boolean and
-    bool v3 = v2 && b > 0;
+    bool v3 = v2 and b > 0;
     //  boolean or
-    bool v4 = v2 || b > 0;
+    bool v4 = v2 or b > 0;
+
+    use(v1, v2, v3, v4);
 
     //  non const assignments
     //  ternary
@@ -152,26 +157,33 @@ void CoverageSrc::assignments(int a, int b) const
     //  simple boolean
     v2 = a < 0;
     //  boolean and
-    v3 = v2 && b < 0;
+    v3 = v2 and b < 0;
     //  boolean or
-    v4 = v2 || b < 0;
+    v4 = v2 or b < 0;
+
+    use(v1, v2, v3, v4);
 }
 
-int CoverageSrc::ifelse(int val) const
+int CoverageSrc::ifelse(const int i, const bool b) const
 {
     int ret = -1;
-    // simple bool
-    if (val == 0)
+    // bool var
+    if (b)
     {
-	    ret = 0;
+        ret = 10;
+    }
+    // simple bool
+    else if (i == 0)
+    {
+        ret = 0;
     }
     // bool and
-    else if (mBool && val == 1)
+    else if (mBool and i == 1)
     {
 	    ret = 1;
     }
     // bool or
-    else if ((!mBool) || val < 0)
+    else if ((!mBool) or i < 0)
     {
 	    ret = 2;
     }

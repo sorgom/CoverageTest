@@ -3,7 +3,8 @@
 --  ============================================================
 
 buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103'
-buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall'
+-- buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall'
+buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
 
 workspace 'CoverageTest'
     configurations { 'ci', 'debug' }

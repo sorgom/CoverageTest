@@ -6,10 +6,10 @@ class CoverageTpl
 {
 public:
     CoverageTpl() = default;
-    inline static bool isNeg() { return IsNeg || I < 0; }
+    inline static bool isNeg() { return IsNeg or I < 0; }
     inline static int val() { return IsNeg ? Val : -Val; }
 private:
-    static const bool IsNeg = B && I < 0;
+    static const bool IsNeg = B and I < 0;
     static const int Val = B ? I : -I;
 };
 

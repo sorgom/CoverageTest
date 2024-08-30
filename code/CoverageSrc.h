@@ -1,6 +1,8 @@
-// #pragma once
+#pragma once
 #ifndef COVERAGESRC_H
 #define COVERAGESRC_H
+
+#include <Use.h>
 
 class CoverageSrc
 {
@@ -36,7 +38,7 @@ public:
     //  switch case multiple return (not allowed with SIL4)
     int switchCaseMulti(const int val) const;
     void assignments(int a, int b) const;
-    int ifelse(int val) const;
+    int ifelse(int i, bool b = false) const;
 
     inline bool getBool() const { return mBool; }
 
