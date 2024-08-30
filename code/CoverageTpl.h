@@ -1,3 +1,4 @@
+#pragma once
 #ifndef COVERAGETPL_H
 #define COVERAGETPL_H
 

@@ -1,4 +1,5 @@
 #include <CoverageHead.h>
+#include <CoverageMacro.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>
 
@@ -36,6 +37,8 @@ void Test01()
     i = ch2.ifElse(0, true);
     ch3.tryCatch(22);
     ch1.tryCatch(ch1.getInt());
+
+    use(b, i);
 }
 
 void Test02()
@@ -62,10 +65,30 @@ void Test03()
     use(b1, i1);
 }
 
+void Test04()
+{
+    cout << "- Test04" << endl;
+
+    int i = 0;
+    bool b = false;
+
+    CoverageMacro cm;
+
+    b = cm.getBool();
+    i = cm.getInt1();
+    i = cm.getInt2();
+
+    CoverageMacroMcp cmm;
+    cmm.setInt2(0);
+
+    use(b, i);
+}
+
 int main()
 {
     Test01();
     Test02();
     Test03();
+    Test04();
     return 0;
 }
