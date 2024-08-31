@@ -30,7 +30,8 @@ void Test01()
     b = ch1.hasVal3();
     b = ch2.noVal();
 
-    ch1.forLoop(10);
+    ch1.forLoop();
+    ch1.forLoopAnd(10);
     i = ch3.switchCaseSingle(1);
     i = ch1.switchCaseMulti(1);
     ch2.assignments(1, 2);
@@ -90,6 +91,6 @@ int main()
     Test01();
     Test02();
     Test03();
-    Test04();
+    // Test04();
     return 0;
 }

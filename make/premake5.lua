@@ -10,7 +10,7 @@ workspace 'CoverageTest'
     configurations { 'ci', 'debug' }
     language 'C++'
     
-    location '../build'
+    -- location '../build'
 
     includedirs { '../test', '../code' }
 
