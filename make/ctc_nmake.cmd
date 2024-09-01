@@ -22,7 +22,7 @@ set /p _covEnabled=<%tmpFile%
 rm -f %tmpFile%
 call cov01 -q --off
 
-if exist %buildDir% rm -f %buildDir%
+if exist %buildDir% rm -rf %buildDir%
 mkdir %buildDir%
 cd %buildDir%
 echo - gen

@@ -1,6 +1,6 @@
 #include <CoverageHead.h>
-#include <CoverageOneFunc.h>
 // #include <CoverageMacro.h>
+#include <CoverageOneFunc.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>
 
@@ -30,8 +30,7 @@ void Test01()
     b = ch1.hasVal3();
     b = ch2.noVal();
 
-    ch1.forLoop();
-    ch1.forLoopAnd(10);
+    ch1.forLoop(10);
     i = ch3.switchCaseSingle(1);
     i = ch1.switchCaseMulti(1);
     ch2.assignments(1, 2);
@@ -67,30 +66,10 @@ void Test03()
     use(b1, i1);
 }
 
-void Test04()
-{
-    // cout << "- Test04" << endl;
-
-    // int i = 0;
-    // bool b = false;
-
-    // CoverageMacro cm;
-
-    // b = cm.getBool();
-    // i = cm.getInt1();
-    // i = cm.getInt2();
-
-    // CoverageMacroMcp cmm;
-    // cmm.setInt2(0);
-
-    // use(b, i);
-}
-
 int main()
 {
     Test01();
     Test02();
     Test03();
-    // Test04();
     return 0;
 }

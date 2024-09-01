@@ -32,9 +32,10 @@ public:
     //  for loop
     void forLoop(int lim) const;
     //  switch case single return
-    int switchCaseSingle(const int val) const;
+    int switchCaseSingle(int val) const;
     //  switch case multiple return (not allowed with SIL4)
-    int switchCaseMulti(const int val) const;
+    int switchCaseMulti(int val) const;
+
     void assignments(int a, int b) const;
     int ifElse(int i, bool b = false) const;
     void tryCatch(int i) const;

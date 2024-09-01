@@ -29,16 +29,19 @@ public:
     {
     	return mBool == other.mBool and mInt == other.mInt;
     }
+
     //  return or
     inline bool operator!=(const CoverageHead& other) const
     {
 	    return mBool != other.mBool or mInt != other.mInt;
     }
+
     //  return simple bool
     inline bool operator<(const CoverageHead& other) const
     {
 	    return mInt < other.mInt;
     }
+
     //  return ternary
     inline int realVal() const
     {
@@ -76,17 +79,12 @@ public:
     }
 
     //  for loop
-    void forLoop() const
+    void forLoop(const int lim) const
     {
         for (int i = 0;	i < mInt; ++i)
         {
             use(i);
         }
-    }
-    
-    //  for loop and
-    void forLoopAnd(const int lim) const
-    {
         for (int i = 0;	(i < mInt) and (i < lim); ++i)
         {
             use(i);
@@ -246,6 +244,5 @@ private:
     const bool mBool;
     const int mInt;
 };
-
 
 #endif // _H

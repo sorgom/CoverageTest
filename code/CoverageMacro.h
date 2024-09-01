@@ -1,10 +1,9 @@
+
 #pragma once
 #ifndef COVERAGEMACRO_H
 #define COVERAGEMACRO_H
 
-#include <Use.h>
-
-#define MEMB(TYPE, NAME, VAL) \
+#define MEMBER(TYPE, NAME, VAL) \
 private: \
     TYPE m ## NAME = VAL; \
 public: \
@@ -15,18 +14,9 @@ class CoverageMacro
 {
 public:
     inline CoverageMacro() {}
-    MEMB(bool, Bool, false)
-    MEMB(int, Int1, 11)
-    MEMB(int, Int2, 22)
-};
-
-class CoverageMacroMcp
-{
-public:
-    inline CoverageMacroMcp() = default;
-    MEMB(bool, Bool, false)
-    MEMB(int, Int1, 11)
-    MEMB(int, Int2, 22)
+    MEMBER(bool, Bool, false)
+    MEMBER(int, Int, 11)
 };
 
 #endif // _H
+

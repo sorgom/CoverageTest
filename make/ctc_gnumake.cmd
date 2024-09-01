@@ -15,7 +15,7 @@ set tmpFile=tmp.tmp
 set symFile=MON.sym
 set covFile=MON.dat
 set eCode=0
-set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m 
+set ctclaunchParams=-C "NO_EXCLUDE+*%codeDir%/*" -C "CONST_INSTR = ON" -i m 
 
 rem make sure Bullseye Coverage is off
 cov01 -qs | grep -c "enabled" > %tmpFile%
@@ -26,7 +26,9 @@ call cov01 -q --off
 if exist %symFile% rm -f %symFile%
 if exist %covFile% rm -f %covFile%
 
-call gnumake -f %makefile% clean
+echo - clean
+call gnumake -f %makefile% clean >NUL 2>&1
+echo - build
 call ctclaunch %ctclaunchParams% gnumake -j -f %makefile% > %buildReport% 2>&1
 
 if not exist %executable% (
@@ -43,7 +45,7 @@ call %executable%
 echo - report
 call ctcreport.exe -nsb -t 25 -restrict-to-files "*/code/*" -measures f,mcdc -o html_ctc >NUL
 echo - report returned: %errorlevel%
+
 :end
 if %_covEnabled% == 1 call cov01 -q --on
-
 exit /b %eCode%

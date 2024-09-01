@@ -77,6 +77,10 @@ bool CoverageSrc::noVal() const
 //  for loop
 void CoverageSrc::forLoop(const int lim) const
 {
+    for (int i = 0;	i < mInt; ++i)
+    {
+        use(i);
+    }
     for (int i = 0; (i < mInt) and (i < lim); ++i)
     {
 	    use(i);
