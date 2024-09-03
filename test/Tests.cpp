@@ -63,7 +63,9 @@ void Test03()
     bool b1 = ct1.isNeg();
     int  i1 = ct1.val();
 
-    use(b1, i1);
+    ByteBuffer<long int, short> bb1;
+
+    use(b1, i1, bb1);
 }
 
 int main()
