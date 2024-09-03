@@ -30,3 +30,19 @@
 *.exe
 *.out
 *.app
+
+# make
+.vs
+.vscode
+exe
+obj
+bin
+build
+html_*
+MON.*
+Makefile
+*.make
+*.vcxproj.user
+*.vcxproj.filters
+*.log
+tmp*
