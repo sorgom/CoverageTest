@@ -3,21 +3,24 @@
 #include <Use.h>
 
 CoverageSrc::CoverageSrc(const bool b):
-    mBool(b),
+    mBool{b},
     // ternary constructor
-    mInt(b ? 1 : 0)
+    mInt{b ? 1 : 0},
+    mStruct{b, b, 0}
 {}
 
 CoverageSrc::CoverageSrc(const int i):
     // simple boolean constructor
-    mBool(i != 0),
-    mInt(i)
+    mBool{i != 0},
+    mInt{i},
+    mStruct{i < 0, i > 0, i}
 {}
 
 CoverageSrc::CoverageSrc(const int i, const bool b):
     // constructor and
-    mBool(b and i != 0),
-    mInt(i)
+    mBool{b and i != 0},
+    mInt{i},
+    mStruct{b and i < 0, b or i > 0, b ? 1 : 0}
 {}
 
 //  return and

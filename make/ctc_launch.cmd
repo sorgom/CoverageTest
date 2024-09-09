@@ -1,28 +1,26 @@
 @echo off
 SETLOCAL
+set _me=%~n0
+call %~dp0ctc_setup.cmd
 
-cd /d %~dp0
-set myDir=%cd%
-cd ..
-set repoDir=%cd%
-cd %myDir%
-set codeDir=%repoDir%\code
-set solution=CoverageTest.sln
-set trg=CoverageTest
-set msbuildParams=-p:TrackFileAccess=false
-set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -i m 
-@REM set ctclaunchParams=-i m
-set executable=exe\CoverageTest.exe
-set buildReport=ctc_build.log
-set tmpFile=tmp.tmp
-set symFile=MON.sym
-set covFile=MON.dat
-set eCode=0
+@REM cd /d %~dp0
+@REM set myDir=%cd%
+@REM cd ..
+@REM set repoDir=%cd%
+@REM cd %myDir%
+@REM set codeDir=%repoDir%\code
+@REM set solution=CoverageTest.sln
+@REM set trg=CoverageTest
+@REM set msbuildParams=-p:TrackFileAccess=false
+@REM set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m 
+@REM set executable=exe\CoverageTest.exe
+@REM set buildReport=ctc_build.log
+@REM set tmpFile=tmp.tmp
+@REM set symFile=MON.sym
+@REM set covFile=MON.dat
+@REM set eCode=0
 
-cov01 -qs | grep -c "enabled" > %tmpFile%
-set /p _covEnabled=<%tmpFile%
-rm -f %tmpFile%
-call cov01 -q --off
+call be_off.cmd
 echo - clean
 call msbuild /t:clean %solution% >NUL 2>&1
 if exist %symFile% rm -f %symFile%
@@ -42,6 +40,5 @@ call %executable%
 echo - report
 call ctcreport.exe -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o %myDir%\html_ctc >NUL
 :end
-if %_covEnabled% == 1 call cov01 -q --on
-
+call be_restore.cmd
 exit /b %eCode%

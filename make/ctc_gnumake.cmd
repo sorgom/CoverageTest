@@ -1,28 +1,9 @@
 @echo off
 SETLOCAL
+set _me=%~n0
+call %~dp0ctc_setup.cmd
 
-cd /d %~dp0
-set myDir=%cd%
-cd ..
-set repoDir=%cd%
-cd %myDir%
-set cmakeDir=%myDir%\cmakelists
-set codeDir=%repoDir%\code
-set executable=bin\CoverageTest.exe
-set makefile=CoverageTest.make
-set buildReport=ctc_build.log
-set tmpFile=tmp.tmp
-set symFile=MON.sym
-set covFile=MON.dat
-set eCode=0
-set ctclaunchParams=-C "NO_EXCLUDE+*%codeDir%/*" -C "CONST_INSTR = ON" -i m 
-
-rem make sure Bullseye Coverage is off
-cov01 -qs | grep -c "enabled" > %tmpFile%
-set /p _covEnabled=<%tmpFile%
-rm -f %tmpFile%
-call cov01 -q --off
-
+call be_off.cmd
 if exist %symFile% rm -f %symFile%
 if exist %covFile% rm -f %covFile%
 
@@ -47,5 +28,5 @@ call ctcreport.exe -nsb -t 25 -restrict-to-files "*/code/*" -measures f,mcdc -o 
 echo - report returned: %errorlevel%
 
 :end
-if %_covEnabled% == 1 call cov01 -q --on
+call be_restore.cmd
 exit /b %eCode%

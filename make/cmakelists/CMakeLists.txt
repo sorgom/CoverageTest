@@ -1,25 +1,13 @@
-#   ============================================================
 #   CMake File for CTC Coverage
 
 cmake_minimum_required(VERSION 3.7)
 
-# BEGIN DOCKER WORKAROUND (see https://stackoverflow.com/questions/56877220/how-do-i-set-compile-options-for-cmake-msvc-build-in-docker)
-# set(CMAKE_C_COMPILER_FORCED TRUE)
-# set(CMAKE_CXX_COMPILER_FORCED TRUE)
-# END DOCKER WORKAROUND
-
 set (projektName CoverageTest)
 project(${projektName})
-
-# #  Standard Linker Flags
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:MULTIPLE /DEBUG /IGNORE:4006" )
-# #  Sichere Compiler Optionen
-# set(SAVE_COMPILE_OPTONS "/Zc:threadSafeInit-")
 
 set(REPO_PATH               ${PROJECT_SOURCE_DIR}/..)
 set(CODE_PATH               ${REPO_PATH}/code)
 set(TEST_PATH               ${REPO_PATH}/test)
-set(LIBRARY_OUTPUT_PATH     ${CMAKE_CURRENT_LIST_DIR})
 set(EXECUTABLE_OUTPUT_PATH  ${CMAKE_CURRENT_LIST_DIR})
 
 include_directories (
@@ -34,16 +22,7 @@ file(GLOB allSrcs
 
 set(CMAKE_CXX_COMPILER "ctc")
 
-# Instrumentierung
-# -i f: function coverage
-# -i d: decition coverage
-# -i m: multicondition coverage
-#
-# Damit auch die Header Dateien mit einbezogen werden, muss in der ctc.ini
-# EXCLUDE = 
-# also leer stehen 
 set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\code\\*\" -C \"CONST_INSTR = ON\" -i m cl -c")
-# set(CMAKE_CXX_COMPILER_ARG1 "-C \"NO_EXCLUDE+*\\code\\*\" cl -c")
 
 find_library (
     CtcWin
@@ -53,5 +32,4 @@ find_library (
 )
 
 add_executable(${projektName} ${allSrcs})
-# target_compile_options(${projektName} PRIVATE ${SAVE_COMPILE_OPTONS})
-target_link_libraries(${projektName} ${CppUTest} ${CtcWin})
+target_link_libraries(${projektName} ${CtcWin})

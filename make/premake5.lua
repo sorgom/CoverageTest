@@ -9,20 +9,17 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
 workspace 'CoverageTest'
     configurations { 'ci', 'debug' }
     language 'C++'
+    targetdir '.'
     
-    -- location '../build'
-
     includedirs { '../test', '../code' }
 
     filter { 'action:vs*' }
         objdir  'obj/vs/%{prj.name}/%{cfg.name}'
-        targetdir 'exe'
         warnings 'high'
         buildoptions { buildoptions_vs }
 
     filter { 'action:gmake*' }
         objdir 'obj/gcc/%{prj.name}/%{cfg.name}'
-        targetdir 'bin'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:ci' }

@@ -2,6 +2,7 @@
 #ifndef COVERAGEHEAD_H
 #define COVERAGEHEAD_H
 
+#include <SomeStruct.h>
 #include <Use.h>
 
 class CoverageHead
@@ -10,36 +11,41 @@ public:
     inline CoverageHead(const bool b = false):
         mBool(b),
         // ternary constructor
-        mInt(b ? 1 : 0)
+        mInt(b ? 1 : 0),
+        mStruct{b, b, 0}
     {}
     inline CoverageHead(const int i):
-        // simple boolean constructor
+        // simple bool constructor
         mBool(i != 0),
-        mInt(i)
+        mInt(i),
+        // mcpp struct constructor bool simple
+        mStruct{i < 0, i > 0, i}
     {}
 
     inline CoverageHead(const int i, const bool b):
         // constructor and
         mBool(b and i != 0),
-        mInt(i)
+        mInt(i),
+        // mcpp struct constructor bool and / or, ternary
+        mStruct{b and i < 0, b or i > 0, b ? 1 : 0}
     {}
 
-    //  return and
+    //  return bool simple
+    inline bool operator<(const CoverageHead& other) const
+    {
+	    return mInt < other.mInt;
+    }
+
+    //  return bool and
     inline bool operator==(const CoverageHead& other) const
     {
     	return mBool == other.mBool and mInt == other.mInt;
     }
 
-    //  return or
+    //  return bool or
     inline bool operator!=(const CoverageHead& other) const
     {
 	    return mBool != other.mBool or mInt != other.mInt;
-    }
-
-    //  return simple bool
-    inline bool operator<(const CoverageHead& other) const
-    {
-	    return mInt < other.mInt;
     }
 
     //  return ternary
@@ -48,34 +54,34 @@ public:
 	    return mBool ? mInt + 1 : mInt;
     }
 
-    //  boolean parameter
+    //  bool parameter
     inline static bool isTrue(const bool b)
     {
 	    return b;
     }
 
-    //  simple boolean call
+    //  call bool simple
     inline bool hasVal1() const
     {
 	    return isTrue(mInt > 0);
     }
 
-    //  ternary call
-    inline bool hasVal2() const
-    {
-	    return isTrue(mBool ? mInt > 0 : mInt < 0);
-    }
-
-    //  boolean call and
+    //  call bool and
     inline bool hasVal3() const
     {
 	    return isTrue(mBool and mInt > 0);
     }
 
-    //  boolean call or
+    //  call bool or
     inline bool noVal() const
     {
 	    return isTrue((!mBool) or mInt == 0);
+    }
+
+    //  call bool ternary
+    inline bool hasVal2() const
+    {
+	    return isTrue(mBool ? mInt > 0 : mInt < 0);
     }
 
     //  for loop
@@ -131,65 +137,99 @@ public:
         #pragma BullseyeCoverage on
     }
 
-    void assignments(const int a, const int b) const
+    void assignments(const int i1, const int i2) const
     {
         //  const assignment constructors
+        //  simple bool
+        const bool cb1 = i1 > 0;
+        //  bool and
+        const bool cb2 = cb1 and i2 > 0;
+        //  bool or
+        const bool cb3 = cb2 or i2 > 0;
         //  ternary
-        const int c1 = a > b ? a : b;
-        //  simple boolean
-        const bool c2 = a > 0;
-        //  boolean and
-        const bool c3 = c2 and b > 0;
-        //  boolean or
-        const bool c4 = c2 or b > 0;
+        const int ci1 = cb1 ? i1 : i2;
         
-        use(c1, c2, c3, c4);
+        use(ci1, cb1, cb2, cb3);
 
         //  const mcp constructors
+        //  simple bool
+        const bool cb4 { i1 > 0 };
+        //  bool and
+        const bool cb5 {cb2 and i2 > 0};
+        //  bool or
+        const bool cb6 {cb2 or i2 > 0};
         //  ternary
-        const int c5 { a > b ? a : b };
-        //  simple boolean
-        const bool c6 { a > 0 };
-        //  boolean and
-        const bool c7 {c2 and b > 0};
-        //  boolean or
-        const bool c8 {c2 or b > 0};
+        const int ci2 { cb6 ? i1 : i2 };
         
-        use(c5, c6, c7, c8);
+        use(ci2, cb4, cb5, cb6);
 
         //  non const assignment constructors
+        //  simple bool
+        bool vb1 = i1 > 0;
+        //  bool and
+        bool vb2 = vb1 and i2 > 0;
+        //  bool or
+        bool vb3 = vb2 or i2 > 0;
         //  ternary
-        int v1 = a > b ? a : b;
-        //  simple boolean
-        bool v2 = a > 0;
-        //  boolean and
-        bool v3 = v2 and b > 0;
-        //  boolean or
-        bool v4 = v2 or b > 0;
+        int vi1 = vb3 ? i1 : i2;
 
         //  non const mcp constructors
+        //  simple bool
+        bool vb4 { i1 > 0 };
+        //  bool and
+        bool vb5 { vb2 and i2 > 0 };
+        //  bool or
+        bool vb6 { vb1 or i2 > 0 };
         //  ternary
-        int v5 { a > b ? a : b };
-        //  simple boolean
-        bool v6 { a > 0 };
-        //  boolean and
-        bool v7 { v2 and b > 0 };
-        //  boolean or
-        bool v8 { v2 or b > 0 };
-
-        use(v5, v6, v7, v8);
+        int vi2 { vb6 ? i1 : i2 };
 
         //  non const assignments
+        //  simple bool
+        vb1 = i1 < 0;
+        //  bool and
+        vb2 = vb1 and i2 < 0;
+        //  bool or
+        vb3 = vb2 or i2 < 0;
         //  ternary
-        v1 = a < b ? a : b;
-        //  simple boolean
-        v2 = a < 0;
-        //  boolean and
-        v3 = v2 and b < 0;
-        //  boolean or
-        v4 = v2 or b < 0;
+        vi1 = vb3 ? i1 : i2;
 
-        use(v1, v2, v3, v4);
+        use(vb1, vb2, vb3, vb4, vb5, vb6, vi1, vi2);
+
+        //  const struct assignment constructors
+        //  bool simple 
+        const SomeStruct cs1 = { vi2 < vi1, vi2 > vi1, vi1 };
+        //  bool and / or
+        const SomeStruct cs2 = { vb2 and vi2 > vi1, vb3 or vi2 < vi1, vi2 };
+        //  ternary
+        const SomeStruct cs3 = { vb2, vb3, vb1 ? vi1 : vi2 };
+
+        //  non const struct assignment constructors
+        //  bool simple 
+        SomeStruct vs1 = { vi2 < vi1, vi2 > vi1, vi1 };
+        //  bool and / or
+        SomeStruct vs2 = { vb2 and vi2 > vi1, vb3 or vi2 < vi1, vi2 };
+        //  ternary
+        SomeStruct vs3 = { vb2, vb3, vb1 ? vi1 : vi2 };
+
+        use(cs1, cs2, cs3, vs1, vs2, vs3);
+
+        //  mcpp const struct constructors
+        //  bool simple 
+        const SomeStruct cs4 { vi2 < vi1, vi2 > vi1, vi1 };
+        //  bool and / or
+        const SomeStruct cs5 { vb2 and vi2 > vi1, vb3 or vi2 < vi1, vi2 };
+        //  ternary
+        const SomeStruct cs6 { vb2, vb3, vb1 ? vi1 : vi2 };
+
+        //  mcpp const struct constructors
+        //  bool simple 
+        SomeStruct vs4 { vi2 < vi1, vi2 > vi1, vi1 };
+        //  bool and / or
+        SomeStruct vs5 { vb2 and vi2 > vi1, vb3 or vi2 < vi1, vi2 };
+        //  ternary
+        SomeStruct vs6 { vb2, vb3, vb1 ? vi1 : vi2 };
+
+        use(cs4, cs5, cs6, vs4, vs5, vs6);
     }
 
     int ifElse(const int i, const bool b = false) const
@@ -243,6 +283,7 @@ public:
 private:
     const bool mBool;
     const int mInt;
+    const SomeStruct mStruct;
 };
 
 #endif // _H

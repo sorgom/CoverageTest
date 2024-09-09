@@ -2,6 +2,8 @@
 #ifndef COVERAGESRC_H
 #define COVERAGESRC_H
 
+#include <SomeStruct.h>
+
 class CoverageSrc
 {
 public:
@@ -46,6 +48,7 @@ public:
 private:
     const bool mBool;
     const int mInt;
+    SomeStruct mStruct;
 };
 
 #endif // _H

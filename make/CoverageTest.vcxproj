@@ -41,14 +41,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ci|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>exe\</OutDir>
+    <OutDir>.\</OutDir>
     <IntDir>obj\vs\CoverageTest\ci\</IntDir>
     <TargetName>CoverageTest</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>exe\</OutDir>
+    <OutDir>.\</OutDir>
     <IntDir>obj\vs\CoverageTest\debug\</IntDir>
     <TargetName>CoverageTest</TargetName>
     <TargetExt>.exe</TargetExt>
