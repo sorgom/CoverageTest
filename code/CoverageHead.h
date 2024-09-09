@@ -18,7 +18,7 @@ public:
         // simple bool constructor
         mBool(i != 0),
         mInt(i),
-        // mcpp struct constructor bool simple
+        // mod cpp member struct constructor bool simple
         mStruct{i < 0, i > 0, i}
     {}
 
@@ -26,115 +26,38 @@ public:
         // constructor and
         mBool(b and i != 0),
         mInt(i),
-        // mcpp struct constructor bool and / or, ternary
+        // mod cpp member struct constructor bool and / or, ternary
         mStruct{b and i < 0, b or i > 0, b ? 1 : 0}
     {}
 
-    //  return bool simple
-    inline bool operator<(const CoverageHead& other) const
+    int ifElse(const int i, const bool b = false) const
     {
-	    return mInt < other.mInt;
-    }
-
-    //  return bool and
-    inline bool operator==(const CoverageHead& other) const
-    {
-    	return mBool == other.mBool and mInt == other.mInt;
-    }
-
-    //  return bool or
-    inline bool operator!=(const CoverageHead& other) const
-    {
-	    return mBool != other.mBool or mInt != other.mInt;
-    }
-
-    //  return ternary
-    inline int realVal() const
-    {
-	    return mBool ? mInt + 1 : mInt;
-    }
-
-    //  bool parameter
-    inline static bool isTrue(const bool b)
-    {
-	    return b;
-    }
-
-    //  call bool simple
-    inline bool hasVal1() const
-    {
-	    return isTrue(mInt > 0);
-    }
-
-    //  call bool and
-    inline bool hasVal3() const
-    {
-	    return isTrue(mBool and mInt > 0);
-    }
-
-    //  call bool or
-    inline bool noVal() const
-    {
-	    return isTrue((!mBool) or mInt == 0);
-    }
-
-    //  call bool ternary
-    inline bool hasVal2() const
-    {
-	    return isTrue(mBool ? mInt > 0 : mInt < 0);
-    }
-
-    //  for loop
-    void forLoop(const int lim) const
-    {
-        for (int i = 0;	i < mInt; ++i)
+        int ret = -1;
+        // bool var
+        if (b)
         {
-            use(i);
+            ret = 10;
         }
-        for (int i = 0;	(i < mInt) and (i < lim); ++i)
+        // simple bool
+        else if (i == 0)
         {
-            use(i);
+            ret = 0;
         }
-    }
-
-    //  switch case single return
-    int switchCaseSingle(const int i) const
-    {
-        int res = -1;
-        switch (i)
+        // bool and
+        else if (mBool and i == 1)
         {
-            case 0:
-                res = 0;
-                break;
-            case 1:
-            case 2:
-                res = 1;
-                break;
-            default:
-                break;
+            ret = 1;
         }
-        return res;
-    }
-
-    //  switch case multiple return (not allowed with SIL4)
-    int switchCaseMulti(const int i) const
-    {
-        switch (i)
+        // bool or
+        else if ((!mBool) or i < 0)
         {
-            case 0:
-                return 0;
-            case 1:
-            case 2:
-                return 1;
-            default:
-                return -1;
+            ret = 2;
         }
-        // unreachable
-        #pragma BullseyeCoverage off
-        #pragma CTC SKIP
-        return 42;
-        #pragma CTC ENDSKIP
-        #pragma BullseyeCoverage on
+        else
+        {
+            ret = 3;
+        }
+        return ret;
     }
 
     void assignments(const int i1, const int i2) const
@@ -151,7 +74,7 @@ public:
         
         use(ci1, cb1, cb2, cb3);
 
-        //  const mcp constructors
+        //  const mod cpp constructors
         //  simple bool
         const bool cb4 { i1 > 0 };
         //  bool and
@@ -173,7 +96,7 @@ public:
         //  ternary
         int vi1 = vb3 ? i1 : i2;
 
-        //  non const mcp constructors
+        //  mod cpp non const constructors
         //  simple bool
         bool vb4 { i1 > 0 };
         //  bool and
@@ -213,7 +136,7 @@ public:
 
         use(cs1, cs2, cs3, vs1, vs2, vs3);
 
-        //  mcpp const struct constructors
+        //  mod cpp const struct constructors
         //  bool simple 
         const SomeStruct cs4 { vi2 < vi1, vi2 > vi1, vi1 };
         //  bool and / or
@@ -221,7 +144,7 @@ public:
         //  ternary
         const SomeStruct cs6 { vb2, vb3, vb1 ? vi1 : vi2 };
 
-        //  mcpp const struct constructors
+        //  mod cpp const struct constructors
         //  bool simple 
         SomeStruct vs4 { vi2 < vi1, vi2 > vi1, vi1 };
         //  bool and / or
@@ -232,34 +155,118 @@ public:
         use(cs4, cs5, cs6, vs4, vs5, vs6);
     }
 
-    int ifElse(const int i, const bool b = false) const
+    //  return bool simple
+    inline bool operator<(const CoverageHead& other) const
     {
-        int ret = -1;
-        // bool var
-        if (b)
+	    return mInt < other.mInt;
+    }
+
+    //  return bool and
+    inline bool operator==(const CoverageHead& other) const
+    {
+    	return mBool == other.mBool and mInt == other.mInt;
+    }
+    //  return bool or
+    inline bool operator!=(const CoverageHead& other) const
+    {
+	    return mBool != other.mBool or mInt != other.mInt;
+    }
+    //  return ternary
+    inline int realVal() const
+    {
+	    return mBool ? mInt + 1 : mInt;
+    }
+
+    //  bool parameter
+    inline static void call(const bool b)
+    {
+	    use(b);
+    }
+
+    //  call bool simple
+    inline void callBoolSimple() const
+    {
+	    call(mInt > 0);
+    }
+    //  call bool and
+    inline void callBoolAnd() const
+    {
+	    call(mBool and mInt > 0);
+    }
+    //  call bool or
+    inline void callBoolOr() const
+    {
+	    call((!mBool) or mInt == 0);
+    }
+    //  call ternary
+    inline void callTernary() const
+    {
+	    call(mBool ? mInt > 0 : mInt < 0);
+    }
+
+    //  for loop simple
+    void forLoopSimple() const
+    {
+        for (int i = 0;	i < mInt; ++i)
         {
-            ret = 10;
+            use(i);
         }
-        // simple bool
-        else if (i == 0)
+    }
+    //  for loop and
+    void forLoopAnd(const int lim) const
+    {
+        for (int i = 0;	(i < mInt) and (i < lim); ++i)
         {
-            ret = 0;
+            use(i);
         }
-        // bool and
-        else if (mBool and i == 1)
+    }
+    //  for loop or
+    void forLoopOr(const int lim) const
+    {
+        for (int i = 0;	(i < mInt) or (i < lim); ++i)
         {
-            ret = 1;
+            use(i);
         }
-        // bool or
-        else if ((!mBool) or i < 0)
+    }
+
+    //  switch case single return
+    static int switchCaseSingle(const int i)
+    {
+        int res = -1;
+        switch (i)
         {
-            ret = 2;
+            case 0:
+                res = 0;
+                break;
+            case 1:
+            case 2:
+                res = 1;
+                break;
+            default:
+                break;
         }
-        else
+        return res;
+    }
+
+    //  switch case multiple return (not allowed with SIL4)
+    static int switchCaseMulti(const int i)
+    {
+        switch (i)
         {
-            ret = 3;
+            case 0:
+                return 0;
+            case 1:
+            case 2:
+                return 1;
+            default:
+                return -1;
         }
-        return ret;
+        // unreachable
+        #pragma BullseyeCoverage off
+        #pragma CTC SKIP
+        return 42;
+        #pragma CTC ENDSKIP
+        #pragma BullseyeCoverage on
     }
 
     void tryCatch(const int i) const

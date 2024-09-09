@@ -25,14 +25,18 @@ void Test01()
     b = ch1 < ch2;
 
     i = ch1.realVal();
-    b = ch2.hasVal1();
-    b = ch3.hasVal2();
-    b = ch1.hasVal3();
-    b = ch2.noVal();
+    ch2.callBoolSimple();
+    ch3.callBoolAnd();
+    ch1.callBoolOr();
+    ch2.callTernary();
 
-    ch1.forLoop(10);
+    ch1.forLoopSimple();
+    ch2.forLoopAnd(10);
+    ch3.forLoopOr(10);
+
     i = ch3.switchCaseSingle(1);
     i = ch1.switchCaseMulti(1);
+    
     ch2.assignments(1, 2);
 
     i = ch2.ifElse(0, true);
