@@ -14,6 +14,7 @@ public:
         mInt(b ? 1 : 0),
         mStruct{b, b, 0}
     {}
+
     inline CoverageHead(const int i):
         // simple bool constructor
         mBool(i != 0),
@@ -284,10 +285,6 @@ public:
         }
     }
 
-    inline bool getBool() const { return mBool; }
-    inline int getInt() const { return mInt; }
-
-private:
     const bool mBool;
     const int mInt;
     const SomeStruct mStruct;

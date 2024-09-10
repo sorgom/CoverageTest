@@ -1,3 +1,6 @@
+@echo off
+rem common setuo for CTC scripts 
+rem avoid env polution by call of this sctipt
 if "%_me%" == "" exit /b 1
 
 cd /d %~dp0
@@ -21,3 +24,5 @@ set solution=CoverageTest.sln
 set symFile=MON.sym
 set tmpFile=tmp.tmp
 set trg=CoverageTest
+
+set reportCall=ctcreport.exe -t 98 -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o %htmlFolder%

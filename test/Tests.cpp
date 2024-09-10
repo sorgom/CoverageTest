@@ -41,7 +41,7 @@ void Test01()
 
     i = ch2.ifElse(0, true);
     ch3.tryCatch(22);
-    ch1.tryCatch(ch1.getInt());
+    ch1.tryCatch(ch1.mInt);
 
     use(b, i);
 }
