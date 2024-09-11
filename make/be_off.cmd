@@ -5,14 +5,23 @@ rem - save status
 
 if "%tmpFile%" == "" exit /b 1
 
-call where cov01 | grep -c cov01.exe > %tmpFile%
-set /p _beEnabled=<%tmpFile%
+SETLOCAL
 
-if %_beEnabled% == 0 goto end
+call where cov01 | grep -c cov01.exe > %tmpFile%
+set /p _beInstalled=<%tmpFile%
+
+if %_beInstalled% == 0 goto end
+
+set state=%1
+if "%state%" == "" set state=off
 
 call cov01 -qs | grep -c "enabled" > %tmpFile%
-set /p _beEnabled=<%tmpFile%
 
-call cov01 -q --off
+echo - set Bullseye Coverage %state%
+call cov01 -q --%state%
 
+ENDLOCAL
+set /p _beCovActive=<%tmpFile%
+
+:end
 rm -f %tmpFile%

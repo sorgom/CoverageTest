@@ -41,8 +41,8 @@ bin
 build
 html_*
 MON.*
-Makefile
-*.make
+# Makefile
+# *.make
 *.vcxproj.user
 *.vcxproj.filters
 *.log

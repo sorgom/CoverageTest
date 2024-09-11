@@ -273,7 +273,7 @@ void CoverageSrc::tryCatch(const int i) const
             throw 0;
         }
     }
-    catch (int e)
+    catch(int e)
     {
         use(e);
     }

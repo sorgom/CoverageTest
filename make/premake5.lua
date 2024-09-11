@@ -3,23 +3,25 @@
 --  ============================================================
 
 buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103'
--- buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall'
 buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
+buildDir = '../build'
+
 
 workspace 'CoverageTest'
+    -- location '../build'
+
     configurations { 'ci', 'debug' }
     language 'C++'
-    targetdir '.'
+    targetdir '../build'
+    objdir  '../build/obj/%{cfg.name}'
     
     includedirs { '../test', '../code' }
 
     filter { 'action:vs*' }
-        objdir  'obj/vs/%{prj.name}/%{cfg.name}'
         warnings 'high'
         buildoptions { buildoptions_vs }
 
     filter { 'action:gmake*' }
-        objdir 'obj/gcc/%{prj.name}/%{cfg.name}'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:ci' }
@@ -35,4 +37,4 @@ workspace 'CoverageTest'
             '../code/*.cpp',            
             '../test/*.cpp'
         }
-        
+       

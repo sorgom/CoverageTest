@@ -10,9 +10,15 @@
 using std::cout;
 using std::endl;
 
+void tstOut(const char* nr)
+{
+    cout << "  - Test" << nr << endl;
+}
+
 void Test01()
 {
-    cout << "- Test01" << endl;
+    tstOut("01");
+
     CoverageHead ch1(true);
     CoverageHead ch2(22);
     CoverageHead ch3(33, true);
@@ -48,7 +54,7 @@ void Test01()
 
 void Test02()
 {
-    cout << "- Test02" << endl;
+    tstOut("02");
     CoverageSrc cs1(false);
     CoverageSrc cs2(-22);
     CoverageSrc cs3(-33, false);
@@ -58,7 +64,7 @@ void Test02()
 
 void Test03()
 {
-    cout << "- Test03" << endl;
+    tstOut("03");
 
     constexpr int i = 22;
     constexpr bool b = true;
