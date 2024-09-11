@@ -5,14 +5,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoverageTest", "CoverageTes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		ci|Win32 = ci|Win32
-		debug|Win32 = debug|Win32
+		1998|Win32 = 1998|Win32
+		2017|Win32 = 2017|Win32
+		macro|Win32 = macro|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.ci|Win32.ActiveCfg = ci|Win32
-		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.ci|Win32.Build.0 = ci|Win32
-		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.debug|Win32.ActiveCfg = debug|Win32
-		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.debug|Win32.Build.0 = debug|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.1998|Win32.ActiveCfg = 1998|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.1998|Win32.Build.0 = 1998|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.2017|Win32.ActiveCfg = 2017|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.2017|Win32.Build.0 = 2017|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.macro|Win32.ActiveCfg = macro|Win32
+		{71E83625-5D4B-C6C9-06D1-FE7FF212924C}.macro|Win32.Build.0 = macro|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

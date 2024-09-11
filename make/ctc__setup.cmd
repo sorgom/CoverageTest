@@ -19,7 +19,6 @@ set codeDir=%repoDir%\code
 set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m 
 set executable=%project%.exe
 set htmlFolder=%buildDir%\html_ctc
-set makefile=%project%.make
 set msbuildParams=-p:TrackFileAccess=false
 set solution=%project%.sln
 set tmpFile=tmp.tmp
@@ -30,6 +29,6 @@ mkdir %buildDir%
 
 call be_off.cmd
 
-if "%1" == "" cp *.make *.sln *.vcxproj %buildDir%
+if "%1" == "" cp Makefile *.make *.sln *.vcxproj %buildDir%
 
 cd %buildDir%

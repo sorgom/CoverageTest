@@ -12,7 +12,7 @@ using std::endl;
 
 void tstOut(const char* nr)
 {
-    cout << "  - Test" << nr << endl;
+    cout << "  - cpp 1998 Test" << nr << endl;
 }
 
 void Test01()

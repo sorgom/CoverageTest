@@ -47,3 +47,4 @@ MON.*
 *.vcxproj.filters
 *.log
 tmp*
+*.ctc

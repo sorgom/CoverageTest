@@ -17,7 +17,7 @@ include_directories (
 
 file(GLOB allSrcs 
     ${CODE_PATH}/*.cpp
-    ${TEST_PATH}/*.cpp
+    ${TEST_PATH}/Tests_1998.cpp
 )
 
 set(CMAKE_CXX_COMPILER "ctc")

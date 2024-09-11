@@ -61,6 +61,7 @@ public:
         SomeStruct vs3 { vb2, vb3, vb1 ? vi1 : ci1 };
 
         use(cs1, cs2, cs3, vs1, vs2, vs3);
+        
     }
 
     const SomeStruct mStruct;

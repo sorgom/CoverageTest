@@ -53,7 +53,6 @@ public:
 
     const bool mBool;
     const int mInt;
-    const SomeStruct mStruct;
 };
 
 #endif // _H

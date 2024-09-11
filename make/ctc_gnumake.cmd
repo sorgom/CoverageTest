@@ -7,9 +7,12 @@ SETLOCAL
 set _me=%~n0
 call %~dp0ctc__setup.cmd
 
+set config=%1
+if "%config%" == "" set config=1998
+
 echo - clean
-call gnumake -f %makefile% clean >NUL 2>&1
+call gnumake clean >NUL 2>&1
 echo - build
-call ctclaunch %ctclaunchParams% gnumake -j -f %makefile% > %buildReport% 2>&1
+call ctclaunch %ctclaunchParams% gnumake -j config=%config% > %buildReport% 2>&1
 
 call %myDir%\ctc__run.cmd
