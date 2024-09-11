@@ -3,39 +3,35 @@
 --  ============================================================
 
 buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103'
--- buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall'
 buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
 
 workspace 'CoverageTest'
-    configurations { 'ci', 'debug' }
-    language 'C++'
-    
-    -- location '../build'
 
+    configurations { '1998', '2017', 'macro' }
+    language 'C++'
+    targetdir '../build'
+    objdir  '../build/obj/%{cfg.name}'
+    
     includedirs { '../test', '../code' }
 
     filter { 'action:vs*' }
-        objdir  'obj/vs/%{prj.name}/%{cfg.name}'
-        targetdir 'exe'
         warnings 'high'
         buildoptions { buildoptions_vs }
 
     filter { 'action:gmake*' }
-        objdir 'obj/gcc/%{prj.name}/%{cfg.name}'
-        targetdir 'bin'
         buildoptions { buildoptions_gcc }
 
-    filter { 'configurations:ci' }
-        defines { 'NDEBUG' }
+    filter { 'configurations:1998' }
+        files { '../test/Tests_1998.cpp', '../code/*.cpp' }
 
-    filter { 'configurations:debug' }
+    filter { 'configurations:2017' }
+        files { '../test/Tests_2017.cpp' }
+
+    filter { 'configurations:macro' }
+        files { '../test/Tests_Macro.cpp' }
+
+        project 'CoverageTest'
+        kind 'ConsoleApp'
         defines { 'DEBUG' }
         symbols 'On'
-
-    project 'CoverageTest'
-        kind 'ConsoleApp'
-        files { 
-            '../code/*.cpp',            
-            '../test/*.cpp'
-        }
-        
+       

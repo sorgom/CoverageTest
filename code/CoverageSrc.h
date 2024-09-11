@@ -2,6 +2,8 @@
 #ifndef COVERAGESRC_H
 #define COVERAGESRC_H
 
+#include <SomeStruct.h>
+
 class CoverageSrc
 {
 public:
@@ -9,41 +11,46 @@ public:
     CoverageSrc(int i);
     CoverageSrc(int i, bool b);
 
-    //  return and
-    bool operator==(const CoverageSrc& other) const;
-    //  return or
-    bool operator!=(const CoverageSrc& other) const;
-    //  return simple bool
+    int ifElse(int i, bool b = false) const;
+
+    void assignments(int i1, int i2) const;
+
+    //  return bool simple
     bool operator<(const CoverageSrc& other) const;
+    //  return bool and
+    bool operator==(const CoverageSrc& other) const;
+    //  return bool or
+    bool operator!=(const CoverageSrc& other) const;
     //  return ternary
     int realVal() const;
-    //  boolean parameter
-    static bool isTrue(bool b);
 
-    //  simple boolean call
-    bool hasVal1() const;
-    //  ternary call
-    bool hasVal2() const;
-    //  boolean call and
-    bool hasVal3() const;
+    //  bool parameter
+    static void call(bool b);
 
-    //  boolean call or
-    bool noVal() const;
-    //  for loop
-    void forLoop(int lim) const;
+    //  call bool simple
+    void callBoolSimple() const;
+    //  call bool and
+    void callBoolAnd() const;
+    //  call bool or
+    void callBoolOr() const;
+    //  call ternary
+    void callTernary() const;
+
+    //  for loop simple
+    void forLoopSimple() const;
+    //  for loop and
+    void forLoopAnd(int lim) const;
+    //  for loop or
+    void forLoopOr(int lim) const;
+
     //  switch case single return
-    int switchCaseSingle(int val) const;
-    //  switch case multiple return (not allowed with SIL4)
-    int switchCaseMulti(int val) const;
+    static int switchCaseSingle(int i);
 
-    void assignments(int a, int b) const;
-    int ifElse(int i, bool b = false) const;
+    //  switch case multiple return (not allowed with SIL4)
+    static int switchCaseMulti(int i);
+
     void tryCatch(int i) const;
 
-    inline bool getBool() const { return mBool; }
-    inline int getInt() const { return mInt; }
-
-private:
     const bool mBool;
     const int mInt;
 };

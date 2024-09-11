@@ -9,7 +9,7 @@ CoverageSrc::CoverageSrc(const bool b):
 {}
 
 CoverageSrc::CoverageSrc(const int i):
-    // simple boolean constructor
+    // simple bool constructor
     mBool(i != 0),
     mInt(i)
 {}
@@ -19,152 +19,6 @@ CoverageSrc::CoverageSrc(const int i, const bool b):
     mBool(b and i != 0),
     mInt(i)
 {}
-
-//  return and
-bool CoverageSrc::operator==(const CoverageSrc& other) const
-{
-    return mBool == other.mBool and mInt == other.mInt;
-}
-
-//  return or
-bool CoverageSrc::operator!=(const CoverageSrc& other) const
-{
-    return mBool != other.mBool or mInt != other.mInt;
-}
-
-//  return simple bool
-bool CoverageSrc::operator<(const CoverageSrc& other) const
-{
-    return mInt < other.mInt;
-}
-
-//  return ternary
-int CoverageSrc::realVal() const
-{
-    return mBool ? mInt + 1 : mInt;
-}
-
-//  boolean parameter
-bool CoverageSrc::isTrue(const bool b)
-{
-    return b;
-}
-
-//  simple boolean call
-bool CoverageSrc::hasVal1() const
-{
-    return isTrue(mInt > 0);
-}
-
-//  ternary call
-bool CoverageSrc::hasVal2() const
-{
-    return isTrue(mBool ? mInt > 0 : mInt < 0);
-}
-
-//  boolean call and
-bool CoverageSrc::hasVal3() const
-{
-    return isTrue(mBool and mInt > 0);
-}
-
-//  boolean call or
-bool CoverageSrc::noVal() const
-{
-    return isTrue((!mBool) or mInt == 0);
-}
-
-//  for loop
-void CoverageSrc::forLoop(const int lim) const
-{
-    for (int i = 0;	i < mInt; ++i)
-    {
-        use(i);
-    }
-    for (int i = 0; (i < mInt) and (i < lim); ++i)
-    {
-	    use(i);
-    }
-}
-
-//  switch case single return
-int CoverageSrc::switchCaseSingle(const int i) const
-{
-    int res = -1;
-    switch (i)
-    {
-	case 0:
-	    res = 0;
-	    break;
-	case 1:
-	case 2:
-	    res = 1;
-	    break;
-	default:
-	    break;
-    }
-    return res;
-}
-
-//  switch case multiple return (not allowed with SIL4)
-int CoverageSrc::switchCaseMulti(const int i) const
-{
-    switch (i)
-    {
-	case 0:
-	    return 0;
-	case 1:
-	case 2:
-	    return 1;
-	default:
-	    return -1;
-    }
-    // unreachable
-    #pragma BullseyeCoverage off
-    #pragma CTC SKIP
-    return 42;
-    #pragma CTC ENDSKIP
-    #pragma BullseyeCoverage on
-}
-
-void CoverageSrc::assignments(const int a, const int b) const
-{
-    //  const assignment constructors
-    //  ternary
-    const int c1 = a > b ? a : b;
-    //  simple boolean
-    const bool c2 = a > 0;
-    //  boolean and
-    const bool c3 = c2 and b > 0;
-    //  boolean or
-    const bool c4 = c2 or b > 0;
-
-    use(c1, c2, c3, c4);
-
-    //  non const assignment constructors
-    //  ternary
-    int v1 = a > b ? a : b;
-    //  simple boolean
-    bool v2 = a > 0;
-    //  boolean and
-    bool v3 = v2 and b > 0;
-    //  boolean or
-    bool v4 = v2 or b > 0;
-
-    use(v1, v2, v3, v4);
-
-    //  non const assignments
-    //  ternary
-    v1 = a < b ? a : b;
-    //  simple boolean
-    v2 = a < 0;
-    //  boolean and
-    v3 = v2 and b < 0;
-    //  boolean or
-    v4 = v2 or b < 0;
-
-    use(v1, v2, v3, v4);
-}
 
 int CoverageSrc::ifElse(const int i, const bool b) const
 {
@@ -182,18 +36,187 @@ int CoverageSrc::ifElse(const int i, const bool b) const
     // bool and
     else if (mBool and i == 1)
     {
-	    ret = 1;
+        ret = 1;
     }
     // bool or
     else if ((!mBool) or i < 0)
     {
-	    ret = 2;
+        ret = 2;
     }
     else
     {
-	    ret = 3;
+        ret = 3;
     }
     return ret;
+}
+
+void CoverageSrc::assignments(const int i1, const int i2) const
+{
+    //  const assignment constructors
+    //  simple bool
+    const bool cb1 = i1 > 0;
+    //  bool and
+    const bool cb2 = cb1 and i2 > 0;
+    //  bool or
+    const bool cb3 = cb2 or i2 > 0;
+    //  ternary
+    const int ci1 = cb1 ? i1 : i2;
+
+    use(ci1, cb1, cb2, cb3);
+
+    //  non const assignment constructors
+    //  simple bool
+    bool vb1 = i1 > 0;
+    //  bool and
+    bool vb2 = vb1 and i2 > 0;
+    //  bool or
+    bool vb3 = vb2 or i2 > 0;
+    //  ternary
+    int vi1 = vb3 ? i1 : i2;
+
+    //  non const assignments
+    //  simple bool
+    vb1 = i1 < 0;
+    //  bool and
+    vb2 = vb1 and i2 < 0;
+    //  bool or
+    vb3 = vb2 or i2 < 0;
+    //  ternary
+    vi1 = vb3 ? i1 : i2;
+
+    use(vb1, vb2, vb3, vi1);
+
+    //  const struct assignment constructors
+    //  bool simple
+    const SomeStruct cs1 = { ci1 < vi1, ci1 > vi1, vi1 };
+    //  bool and / or
+    const SomeStruct cs2 = { vb2 and ci1 > vi1, vb3 or ci1 < vi1, ci1 };
+    //  ternary
+    const SomeStruct cs3 = { vb2, vb3, vb1 ? vi1 : ci1 };
+
+    //  non const struct assignment constructors
+    //  bool simple
+    SomeStruct vs1 = { ci1 < vi1, ci1 > vi1, vi1 };
+    //  bool and / or
+    SomeStruct vs2 = { vb2 and ci1 > vi1, vb3 or ci1 < vi1, ci1 };
+    //  ternary
+    SomeStruct vs3 = { vb2, vb3, vb1 ? vi1 : ci1 };
+
+    use(cs1, cs2, cs3, vs1, vs2, vs3);
+}
+
+//  return bool simple
+bool CoverageSrc::operator<(const CoverageSrc& other) const
+{
+    return mInt < other.mInt;
+}
+
+//  return bool and
+bool CoverageSrc::operator==(const CoverageSrc& other) const
+{
+    return mBool == other.mBool and mInt == other.mInt;
+}
+//  return bool or
+bool CoverageSrc::operator!=(const CoverageSrc& other) const
+{
+    return mBool != other.mBool or mInt != other.mInt;
+}
+//  return ternary
+int CoverageSrc::realVal() const
+{
+    return mBool ? mInt + 1 : mInt;
+}
+
+//  bool parameter
+void CoverageSrc::call(const bool b)
+{
+    use(b);
+}
+
+//  call bool simple
+void CoverageSrc::callBoolSimple() const
+{
+    call(mInt > 0);
+}
+//  call bool and
+void CoverageSrc::callBoolAnd() const
+{
+    call(mBool and mInt > 0);
+}
+//  call bool or
+void CoverageSrc::callBoolOr() const
+{
+    call((!mBool) or mInt == 0);
+}
+//  call ternary
+void CoverageSrc::callTernary() const
+{
+    call(mBool ? mInt > 0 : mInt < 0);
+}
+
+//  for loop simple
+void CoverageSrc::forLoopSimple() const
+{
+    for (int i = 0; i < mInt; ++i)
+    {
+        use(i);
+    }
+}
+//  for loop and
+void CoverageSrc::forLoopAnd(const int lim) const
+{
+    for (int i = 0; (i < mInt) and (i < lim); ++i)
+    {
+        use(i);
+    }
+}
+//  for loop or
+void CoverageSrc::forLoopOr(const int lim) const
+{
+    for (int i = 0; (i < mInt) or (i < lim); ++i)
+    {
+        use(i);
+    }
+}
+
+//  switch case single return
+int CoverageSrc::switchCaseSingle(const int i)
+{
+    int res = -1;
+    switch (i)
+    {
+        case 0:
+            res = 0;
+            break;
+        case 1:
+        case 2:
+            res = 1;
+            break;
+        default:
+            break;
+    }
+    return res;
+}
+
+//  switch case multiple return (not allowed with SIL4)
+int CoverageSrc::switchCaseMulti(const int i)
+{
+    switch (i)
+    {
+        case 0:
+            return 0;
+        case 1:
+        case 2:
+            return 1;
+        default:
+            return -1;
+    }
+    // unreachable
+    #pragma BullseyeCoverage off
+    #pragma CTC SKIP
+    return 42;
+    #pragma CTC ENDSKIP
+    #pragma BullseyeCoverage on
 }
 
 void CoverageSrc::tryCatch(const int i) const
@@ -205,7 +228,7 @@ void CoverageSrc::tryCatch(const int i) const
             throw 0;
         }
     }
-    catch (int e)
+    catch(int e)
     {
         use(e);
     }
