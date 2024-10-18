@@ -11,14 +11,15 @@ call %cleanCmd% >NUL 2>&1
 echo - build: %config%
 call %buildCmd% > %buildReport% 2>&1
 
-call %myDir%\_be_restore.cmd
+call %subsDir%\_be_restore.cmd
 
+echo - eval
 if not exist %executable% (
     echo - build failed
     cat %buildReport%
     exit /b 1
 ) else (
-    @REM rm -f %buildReport%
+    rm -f %buildReport%
 )
 
 echo - run

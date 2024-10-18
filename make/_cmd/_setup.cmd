@@ -6,14 +6,16 @@ if "%_me%" == "" exit /b 1
 echo - setup
 
 cd /d %~dp0
-set myDir=%cd%
+set subsDir=%cd%
+cd ..
+set makeDir=%cd%
 cd ..
 set repoDir=%cd%
-cd %myDir%
+cd %makeDir%
 
 set project=CoverageTest
 set buildDir=%repoDir%\build
-set cmakeDir=%myDir%\cmakelists
+set cmakeDir=%makeDir%\cmakelists
 set codeDir=%repoDir%\code
 set executable=%project%.exe
 set solution=%project%.sln
