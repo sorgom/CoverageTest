@@ -5,15 +5,14 @@ rem make file generated using cmake
 
 SETLOCAL
 set _me=%~n0
-call %~dp0ctc__setup.cmd X
+set _nocopy=1
+call %~dp0_cmd\_ctc_setup.cmd %*
 
 echo - gen
 cp -r %cmakeDir%/* ./
 cmake -S . -B . -G "NMake Makefiles"
-echo - clean
 set MAKE=nmake
-nmake.exe clean
-echo - build
-nmake.exe > %buildReport% 2>&1
+set cleanCmd=nmake.exe clean
+set buildCmd=nmake.exe
 
-call %myDir%\ctc__run.cmd
+call %subsDir%\_ctc_report.cmd

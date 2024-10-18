@@ -1,24 +1,13 @@
 #include <CoverageHead.h>
-// #include <CoverageMacro.h>
 #include <CoverageOneFunc.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>
 
 #include <Use.h>
-
-#include <iostream>
-using std::cout;
-using std::endl;
-
-void tstOut(const char* nr)
-{
-    cout << "  - cpp 1998 Test" << nr << endl;
-}
+#include <test.h>
 
 void Test01()
 {
-    tstOut("01");
-
     CoverageHead ch1(true);
     CoverageHead ch2(22);
     CoverageHead ch3(33, true);
@@ -54,7 +43,6 @@ void Test01()
 
 void Test02()
 {
-    tstOut("02");
     CoverageSrc cs1(false);
     CoverageSrc cs2(-22);
     CoverageSrc cs3(-33, false);
@@ -64,8 +52,6 @@ void Test02()
 
 void Test03()
 {
-    tstOut("03");
-
     constexpr int i = 22;
     constexpr bool b = true;
 
@@ -80,8 +66,9 @@ void Test03()
 
 int main()
 {
-    Test01();
-    Test02();
-    Test03();
+    settest("cpp 1998");
+    test(Test01, 1);
+    test(Test02, 2);
+    test(Test03, 3);
     return 0;
 }

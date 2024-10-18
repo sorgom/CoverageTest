@@ -3,6 +3,7 @@
 #define COVERAGESRC_H
 
 #include <SomeStruct.h>
+#include <coding.h>
 
 class CoverageSrc
 {
@@ -10,6 +11,8 @@ public:
     CoverageSrc(bool b = false);
     CoverageSrc(int i);
     CoverageSrc(int i, bool b);
+
+    INSTANCE_DEC(CoverageSrc)
 
     int ifElse(int i, bool b = false) const;
 
