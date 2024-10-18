@@ -2,6 +2,8 @@
 #include <CoverageSrc.h>
 #include <Use.h>
 
+INSTANCE_DEF(CoverageSrc)
+
 CoverageSrc::CoverageSrc(const bool b):
     mBool(b),
     // ternary constructor

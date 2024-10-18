@@ -1,5 +1,4 @@
 #include <CoverageHead.h>
-// #include <CoverageMacro.h>
 #include <CoverageOneFunc.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>

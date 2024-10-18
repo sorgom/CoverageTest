@@ -91,6 +91,33 @@ all: prebuild prelink $(TARGET)
 
 endif
 
+ifeq ($(config),b_macro)
+  RESCOMP = windres
+  TARGETDIR = ../build
+  TARGET = $(TARGETDIR)/CoverageTest.exe
+  OBJDIR = ../build/obj/B_macro
+  DEFINES += -DDEBUG
+  INCLUDES += -I../test -I../code
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: prebuild prelink $(TARGET)
+	@:
+
+endif
+
 OBJECTS := \
 
 RESOURCES := \
@@ -113,6 +140,12 @@ endif
 ifeq ($(config),macro)
   OBJECTS += \
 	$(OBJDIR)/Tests_Macro.o \
+
+endif
+
+ifeq ($(config),b_macro)
+  OBJECTS += \
+	$(OBJDIR)/Tests_B.o \
 
 endif
 
@@ -176,6 +209,9 @@ $(OBJDIR)/Tests_1998.o: ../test/Tests_1998.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Tests_2017.o: ../test/Tests_2017.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Tests_B.o: ../test/Tests_B.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Tests_Macro.o: ../test/Tests_Macro.cpp

@@ -1,0 +1,25 @@
+@echo off
+rem run & report
+if "%_me%" == "" exit /b 1
+
+if exist %buildReport% rm -f %buildReport%
+if exist %htmlFolder% rm -rf %htmlFolder%
+
+echo - clean
+call %cleanCmd% >NUL 2>&1
+
+echo - build: %config%
+call %buildCmd% > %buildReport% 2>&1
+
+call %myDir%\_be_restore.cmd
+
+if not exist %executable% (
+    echo - build failed
+    cat %buildReport%
+    exit /b 1
+) else (
+    rm -f %buildReport%
+)
+
+echo - run
+call %executable%

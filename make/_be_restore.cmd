@@ -6,3 +6,4 @@ if %_beCovActive% == 1 (
     echo - set Bullseye Coverage on
     call cov01 -q --on
 )
+set _beCovActive=

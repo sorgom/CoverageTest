@@ -12,7 +12,16 @@
     <ClCompile Include="..\code\CoverageSrc.cpp">
       <Filter>code</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\Tests.cpp">
+    <ClCompile Include="..\test\Tests_1998.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Tests_2017.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Tests_B.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Tests_Macro.cpp">
       <Filter>test</Filter>
     </ClCompile>
   </ItemGroup>

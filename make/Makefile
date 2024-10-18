@@ -17,6 +17,9 @@ endif
 ifeq ($(config),macro)
   CoverageTest_config = macro
 endif
+ifeq ($(config),b_macro)
+  CoverageTest_config = b_macro
+endif
 
 PROJECTS := CoverageTest
 
@@ -40,6 +43,7 @@ help:
 	@echo "  1998"
 	@echo "  2017"
 	@echo "  macro"
+	@echo "  b_macro"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

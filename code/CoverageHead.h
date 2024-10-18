@@ -109,6 +109,14 @@ public:
         SomeStruct vs3 = { vb2, vb3, vb1 ? vi1 : ci1 };
 
         use(cs1, cs2, cs3, vs1, vs2, vs3);
+
+        //  true and
+        const bool ct1 = true and i1 > 0;
+
+        //  and
+        const bool ct2 = i1 > 0 and i1 > 0;
+
+        use(ct1, ct2);
     }
 
     //  return bool simple

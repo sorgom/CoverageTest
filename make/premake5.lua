@@ -7,7 +7,7 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
 
 workspace 'CoverageTest'
 
-    configurations { '1998', '2017', 'macro' }
+    configurations { '1998', '2017', 'macro', 'B_macro' }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
@@ -29,6 +29,9 @@ workspace 'CoverageTest'
 
     filter { 'configurations:macro' }
         files { '../test/Tests_Macro.cpp' }
+
+    filter { 'configurations:B_macro' }
+        files { '../test/Tests_B.cpp' }
 
         project 'CoverageTest'
         kind 'ConsoleApp'
