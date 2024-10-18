@@ -4,25 +4,31 @@
     <Filter Include="code">
       <UniqueIdentifier>{803E957C-6C75-960D-1562-7C100178120F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="test">
-      <UniqueIdentifier>{65689E7C-519F-9F0D-FA8B-8510E6A11B0F}</UniqueIdentifier>
+    <Filter Include="testlib">
+      <UniqueIdentifier>{9CA31ED9-0883-9D74-119B-284B7DF903D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{78756B10-E489-93C1-AD0B-372119DF8FF2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\code\CoverageSrc.cpp">
       <Filter>code</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\Tests_1998.cpp">
-      <Filter>test</Filter>
+    <ClCompile Include="..\testlib\test.cpp">
+      <Filter>testlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\Tests_2017.cpp">
-      <Filter>test</Filter>
+    <ClCompile Include="..\tests\Tests_1998.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\Tests_B.cpp">
-      <Filter>test</Filter>
+    <ClCompile Include="..\tests\Tests_2017.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\Tests_Macro.cpp">
-      <Filter>test</Filter>
+    <ClCompile Include="..\tests\Tests_B.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\Tests_Macro.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

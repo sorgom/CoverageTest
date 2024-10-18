@@ -7,12 +7,13 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
 
 workspace 'CoverageTest'
 
-    configurations { '1998', '2017', 'macro', 'B_macro' }
+    configurations { '1998', '2017', 'macro', 'b_macro' }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
     
-    includedirs { '../test', '../code' }
+    includedirs { '../testlib', '../code' }
+    files { '../testlib/*.cpp' }
 
     filter { 'action:vs*' }
         warnings 'high'
@@ -22,16 +23,16 @@ workspace 'CoverageTest'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:1998' }
-        files { '../test/Tests_1998.cpp', '../code/*.cpp' }
+        files { '../tests/Tests_1998.cpp', '../code/*.cpp' }
 
     filter { 'configurations:2017' }
-        files { '../test/Tests_2017.cpp' }
+        files { '../tests/Tests_2017.cpp' }
 
     filter { 'configurations:macro' }
-        files { '../test/Tests_Macro.cpp' }
+        files { '../tests/Tests_Macro.cpp' }
 
-    filter { 'configurations:B_macro' }
-        files { '../test/Tests_B.cpp' }
+    filter { 'configurations:b_macro' }
+        files { '../tests/Tests_B.cpp' }
 
         project 'CoverageTest'
         kind 'ConsoleApp'

@@ -16,7 +16,7 @@ ifeq ($(config),1998)
   TARGET = $(TARGETDIR)/CoverageTest.exe
   OBJDIR = ../build/obj/1998
   DEFINES += -DDEBUG
-  INCLUDES += -I../test -I../code
+  INCLUDES += -I../testlib -I../code
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
@@ -43,7 +43,7 @@ ifeq ($(config),2017)
   TARGET = $(TARGETDIR)/CoverageTest.exe
   OBJDIR = ../build/obj/2017
   DEFINES += -DDEBUG
-  INCLUDES += -I../test -I../code
+  INCLUDES += -I../testlib -I../code
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
@@ -70,7 +70,7 @@ ifeq ($(config),macro)
   TARGET = $(TARGETDIR)/CoverageTest.exe
   OBJDIR = ../build/obj/macro
   DEFINES += -DDEBUG
-  INCLUDES += -I../test -I../code
+  INCLUDES += -I../testlib -I../code
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
@@ -95,9 +95,9 @@ ifeq ($(config),b_macro)
   RESCOMP = windres
   TARGETDIR = ../build
   TARGET = $(TARGETDIR)/CoverageTest.exe
-  OBJDIR = ../build/obj/B_macro
+  OBJDIR = ../build/obj/b_macro
   DEFINES += -DDEBUG
-  INCLUDES += -I../test -I../code
+  INCLUDES += -I../testlib -I../code
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++17 -pedantic-errors -Wall
@@ -119,6 +119,7 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/test.o \
 
 RESOURCES := \
 
@@ -205,16 +206,19 @@ endif
 $(OBJDIR)/CoverageSrc.o: ../code/CoverageSrc.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Tests_1998.o: ../test/Tests_1998.cpp
+$(OBJDIR)/test.o: ../testlib/test.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Tests_2017.o: ../test/Tests_2017.cpp
+$(OBJDIR)/Tests_1998.o: ../tests/Tests_1998.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Tests_B.o: ../test/Tests_B.cpp
+$(OBJDIR)/Tests_2017.o: ../tests/Tests_2017.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Tests_Macro.o: ../test/Tests_Macro.cpp
+$(OBJDIR)/Tests_B.o: ../tests/Tests_B.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Tests_Macro.o: ../tests/Tests_Macro.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

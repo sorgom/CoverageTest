@@ -18,7 +18,7 @@ if not exist %executable% (
     cat %buildReport%
     exit /b 1
 ) else (
-    rm -f %buildReport%
+    @REM rm -f %buildReport%
 )
 
 echo - run

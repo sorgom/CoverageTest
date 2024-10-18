@@ -16,7 +16,6 @@ public:
         mInt(i)
     {}
 
-
     void assignments(const int i1, const int i2) const
     {
         //  const assignment constructors
@@ -29,7 +28,7 @@ public:
 
         //  non const assignments
         //  simple bool
-        vb1 = (i1 < 0);
+        vb1 = B(i1 < 0);
 
         //  const struct assignment constructors
         //  bool simple 
