@@ -37,7 +37,7 @@ public:
     //  full coverage
     //  b true / false
     //  i 0 / 1 / -1
-    void ifElse(const bool b, const int i) const
+    static void ifElse(const bool b, const int i)
     {
         // bool var
         if (b)
@@ -62,44 +62,44 @@ public:
     }
 
     //  return bool simple
-    inline bool retBoolSimple(const int i1, const int i2) const
+    inline static bool retBoolSimple(const int i1, const int i2)
     {
 	    return i2 > i1;
     }
 
     //  return bool and
-    inline bool retBoolAnd(const int i1, const int i2) const
+    inline static bool retBoolAnd(const int i1, const int i2)
     {
     	return (i1 > 0) and (i2 > 0);
     }
     //  return bool or
-    inline bool retBoolOr(const int i1, const int i2) const
+    inline static bool retBoolOr(const int i1, const int i2)
     {
     	return (i1 > 0) or (i2 > 0);
     }
     //  return ternary
-    inline int retTernary(const int i1, const int i2) const
+    inline static int retTernary(const int i1, const int i2)
     {
 	    return i2 > i1 ? i2 : i1;
     }
 
     //  call bool simple
-    inline void callBoolSimple(const int i1, const int i2) const
+    inline static void callBoolSimple(const int i1, const int i2)
     {
 	    call(i2 > i1);
     }
     //  call bool and
-    inline void callBoolAnd(const int i1, const int i2) const
+    inline static void callBoolAnd(const int i1, const int i2)
     {
 	    call((i1 > 0) and (i2 > 0));
     }
     //  call bool or
-    inline void callBoolOr(const int i1, const int i2) const
+    inline static void callBoolOr(const int i1, const int i2)
     {
 	    call((i1 > 0) or (i2 > 0));
     }
     //  call ternary
-    inline void callTernary(const int i1, const int i2) const
+    inline static void callTernary(const int i1, const int i2)
     {
 	    call(i2 > i1 ? i2 : i1);
     }
@@ -107,7 +107,7 @@ public:
     //  full coverage
     //  i1 0 / 1
     //  i2 0 / 1
-    void assignments(const int i1, const int i2) const
+    static void assignments(const int i1, const int i2)
     {
         //  const assignment constructors
         //  simple bool
@@ -141,7 +141,6 @@ public:
         //  ternary
         vi1 = (i2 == 1) ? i2 : i1;
 
-
         use(vb1, vb2, vb3, vi1);
 
         //  const struct assignment constructors
@@ -164,7 +163,7 @@ public:
     }
 
     //  for loop simple
-    void forLoopSimple(const int i1) const
+    static void forLoopSimple(const int i1)
     {
         for (int i = 0;	i < i1; ++i)
         {
@@ -172,7 +171,7 @@ public:
         }
     }
     //  for loop and
-    void forLoopAnd(const int i1, const int i2) const
+    static void forLoopAnd(const int i1, const int i2)
     {
         for (int i = 0;	(i < i1) and (i < i2); ++i)
         {
@@ -180,7 +179,7 @@ public:
         }
     }
     //  for loop or
-    void forLoopOr(const int i1, const int i2) const
+    static void forLoopOr(const int i1, const int i2)
     {
         for (int i = 0;	(i < i1) or (i < i2); ++i)
         {
@@ -228,7 +227,7 @@ public:
         BULLSEY_RESUME
     }
 
-    void tryCatch(const bool b) const
+    static void tryCatch(const bool b)
     {
         try
         {

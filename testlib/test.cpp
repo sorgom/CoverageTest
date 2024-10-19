@@ -20,3 +20,5 @@ void test(testfunc func)
         func();
     }
 }
+
+void NoTest() {}

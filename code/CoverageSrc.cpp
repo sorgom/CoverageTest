@@ -31,7 +31,7 @@ CoverageSrc::CoverageSrc(const bool b, const int i):
 //  full coverage
 //  b true / false
 //  i 0 / 1 / -1
-void CoverageSrc::ifElse(const bool b, const int i) const
+void CoverageSrc::ifElse(const bool b, const int i)
 {
     // bool var
     if (b)
@@ -56,44 +56,44 @@ void CoverageSrc::ifElse(const bool b, const int i) const
 }
 
 //  return bool simple
-bool CoverageSrc::retBoolSimple(const int i1, const int i2) const
+bool CoverageSrc::retBoolSimple(const int i1, const int i2)
 {
     return i2 > i1;
 }
 
 //  return bool and
-bool CoverageSrc::retBoolAnd(const int i1, const int i2) const
+bool CoverageSrc::retBoolAnd(const int i1, const int i2)
 {
     return (i1 > 0) and (i2 > 0);
 }
 //  return bool or
-bool CoverageSrc::retBoolOr(const int i1, const int i2) const
+bool CoverageSrc::retBoolOr(const int i1, const int i2)
 {
     return (i1 > 0) or (i2 > 0);
 }
 //  return ternary
-int CoverageSrc::retTernary(const int i1, const int i2) const
+int CoverageSrc::retTernary(const int i1, const int i2)
 {
     return i2 > i1 ? i2 : i1;
 }
 
 //  call bool simple
-void CoverageSrc::callBoolSimple(const int i1, const int i2) const
+void CoverageSrc::callBoolSimple(const int i1, const int i2)
 {
     call(i2 > i1);
 }
 //  call bool and
-void CoverageSrc::callBoolAnd(const int i1, const int i2) const
+void CoverageSrc::callBoolAnd(const int i1, const int i2)
 {
     call((i1 > 0) and (i2 > 0));
 }
 //  call bool or
-void CoverageSrc::callBoolOr(const int i1, const int i2) const
+void CoverageSrc::callBoolOr(const int i1, const int i2)
 {
     call((i1 > 0) or (i2 > 0));
 }
 //  call ternary
-void CoverageSrc::callTernary(const int i1, const int i2) const
+void CoverageSrc::callTernary(const int i1, const int i2)
 {
     call(i2 > i1 ? i2 : i1);
 }
@@ -101,7 +101,7 @@ void CoverageSrc::callTernary(const int i1, const int i2) const
 //  full coverage
 //  i1 0 / 1
 //  i2 0 / 1
-void CoverageSrc::assignments(const int i1, const int i2) const
+void CoverageSrc::assignments(const int i1, const int i2)
 {
     //  const assignment constructors
     //  simple bool
@@ -158,7 +158,7 @@ void CoverageSrc::assignments(const int i1, const int i2) const
 }
 
 //  for loop simple
-void CoverageSrc::forLoopSimple(const int i1) const
+void CoverageSrc::forLoopSimple(const int i1)
 {
     for (int i = 0; i < i1; ++i)
     {
@@ -166,7 +166,7 @@ void CoverageSrc::forLoopSimple(const int i1) const
     }
 }
 //  for loop and
-void CoverageSrc::forLoopAnd(const int i1, const int i2) const
+void CoverageSrc::forLoopAnd(const int i1, const int i2)
 {
     for (int i = 0; (i < i1) and (i < i2); ++i)
     {
@@ -174,7 +174,7 @@ void CoverageSrc::forLoopAnd(const int i1, const int i2) const
     }
 }
 //  for loop or
-void CoverageSrc::forLoopOr(const int i1, const int i2) const
+void CoverageSrc::forLoopOr(const int i1, const int i2)
 {
     for (int i = 0; (i < i1) or (i < i2); ++i)
     {
@@ -222,7 +222,7 @@ int CoverageSrc::switchCaseMulti(const int i)
     BULLSEY_RESUME
 }
 
-void CoverageSrc::tryCatch(const bool b) const
+void CoverageSrc::tryCatch(const bool b)
 {
     try
     {

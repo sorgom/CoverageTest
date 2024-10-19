@@ -25,38 +25,38 @@ public:
     //  full coverage
     //  b true / false
     //  i 0 / 1 / -1
-    void ifElse(bool b, int i) const;
+    static void ifElse(bool b, int i);
 
-    //  return bool simple
-    bool retBoolSimple(int i1, int i2) const;
+    //  return static bool simple
+    static bool retBoolSimple(int i1, int i2);
 
-    //  return bool and
-    bool retBoolAnd(int i1, int i2) const;
-    //  return bool or
-    bool retBoolOr(int i1, int i2) const;
+    //  return static bool and
+    static bool retBoolAnd(int i1, int i2);
+    //  return static bool or
+    static bool retBoolOr(int i1, int i2);
     //  return ternary
-    int retTernary(int i1, int i2) const;
+    static int retTernary(int i1, int i2);
 
-    //  call bool simple
-    void callBoolSimple(int i1, int i2) const;
-    //  call bool and
-    void callBoolAnd(int i1, int i2) const;
-    //  call bool or
-    void callBoolOr(int i1, int i2) const;
+    //  call static bool simple
+    static void callBoolSimple(int i1, int i2);
+    //  call static bool and
+    static void callBoolAnd(int i1, int i2);
+    //  call static bool or
+    static void callBoolOr(int i1, int i2);
     //  call ternary
-    void callTernary(int i1, int i2) const;
+    static void callTernary(int i1, int i2);
 
     //  full coverage
     //  i1 0 / 1
     //  i2 0 / 1
-    void assignments(int i1, int i2) const;
+    static void assignments(int i1, int i2);
 
     //  for loop simple
-    void forLoopSimple(int i1) const;
+    static void forLoopSimple(int i1);
     //  for loop and
-    void forLoopAnd(int i1, int i2) const;
+    static void forLoopAnd(int i1, int i2);
     //  for loop or
-    void forLoopOr(int i1, int i2) const;
+    static void forLoopOr(int i1, int i2);
 
     //  switch case single return
     static int switchCaseSingle(int i);
@@ -64,7 +64,7 @@ public:
     //  switch case multiple return (not allowed with SIL4)
     static int switchCaseMulti(int i);
 
-    void tryCatch(bool b) const;
+    static void tryCatch(bool b);
 
     const bool mBool;
     const int mInt;
