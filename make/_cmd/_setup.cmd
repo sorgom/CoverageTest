@@ -13,9 +13,9 @@ cd ..
 set repoDir=%cd%
 cd %makeDir%
 
-set buildReport=%buildDir%\%_who%_build.log
-set covReport=%buildDir%\%_who%_coverage.log
-set htmlFolder=%buildDir%\html_%_who%
+set config=%1
+if "%config%" == "" set config=1998
+
 
 set project=CoverageTest
 set buildDir=%repoDir%\build
@@ -27,5 +27,6 @@ set makeFile=%project%.make
 set tmpFile=tmp.tmp
 set trg=%project%
 
-set config=%1
-if "%config%" == "" set config=1998
+set buildReport=%buildDir%\%_who%_build.log
+set covReport=%buildDir%\%_who%_coverage.log
+set htmlFolder=%buildDir%\html_%_who%_%config%

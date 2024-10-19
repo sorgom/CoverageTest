@@ -7,7 +7,7 @@ set _who=bullseye
 
 call %~dp0_setup.cmd %*
 
-set covfile=%buildDir%\%project%.cov
+set covfile=%buildDir%\%project%_%config%.cov
 set covcopt=--srcdir %repoDir% --macro
 set excludeFile=%subsDir%\_be_exclude.txt
 
