@@ -3,7 +3,7 @@
 #define COVERAGEMCPP_H
 
 #include <SomeStruct.h>
-#include <Use.h>
+#include <use.h>
 
 class CoverageMcpp
 {

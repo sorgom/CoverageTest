@@ -3,48 +3,60 @@
 #define COVERAGESRC_H
 
 #include <SomeStruct.h>
-#include <coding.h>
+#include <use.h>
+#include <coverage.h>
 
 class CoverageSrc
 {
 public:
+    //  full coverage
+    //  b true / false
     CoverageSrc(bool b = false);
+
+    //  full coverage
+    //  i 0 / 1
     CoverageSrc(int i);
-    CoverageSrc(int i, bool b);
 
-    INSTANCE_DEC(CoverageSrc)
+    //  full coverage
+    //  i 0 / 1
+    //  b false / true
+    CoverageSrc(bool b, int i);
 
-    int ifElse(int i, bool b = false) const;
-
-    void assignments(int i1, int i2) const;
+    //  full coverage
+    //  b true / false
+    //  i 0 / 1 / -1
+    void ifElse(bool b, int i) const;
 
     //  return bool simple
-    bool operator<(const CoverageSrc& other) const;
-    //  return bool and
-    bool operator==(const CoverageSrc& other) const;
-    //  return bool or
-    bool operator!=(const CoverageSrc& other) const;
-    //  return ternary
-    int realVal() const;
+    bool retBoolSimple(int i1, int i2) const;
 
-    //  bool parameter
-    static void call(bool b);
+    //  return bool and
+    bool retBoolAnd(int i1, int i2) const;
+    //  return bool or
+    bool retBoolOr(int i1, int i2) const;
+    //  return ternary
+    int retTernary(int i1, int i2) const;
 
     //  call bool simple
-    void callBoolSimple() const;
+    void callBoolSimple(int i1, int i2) const;
     //  call bool and
-    void callBoolAnd() const;
+    void callBoolAnd(int i1, int i2) const;
     //  call bool or
-    void callBoolOr() const;
+    void callBoolOr(int i1, int i2) const;
     //  call ternary
-    void callTernary() const;
+    void callTernary(int i1, int i2) const;
+
+    //  full coverage
+    //  i1 0 / 1
+    //  i2 0 / 1
+    void assignments(int i1, int i2) const;
 
     //  for loop simple
-    void forLoopSimple() const;
+    void forLoopSimple(int i1) const;
     //  for loop and
-    void forLoopAnd(int lim) const;
+    void forLoopAnd(int i1, int i2) const;
     //  for loop or
-    void forLoopOr(int lim) const;
+    void forLoopOr(int i1, int i2) const;
 
     //  switch case single return
     static int switchCaseSingle(int i);
@@ -52,7 +64,7 @@ public:
     //  switch case multiple return (not allowed with SIL4)
     static int switchCaseMulti(int i);
 
-    void tryCatch(int i) const;
+    void tryCatch(bool b) const;
 
     const bool mBool;
     const int mInt;

@@ -2,8 +2,8 @@
 --  premake5 build rules for coverage test
 --  ============================================================
 
-buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103'
-buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall'
+buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON'
+buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall -D_COVERAGE_ON'
 
 workspace 'CoverageTest'
 

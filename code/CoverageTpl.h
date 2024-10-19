@@ -2,7 +2,7 @@
 #ifndef COVERAGETPL_H
 #define COVERAGETPL_H
 
-template <int I, bool B>
+template <bool B, int I>
 class CoverageTpl
 {
 public:
@@ -13,7 +13,7 @@ private:
     //  static const bool and
     static const bool IsNeg = B and I < 0;
     //  static const int ternary
-    static const int Val = B ? I : -I;
+    static const int Val = IsNeg ? I : -I;
 };
 
 #define MAX(V1, V2) (((V1) > (V2)) ? (V1) : (V2))

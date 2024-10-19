@@ -10,4 +10,12 @@ template <typename... Args>
 inline void use(const Args&... args)
 {}
 
+//  bool parameter
+inline static void call(const bool b)
+{
+    use(b);
+}
+
+inline void pass() {}
+
 #endif // _H

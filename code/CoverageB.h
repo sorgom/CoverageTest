@@ -3,9 +3,8 @@
 #define COVERAGEB_H
 
 #include <SomeStruct.h>
-#include <Use.h>
-
-#define B(BOOL_EXPR) (BOOL_EXPR ? true : false)
+#include <use.h>
+#include <coverage.h>
 
 class CoverageB
 {

@@ -101,7 +101,7 @@
       <AdditionalIncludeDirectories>..\testlib;..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,7 +116,7 @@
       <AdditionalIncludeDirectories>..\testlib;..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +131,7 @@
       <AdditionalIncludeDirectories>..\testlib;..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,7 +146,7 @@
       <AdditionalIncludeDirectories>..\testlib;..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

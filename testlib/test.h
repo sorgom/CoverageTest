@@ -6,6 +6,6 @@ using testfunc = void(*)();
 
 void settest(const char* name);
 
-void test(testfunc func, int nr);
+void test(testfunc func);
 
 #endif // _H

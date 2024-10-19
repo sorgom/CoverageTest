@@ -2,7 +2,7 @@
 #ifndef COVERAGENOTINC_H
 #define COVERAGENOTINC_H
 
-#include <Use.h>
+#include <use.h>
 
 class CoverageNotInc
 {

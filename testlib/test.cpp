@@ -4,17 +4,19 @@ using std::cout;
 using std::endl;
 
 const char* testname = nullptr;
+int nr = 0;
 
 void settest(const char* name)
 {
     testname = name;
+    nr = 0;
 }
 
-void test(testfunc func, int nr)
+void test(testfunc func)
 {
     if (testname)
     {
-        cout << "  - " << testname << " Test " << nr << std::endl;
+        cout << "  - " << testname << " Test " << ++nr << std::endl;
         func();
     }
 }
