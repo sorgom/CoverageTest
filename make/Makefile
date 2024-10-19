@@ -23,6 +23,9 @@ endif
 ifeq ($(config),b_macro)
   CoverageTest_config = b_macro
 endif
+ifeq ($(config),fd_set)
+  CoverageTest_config = fd_set
+endif
 
 PROJECTS := CoverageTest
 
@@ -48,6 +51,7 @@ help:
 	@echo "  2017"
 	@echo "  macro"
 	@echo "  b_macro"
+	@echo "  fd_set"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

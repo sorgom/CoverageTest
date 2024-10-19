@@ -10,6 +10,8 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 call covselect -qd
 call covselect -q --import %excludeFile%
 
+if not "%1" == "" exit /b 1
+
 cd %codeDir%
 echo - html
 call covhtml -q --allNum %htmlFolder%

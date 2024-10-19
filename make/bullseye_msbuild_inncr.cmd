@@ -10,4 +10,4 @@ call %~dp0_cmd\_be_setup.cmd %*
 set cleanCmd=msbuild -t:clean -p:configuration=%config% %solution%
 set buildCmd=msbuild -t:%trg% -p:configuration=%config% %solution%
 
-call %subsDir%\_run.cmd
+call %subsDir%\_be_report.cmd noreport

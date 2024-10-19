@@ -3,11 +3,11 @@
 --  ============================================================
 
 buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON'
-buildoptions_gcc = '-std=c++17 -pedantic-errors -Wall -D_COVERAGE_ON'
+buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
 
 workspace 'CoverageTest'
 
-    configurations { '1998_cov', '1998', '2017', 'macro', 'b_macro' }
+    configurations { '1998_cov', '1998', '2017', 'macro', 'b_macro', 'fd_set' }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
@@ -37,8 +37,12 @@ workspace 'CoverageTest'
     filter { 'configurations:b_macro' }
         files { '../tests/Tests_B.cpp' }
 
-        project 'CoverageTest'
+    filter { 'configurations:fd_set' }
+        files { '../tests/Tests_FD_SET.cpp' }
+
+    project 'CoverageTest'
         kind 'ConsoleApp'
-        defines { 'DEBUG' }
-        symbols 'On'
+        defines { 'NDEBUG' }
+        -- defines { 'DEBUG' }
+        -- symbols 'On'
        
