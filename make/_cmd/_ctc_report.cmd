@@ -9,3 +9,5 @@ if %errorlevel% == 0 (
     echo - report
     call ctcreport.exe -t 98 -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o %htmlFolder%
 )
+if exist %monFile% rm -f %monFile%
+if exist %datFile% rm -f %datFile%

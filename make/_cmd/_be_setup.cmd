@@ -3,10 +3,9 @@ rem common setup for Bullseye scripts
 rem avoid env polution by call of this sctipt
 if "%_me%" == "" exit /b 1
 
-call %~dp0_setup.cmd %*
+set _who=bullseye
 
-set buildReport=%buildDir%\bullsey_build.log
-set htmlFolder=%buildDir%\html_bullseye
+call %~dp0_setup.cmd %*
 
 set covfile=%buildDir%\%project%.cov
 set covcopt=--srcdir %repoDir% --macro

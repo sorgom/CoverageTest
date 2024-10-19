@@ -9,7 +9,8 @@ echo - clean
 call %cleanCmd% >NUL 2>&1
 
 echo - build: %config%
-call %buildCmd% > %buildReport% 2>&1
+echo %DATE% %TIME% CFG: %config% > %buildReport%
+call %buildCmd% >> %buildReport% 2>&1
 
 call %subsDir%\_be_restore.cmd
 
