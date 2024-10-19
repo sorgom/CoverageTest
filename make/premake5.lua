@@ -32,7 +32,7 @@ workspace 'CoverageTest'
         files { '../tests/Tests_2017.cpp' }
 
     filter { 'configurations:macro' }
-        files { '../tests/Tests_Macro.cpp' }
+        files { '../tests/Tests_Macro.cpp', '../code/CoverageMacro.cpp' }
 
     filter { 'configurations:b_macro' }
         files { '../tests/Tests_B.cpp' }

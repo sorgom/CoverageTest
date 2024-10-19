@@ -181,6 +181,7 @@ CUSTOMFILES := \
 
 ifeq ($(config),1998_cov)
   OBJECTS += \
+	$(OBJDIR)/CoverageMacro.o \
 	$(OBJDIR)/CoverageSrc.o \
 	$(OBJDIR)/Tests_1998_cov.o \
 
@@ -188,6 +189,7 @@ endif
 
 ifeq ($(config),1998)
   OBJECTS += \
+	$(OBJDIR)/CoverageMacro.o \
 	$(OBJDIR)/CoverageSrc.o \
 	$(OBJDIR)/Tests_1998.o \
 
@@ -201,6 +203,7 @@ endif
 
 ifeq ($(config),macro)
   OBJECTS += \
+	$(OBJDIR)/CoverageMacro.o \
 	$(OBJDIR)/Tests_Macro.o \
 
 endif
@@ -270,6 +273,9 @@ else
 $(OBJECTS): | $(OBJDIR)
 endif
 
+$(OBJDIR)/CoverageMacro.o: ../code/CoverageMacro.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/CoverageSrc.o: ../code/CoverageSrc.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

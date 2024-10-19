@@ -212,6 +212,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\code\CoverageMacro.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='2017|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\code\CoverageSrc.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='2017|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>

@@ -12,6 +12,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\code\CoverageMacro.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
     <ClCompile Include="..\code\CoverageSrc.cpp">
       <Filter>code</Filter>
     </ClCompile>
