@@ -3,9 +3,8 @@
 #include <use.h>
 #include <test.h>
 
-int main()
+int main(const int argc, const char**)
 {
-    settest("macros");
-    test(NoTest);
+    settest("macros", 0);
     return 0;
 }

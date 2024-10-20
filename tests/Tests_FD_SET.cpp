@@ -5,7 +5,6 @@
 
 int main()
 {
-    settest("FD_SET");
-    test(NoTest);
+    settest("FD_SET", 0);
     return 0;
 }
