@@ -6,6 +6,7 @@ if "%_me%" == "" exit /b 1
 set _who=bullseye
 
 call %~dp0_setup.cmd %*
+if %errorlevel% NEQ 0 exit /b 1
 
 set covfile=%buildDir%\%project%_%config%.cov
 set covcopt=--srcdir %repoDir% --macro

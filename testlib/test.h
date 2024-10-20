@@ -4,10 +4,8 @@
 
 using testfunc = void(*)();
 
-void settest(const char* name);
+void settest(const char* name, int argc = 0);
 
 void test(testfunc func);
-
-void NoTest();
 
 #endif // _H

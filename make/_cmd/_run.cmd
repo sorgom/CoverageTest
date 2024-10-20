@@ -8,7 +8,7 @@ if exist %htmlFolder% rm -rf %htmlFolder%
 echo - clean
 call %cleanCmd% >NUL 2>&1
 
-echo - build: %config%
+echo - build
 echo %DATE% %TIME% CFG: %config% > %buildReport%
 call %buildCmd% >> %buildReport% 2>&1
 
@@ -24,4 +24,4 @@ if not exist %executable% (
 )
 
 echo - run
-call %executable%
+call %executable% %covArg%

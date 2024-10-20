@@ -6,6 +6,7 @@ if "%_me%" == "" exit /b 1
 set _who=ctc
 
 call %~dp0_setup.cmd %*
+if not %errorlevel% == 0 exit /b 1
 
 set buildReport=%buildDir%\ctc_build.log
 set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m 

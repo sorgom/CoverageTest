@@ -1,24 +1,48 @@
 #include "test.h"
+#include <coding.h>
 #include <iostream>
 using std::cout;
 using std::endl;
 
-const char* testname = nullptr;
-int nr = 0;
 
-void settest(const char* name)
+class CoTest
 {
-    testname = name;
-    nr = 0;
+public:
+    INSTANCE_DEC(CoTest)
+    void setTest(const char* name, int argc)
+    {
+        mName = name;
+        mCov = argc > 1;
+        mNr = 0;
+        if ((mName != nullptr) && !mCov)
+        {
+            cout << "  - " << mName << " no test" << endl;
+        }
+    }
+
+    void runTest(testfunc func)
+    {
+        if ((mName != nullptr) && mCov)
+        {
+            cout << "  - " << mName << " test nr. " << ++mNr << endl;
+            func();
+        }
+    }
+
+private:
+    const char* mName = nullptr;
+    int mNr = 0;
+    bool mCov = false;
+};
+
+INSTANCE_DEF(CoTest)
+
+void settest(const char* name, int argc)
+{
+    CoTest::instance().setTest(name, argc);
 }
 
 void test(testfunc func)
 {
-    if (testname)
-    {
-        cout << "  - " << testname << " Test " << ++nr << std::endl;
-        func();
-    }
+    CoTest::instance().runTest(func);
 }
-
-void NoTest() {}

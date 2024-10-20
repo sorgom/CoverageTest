@@ -7,7 +7,7 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
 
 workspace 'CoverageTest'
 
-    configurations { '1998_cov', '1998', '2017', 'macro', 'b_macro', 'fd_set' }
+    configurations { '1998', '2017', 'macro', 'b_macro', 'fd_set' }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
@@ -23,10 +23,7 @@ workspace 'CoverageTest'
         buildoptions { buildoptions_gcc }
 
     filter { 'configurations:1998' }
-        files { '../tests/Tests_1998.cpp', '../code/*.cpp' }
-
-    filter { 'configurations:1998_cov' }
-        files { '../tests/Tests_1998_cov.cpp', '../code/*.cpp' }
+        files { '../tests/Tests_1998.cpp', '../code/CoverageSrc.cpp' }
         
     filter { 'configurations:2017' }
         files { '../tests/Tests_2017.cpp' }
@@ -43,6 +40,4 @@ workspace 'CoverageTest'
     project 'CoverageTest'
         kind 'ConsoleApp'
         defines { 'NDEBUG' }
-        -- defines { 'DEBUG' }
-        -- symbols 'On'
        

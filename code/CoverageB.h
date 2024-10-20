@@ -15,47 +15,44 @@ public:
         mInt(i)
     {}
 
-    void assignments(const int i1, const int i2) const
+    //  return bool simple
+    inline static bool retBoolSimple(const int i1, const int i2)
+    {
+	    return B(i2 > i1);
+    }
+
+    //  call bool simple
+    inline static void callBoolSimple(const int i1, const int i2)
+    {
+	    call(B(i2 > i1));
+    }
+    
+    //  full coverage
+    //  i1 0 / 1
+    //  i2 0 / 1
+    static void assignments(const int i1, const int i2)
     {
         //  const assignment constructors
         //  simple bool
         const bool cb1 = B(i1 > 0);
-        
+
         //  non const assignment constructors
         //  simple bool
         bool vb1 = B(i1 > 0);
 
         //  non const assignments
         //  simple bool
-        vb1 = B(i1 < 0);
+        vb1 = B(i1 == 0);
 
         //  const struct assignment constructors
         //  bool simple 
-        const SomeStruct cs1 = { B(i1 < i2), B(i1 == i2), i1 };
+        const SomeStruct cs1 = { B(i2 > i1), B(i2 == i1), i2 };
 
         //  non const struct assignment constructors
         //  bool simple 
-        SomeStruct vs1 = { B(i1 < i2), B(i1 == i2), i1 };
+        SomeStruct vs1 = { B(i2 > i1), B(i2 == i1), i2 };
 
         use(cb1, vb1, cs1, vs1);
-    }
-
-    //  return bool simple
-    inline bool operator<(const CoverageB& other) const
-    {
-	    return B(mInt < other.mInt);
-    }
-
-    //  bool parameter
-    inline static void call(const bool b)
-    {
-	    use(b);
-    }
-
-    //  call bool simple
-    inline void callBoolSimple() const
-    {
-	    call(B(mInt > 0));
     }
 
     const bool mBool;

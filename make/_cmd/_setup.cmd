@@ -3,8 +3,6 @@ rem common setup for CTC and Bullseye scripts
 rem avoid env polution by call of this sctipt
 if "%_who%" == "" exit /b 1
 
-echo - setup
-
 cd /d %~dp0
 set subsDir=%cd%
 cd ..
@@ -13,9 +11,22 @@ cd ..
 set repoDir=%cd%
 cd %makeDir%
 
-set config=%1
-if "%config%" == "" set config=1998
+set covArg=
+set config=1998
+for %%p in (%*) do (
+    if "%%p" == "-h" (
+        echo.
+        echo Usage: %_me%.cmd [options] [config]
+        cat %subsDir%\_options.txt
+        exit /b 1
+    ) else if "%%p" == "-c" (
+        set covArg=_cov
+    ) else (
+        set config=%%p
+    )
+)
 
+echo - setup
 
 set project=CoverageTest
 set buildDir=%repoDir%\build
@@ -28,5 +39,5 @@ set tmpFile=tmp.tmp
 set trg=%project%
 
 set buildReport=%buildDir%\%_who%_build.log
-set covReport=%buildDir%\%_who%_coverage.log
-set htmlFolder=%buildDir%\html_%_who%_%config%
+set covReport=%buildDir%\%_who%_%config%%covArg%.log
+set htmlFolder=%buildDir%\html_%_who%_%config%%covArg%

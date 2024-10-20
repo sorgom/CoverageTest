@@ -7,6 +7,7 @@ SETLOCAL
 set _me=%~n0
 set _nocopy=1
 call %~dp0_cmd\_ctc_setup.cmd %*
+if %errorlevel% NEQ 0 exit /b 0
 
 echo - gen
 cp -r %cmakeDir%/* ./

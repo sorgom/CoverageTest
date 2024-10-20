@@ -9,60 +9,63 @@ class CoverageMcpp
 {
 public:
     inline CoverageMcpp(const int i = 0):
-        // mod cpp member struct constructor bool simple
-        mStruct{i < 0, i > 0, i}
+        // member struct constructor bool simple
+        mStruct{i == 0, i > 0, i}
     {}
 
-    inline CoverageMcpp(const int i, const bool b):
-        // mod cpp member struct constructor bool and / or, ternary
-        mStruct{b and i < 0, b or i > 0, b ? 1 : 0}
+    inline CoverageMcpp(const bool b, const int i):
+        // member struct constructor bool and / or, ternary
+        mStruct{b and i > 0, b or i > 0, b ? 1 : 0}
     {}
 
-    void assignments(const int i1, const int i2) const
+    //  full coverage
+    //  i1 0 / 1
+    //  i2 0 / 1
+    static void assignments(const int i1, const int i2)
     {
-        //  const mod cpp constructors
+        //  const assignment constructors
         //  simple bool
         const bool cb1 { i1 > 0 };
         //  bool and
-        const bool cb2 {cb1 and i2 > 0};
+        const bool cb2 { (i1 > 0) and (i2 > 0) };
         //  bool or
-        const bool cb3 {cb2 or i2 > 0};
+        const bool cb3 { (i1 > 0) or (i2 > 0) };
         //  ternary
-        const int ci1 { cb3 ? i1 : i2 };
+        const int ci1 { (i2 > i1) ? i2 : i1 };
         
         use(ci1, cb1, cb2, cb3);
 
-        //  mod cpp non const constructors
+        //  non const assignment constructors
         //  simple bool
         bool vb1 { i1 > 0 };
         //  bool and
-        bool vb2 { vb1 and i2 > 0 };
+        bool vb2 { (i1 > 0) and (i2 > 0) };
         //  bool or
-        bool vb3 { vb2 or i2 > 0 };
+        bool vb3 { (i1 > 0) or (i2 > 0) };
         //  ternary
-        int vi1 { vb3 ? i1 : i2 };
+        int vi1 = { (i2 > i1) ? i2 : i1 };
 
-        use(vi1, vb1, vb2, vb3);
+        use(vb1, vb2, vb3, vi1);
 
-        //  mod cpp const struct constructors
+        //  const struct assignment constructors
         //  bool simple 
-        const SomeStruct cs1 { ci1 < vi1, ci1 > vi1, vi1 };
+        const SomeStruct cs1 { i2 > i1, i2 == i1, i2 };
         //  bool and / or
-        const SomeStruct cs2 { vb2 and ci1 > vi1, vb3 or ci1 < vi1, ci1 };
+        const SomeStruct cs2 { vb1 and vb2, vb2 or vb3, i1 };
         //  ternary
-        const SomeStruct cs3 { vb2, vb3, vb1 ? vi1 : ci1 };
+        const SomeStruct cs3 { vb2, vb3, i2 > i1 ? i2 : i1 };
 
-        //  mod cpp const struct constructors
+        //  non const struct assignment constructors
         //  bool simple 
-        SomeStruct vs1 { ci1 < vi1, ci1 > vi1, vi1 };
+        SomeStruct vs1 { i2 > i1, i2 == i1, i2 };
         //  bool and / or
-        SomeStruct vs2 { vb2 and ci1 > vi1, vb3 or ci1 < vi1, ci1 };
+        SomeStruct vs2 { vb1 and vb2, vb2 or vb3, i1 };
         //  ternary
-        SomeStruct vs3 { vb2, vb3, vb1 ? vi1 : ci1 };
+        SomeStruct vs3 { vb2, vb3, i2 > i1 ? i2 : i1 };
 
         use(cs1, cs2, cs3, vs1, vs2, vs3);
-        
     }
+
 
     const SomeStruct mStruct;
 };

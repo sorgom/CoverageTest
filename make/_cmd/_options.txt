@@ -1,0 +1,3 @@
+options:
+-c  generate coverage
+-h  this help
