@@ -194,13 +194,10 @@ int CoverageSrc::switchCaseSingle(const SomeEnum e)
         case VALUE_C:
             res = 1;
             break;
-// defensive code: only performed with proper enumeration
-BULLSEY_PAUSE
-#pragma CTC SKIP
+        // not reachable with proper enumeration
+        // but testable with cast
         default:
             break;
-#pragma CTC ENDSKIP
-BULLSEY_RESUME
     }
     return res;
 }
@@ -215,13 +212,10 @@ int CoverageSrc::switchCaseMulti(const SomeEnum e)
         case VALUE_B:
         case VALUE_C:
             return 1;
-// defensive code: only performed with proper enumeration
-BULLSEY_PAUSE
-#pragma CTC SKIP
+        // not reachable with proper enumeration
+        // but testable with cast
         default:
             return -1;
-#pragma CTC ENDSKIP
-BULLSEY_RESUME
     }
 }
 

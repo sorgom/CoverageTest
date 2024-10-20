@@ -97,10 +97,12 @@ void TestCov()
     COVCL::switchCaseSingle(VALUE_A);
     COVCL::switchCaseSingle(VALUE_B);
     COVCL::switchCaseSingle(VALUE_C);
+    COVCL::switchCaseSingle(static_cast<SomeEnum>(VALUE_C + 1));
 
     COVCL::switchCaseMulti(VALUE_A);
     COVCL::switchCaseMulti(VALUE_B);
     COVCL::switchCaseMulti(VALUE_C);
+    COVCL::switchCaseMulti(static_cast<SomeEnum>(VALUE_C + 1));
 
     COVCL::tryCatch(true);
     COVCL::tryCatch(false);
