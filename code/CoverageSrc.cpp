@@ -1,4 +1,4 @@
-
+#include <SomeEnum.h>
 #include <CoverageSrc.h>
 #include <use.h>
 #include <coverage.h>
@@ -135,7 +135,6 @@ void CoverageSrc::assignments(const int i1, const int i2)
     //  ternary
     vi1 = (i2 == 1) ? i2 : i1;
 
-
     use(vb1, vb2, vb3, vi1);
 
     //  const struct assignment constructors
@@ -183,43 +182,47 @@ void CoverageSrc::forLoopOr(const int i1, const int i2)
 }
 
 //  switch case single return
-int CoverageSrc::switchCaseSingle(const int i)
+int CoverageSrc::switchCaseSingle(const SomeEnum e)
 {
     int res = -1;
-    switch (i)
+    switch (e)
     {
-        case 0:
+        case VALUE_A:
             res = 0;
             break;
-        case 1:
-        case 2:
+        case VALUE_B:
+        case VALUE_C:
             res = 1;
             break;
+// defensive code: only performed with proper enumeration
+BULLSEY_PAUSE
+#pragma CTC SKIP
         default:
             break;
+#pragma CTC ENDSKIP
+BULLSEY_RESUME
     }
     return res;
 }
 
 //  switch case multiple return (not allowed with SIL4)
-int CoverageSrc::switchCaseMulti(const int i)
+int CoverageSrc::switchCaseMulti(const SomeEnum e)
 {
-    switch (i)
+    switch (e)
     {
-        case 0:
+        case VALUE_A:
             return 0;
-        case 1:
-        case 2:
+        case VALUE_B:
+        case VALUE_C:
             return 1;
+// defensive code: only performed with proper enumeration
+BULLSEY_PAUSE
+#pragma CTC SKIP
         default:
             return -1;
+#pragma CTC ENDSKIP
+BULLSEY_RESUME
     }
-    // unreachable
-    BULLSEY_PAUSE
-    #pragma CTC SKIP
-    return 42;
-    #pragma CTC ENDSKIP
-    BULLSEY_RESUME
 }
 
 void CoverageSrc::tryCatch(const bool b)

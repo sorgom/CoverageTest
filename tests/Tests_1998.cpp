@@ -94,15 +94,13 @@ void TestCov()
     COVCL::forLoopOr(2, 3);
     COVCL::forLoopOr(3, 2);
 
-    COVCL::switchCaseSingle(0);
-    COVCL::switchCaseSingle(1);
-    COVCL::switchCaseSingle(2);
-    COVCL::switchCaseSingle(3);
+    COVCL::switchCaseSingle(VALUE_A);
+    COVCL::switchCaseSingle(VALUE_B);
+    COVCL::switchCaseSingle(VALUE_C);
 
-    COVCL::switchCaseMulti(0);
-    COVCL::switchCaseMulti(1);
-    COVCL::switchCaseMulti(2);
-    COVCL::switchCaseMulti(3);
+    COVCL::switchCaseMulti(VALUE_A);
+    COVCL::switchCaseMulti(VALUE_B);
+    COVCL::switchCaseMulti(VALUE_C);
 
     COVCL::tryCatch(true);
     COVCL::tryCatch(false);
@@ -131,9 +129,9 @@ void Test03()
 
 int main(const int argc, const char**)
 {
-    settest("cpp 1998", argc);
-    test(TestCov<CoverageHead>);
-    test(TestCov<CoverageSrc>);
-    test(Test03);
+    setTest("cpp 1998", argc);
+    runTest(TestCov<CoverageHead>);
+    runTest(TestCov<CoverageSrc>);
+    runTest(Test03);
     return 0;
 }

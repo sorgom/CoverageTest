@@ -4,7 +4,6 @@
 using std::cout;
 using std::endl;
 
-
 class CoTest
 {
 public:
@@ -37,12 +36,12 @@ private:
 
 INSTANCE_DEF(CoTest)
 
-void settest(const char* name, int argc)
+void setTest(const char* name, int argc)
 {
     CoTest::instance().setTest(name, argc);
 }
 
-void test(testfunc func)
+void runTest(testfunc func)
 {
     CoTest::instance().runTest(func);
 }

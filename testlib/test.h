@@ -4,8 +4,8 @@
 
 using testfunc = void(*)();
 
-void settest(const char* name, int argc = 0);
+void setTest(const char* name, int argc = 0);
 
-void test(testfunc func);
+void runTest(testfunc func);
 
 #endif // _H

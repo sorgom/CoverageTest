@@ -2,6 +2,7 @@
 #ifndef COVERAGESRC_H
 #define COVERAGESRC_H
 
+#include <SomeEnum.h>
 #include <SomeStruct.h>
 #include <use.h>
 #include <coverage.h>
@@ -27,21 +28,21 @@ public:
     //  i 0 / 1 / -1
     static void ifElse(bool b, int i);
 
-    //  return static bool simple
+    //  return bool simple
     static bool retBoolSimple(int i1, int i2);
 
-    //  return static bool and
+    //  return bool and
     static bool retBoolAnd(int i1, int i2);
-    //  return static bool or
+    //  return bool or
     static bool retBoolOr(int i1, int i2);
     //  return ternary
     static int retTernary(int i1, int i2);
 
-    //  call static bool simple
+    //  call bool simple
     static void callBoolSimple(int i1, int i2);
-    //  call static bool and
+    //  call bool and
     static void callBoolAnd(int i1, int i2);
-    //  call static bool or
+    //  call bool or
     static void callBoolOr(int i1, int i2);
     //  call ternary
     static void callTernary(int i1, int i2);
@@ -59,10 +60,10 @@ public:
     static void forLoopOr(int i1, int i2);
 
     //  switch case single return
-    static int switchCaseSingle(int i);
+    static int switchCaseSingle(SomeEnum e);
 
     //  switch case multiple return (not allowed with SIL4)
-    static int switchCaseMulti(int i);
+    static int switchCaseMulti(SomeEnum e);
 
     static void tryCatch(bool b);
 

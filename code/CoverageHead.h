@@ -2,6 +2,7 @@
 #ifndef COVERAGEHEAD_H
 #define COVERAGEHEAD_H
 
+#include <SomeEnum.h>
 #include <SomeStruct.h>
 #include <use.h>
 #include <coverage.h>
@@ -188,43 +189,47 @@ public:
     }
 
     //  switch case single return
-    static int switchCaseSingle(const int i)
+    static int switchCaseSingle(const SomeEnum e)
     {
         int res = -1;
-        switch (i)
+        switch (e)
         {
-            case 0:
+            case VALUE_A:
                 res = 0;
                 break;
-            case 1:
-            case 2:
+            case VALUE_B:
+            case VALUE_C:
                 res = 1;
                 break;
+    // defensive code: only performed with proper enumeration
+    BULLSEY_PAUSE
+    #pragma CTC SKIP
             default:
                 break;
+    #pragma CTC ENDSKIP
+    BULLSEY_RESUME
         }
         return res;
     }
 
     //  switch case multiple return (not allowed with SIL4)
-    static int switchCaseMulti(const int i)
+    static int switchCaseMulti(const SomeEnum e)
     {
-        switch (i)
+        switch (e)
         {
-            case 0:
+            case VALUE_A:
                 return 0;
-            case 1:
-            case 2:
+            case VALUE_B:
+            case VALUE_C:
                 return 1;
+    // defensive code: only performed with proper enumeration
+    BULLSEY_PAUSE
+    #pragma CTC SKIP
             default:
                 return -1;
+    #pragma CTC ENDSKIP
+    BULLSEY_RESUME
         }
-        // unreachable
-        BULLSEY_PAUSE
-        #pragma CTC SKIP
-        return 42;
-        #pragma CTC ENDSKIP
-        BULLSEY_RESUME
     }
 
     static void tryCatch(const bool b)

@@ -23,7 +23,7 @@ void Test01()
 
 int main(const int argc, const char**)
 {
-    settest("cpp 2017", argc);
-    test(Test01);
+    setTest("cpp 2017", argc);
+    runTest(Test01);
     return 0;
 }

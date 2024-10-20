@@ -7,7 +7,7 @@ call %subsDir%\_run.cmd
 
 if %errorlevel% == 0 (
     echo - report
-    call ctcreport.exe -t 98 -nsb -restrict-to-files "*/code/*" -measures f,mcdc -o %htmlFolder%
+    call ctcreport.exe -t 98 -nsb  -include-justifications -restrict-to-files "*/code/*" -measures f,mcdc -o %htmlFolder%
 )
 if exist %monFile% rm -f %monFile%
 if exist %datFile% rm -f %datFile%
