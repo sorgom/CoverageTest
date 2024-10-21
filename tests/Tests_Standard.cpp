@@ -1,5 +1,4 @@
 #include <CoverageHead.h>
-#include <CoverageOneFunc.h>
 #include <CoverageSrc.h>
 #include <CoverageTpl.h>
 
@@ -94,15 +93,10 @@ void TestCov()
     COVCL::forLoopOr(2, 3);
     COVCL::forLoopOr(3, 2);
 
-    COVCL::switchCaseSingle(VALUE_A);
-    COVCL::switchCaseSingle(VALUE_B);
-    COVCL::switchCaseSingle(VALUE_C);
-    COVCL::switchCaseSingle(static_cast<SomeEnum>(VALUE_C + 1));
-
-    COVCL::switchCaseMulti(VALUE_A);
-    COVCL::switchCaseMulti(VALUE_B);
-    COVCL::switchCaseMulti(VALUE_C);
-    COVCL::switchCaseMulti(static_cast<SomeEnum>(VALUE_C + 1));
+    COVCL::switchCase(VALUE_A);
+    COVCL::switchCase(VALUE_B);
+    COVCL::switchCase(VALUE_C);
+    COVCL::switchCase(static_cast<SomeEnum>(VALUE_C + 1));
 
     COVCL::tryCatch(true);
     COVCL::tryCatch(false);
@@ -125,13 +119,11 @@ void Test03()
 
     ByteBuffer<long int, short> bb;
     use(b, i, bb);
-
-    oneFunc();
 }
 
 int main(const int argc, const char**)
 {
-    setTest("cpp 1998", argc);
+    setTest("Standard Code", argc);
     runTest(TestCov<CoverageHead>);
     runTest(TestCov<CoverageSrc>);
     runTest(Test03);

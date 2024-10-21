@@ -1,11 +1,11 @@
 #pragma once
-#ifndef COVERAGE_EX_SKIP_H
-#define COVERAGE_EX_SKIP_H
+#ifndef COVERAGE_EX_JUSTIFY_H
+#define COVERAGE_EX_JUSTIFY_H
 
 #include <SomeEnum.h>
 #include <coverage.h>
 
-int switchCaseSkip(const SomeEnum e)
+int switchCaseJust(const SomeEnum e)
 {
     int res = -1;
     switch (e)
@@ -17,12 +17,9 @@ int switchCaseSkip(const SomeEnum e)
         case VALUE_C:
             res = 1;
             break;
-//  DefensiveDefaults
 BULLSEY_PAUSE
-#pragma CTC SKIP
-        default:
+        default: // CTC++ Justify | DefensiveDefaults
             break;
-#pragma CTC ENDSKIP
 BULLSEY_RESUME
     }
     return res;

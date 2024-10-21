@@ -13,7 +13,7 @@ void Test01()
 
 int main(const int argc, const char**)
 {
-    setTest("macros", argc);
+    setTest("Macro", argc);
     runTest(Test01);
     return 0;
 }

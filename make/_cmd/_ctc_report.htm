@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>$ProjectName$</title>
+</head>
+<body>
+    <style type="text/css">
+        table {border-collapse: collapse;}
+        td {border: 1px solid black; padding: 5px; text-align: center;}
+        td.l {text-align: left;}
+        thead { background-color: lightgray; }
+        * { font-family: Arial, sans-serif; }
+   </style>
+   <table>
+    <thead>
+    <tr>
+        <td class="l">Source</td>
+        <td>function</td>
+        <td>MC/DC</td>
+    </tr>
+    </thead>
+    {CTC_LOOP("Directories")}
+    {CTC_LOOP("SourceFiles")}
+    <tr>
+        <td class="l">$SourceFileName$</td>
+        {CTC_LOOP("CoverageMeasures")}
+        <td>$Hits$ / $Checkpoints$</td>
+        {CTC_LOOP_END("CoverageMeasures")}
+    </tr>
+    {CTC_LOOP_END("SourceFiles")}{CTC_LOOP_END("Directories")}
+    <tr>
+        <td class="l">Total</td>
+        {CTC_LOOP("CoverageMeasures")}
+        <td>$Hits$ / $Checkpoints$</td>
+        {CTC_LOOP_END("CoverageMeasures")}
+    </tr>
+   </table> 
+</body>
+</html>
+

@@ -7,7 +7,9 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
 
 workspace 'CoverageTest'
 
-    configurations { '1998', '2017', 'macro', 'b_macro', 'fd_set' }
+    configurations { 
+        'standard', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count' 
+    }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
@@ -22,20 +24,26 @@ workspace 'CoverageTest'
     filter { 'action:gmake*' }
         buildoptions { buildoptions_gcc }
 
-    filter { 'configurations:1998' }
-        files { '../tests/Tests_1998.cpp', '../code/CoverageSrc.cpp' }
+    filter { 'configurations:standard' }
+        files { '../tests/Tests_standard.cpp', '../code/CoverageSrc.cpp' }
         
-    filter { 'configurations:2017' }
-        files { '../tests/Tests_2017.cpp' }
+    filter { 'configurations:mod_cpp' }
+        files { '../tests/Tests_Mod_Cpp.cpp' }
 
     filter { 'configurations:macro' }
         files { '../tests/Tests_Macro.cpp', '../code/CoverageMacro.cpp' }
 
     filter { 'configurations:b_macro' }
-        files { '../tests/Tests_B.cpp' }
+        files { '../tests/Tests_B_Macro.cpp' }
+
+    filter { 'configurations:exclude' }
+        files { '../tests/Tests_Exclude.cpp' }
 
     filter { 'configurations:fd_set' }
         files { '../tests/Tests_FD_SET.cpp' }
+
+    filter { 'configurations:count' }
+        files { '../tests/Tests_Count.cpp' }
 
     project 'CoverageTest'
         kind 'ConsoleApp'

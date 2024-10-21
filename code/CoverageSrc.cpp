@@ -181,8 +181,8 @@ void CoverageSrc::forLoopOr(const int i1, const int i2)
     }
 }
 
-//  switch case single return
-int CoverageSrc::switchCaseSingle(const SomeEnum e)
+//  switch case
+int CoverageSrc::switchCase(const SomeEnum e)
 {
     int res = -1;
     switch (e)
@@ -200,23 +200,6 @@ int CoverageSrc::switchCaseSingle(const SomeEnum e)
             break;
     }
     return res;
-}
-
-//  switch case multiple return (not allowed with SIL4)
-int CoverageSrc::switchCaseMulti(const SomeEnum e)
-{
-    switch (e)
-    {
-        case VALUE_A:
-            return 0;
-        case VALUE_B:
-        case VALUE_C:
-            return 1;
-        // not reachable with proper enumeration
-        // but testable with cast
-        default:
-            return -1;
-    }
 }
 
 void CoverageSrc::tryCatch(const bool b)

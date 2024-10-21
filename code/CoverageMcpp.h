@@ -1,6 +1,6 @@
 #pragma once
-#ifndef COVERAGEMCPP_H
-#define COVERAGEMCPP_H
+#ifndef COVERAGE_MCPP_H
+#define COVERAGE_MCPP_H
 
 #include <SomeStruct.h>
 #include <use.h>
@@ -32,7 +32,7 @@ public:
         const bool cb3 { (i1 > 0) or (i2 > 0) };
         //  ternary
         const int ci1 { (i2 > i1) ? i2 : i1 };
-        
+
         use(ci1, cb1, cb2, cb3);
 
         //  non const assignment constructors
@@ -48,7 +48,7 @@ public:
         use(vb1, vb2, vb3, vi1);
 
         //  const struct assignment constructors
-        //  bool simple 
+        //  bool simple
         const SomeStruct cs1 { i2 > i1, i2 == i1, i2 };
         //  bool and / or
         const SomeStruct cs2 { vb1 and vb2, vb2 or vb3, i1 };
@@ -56,7 +56,7 @@ public:
         const SomeStruct cs3 { vb2, vb3, i2 > i1 ? i2 : i1 };
 
         //  non const struct assignment constructors
-        //  bool simple 
+        //  bool simple
         SomeStruct vs1 { i2 > i1, i2 == i1, i2 };
         //  bool and / or
         SomeStruct vs2 { vb1 and vb2, vb2 or vb3, i1 };

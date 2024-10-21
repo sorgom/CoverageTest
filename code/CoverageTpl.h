@@ -1,6 +1,6 @@
 #pragma once
-#ifndef COVERAGETPL_H
-#define COVERAGETPL_H
+#ifndef COVERAGE_TPL_H
+#define COVERAGE_TPL_H
 
 template <bool B, int I>
 class CoverageTpl
@@ -19,16 +19,16 @@ private:
 #define MAX(V1, V2) (((V1) > (V2)) ? (V1) : (V2))
 
 template <typename T1, typename T2>
-class ByteBuffer 
-{ 
+class ByteBuffer
+{
 public:
-    inline ByteBuffer(): 
-        mBytes(new unsigned char[MAX(sizeof(T1), sizeof(T2))]) 
+    inline ByteBuffer():
+        mBytes(new unsigned char[MAX(sizeof(T1), sizeof(T2))])
     {}
     inline ~ByteBuffer() { delete[] mBytes; }
 private:
     unsigned char* mBytes;
-}; 
+};
 
 
 #endif // _H

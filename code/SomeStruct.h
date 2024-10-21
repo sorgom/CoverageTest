@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef SOMESTRUCT_H
-#define SOMESTRUCT_H
+#ifndef SOME_STRUCT_H
+#define SOME_STRUCT_H
 
 struct SomeStruct
 {

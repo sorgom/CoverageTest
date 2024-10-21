@@ -1,6 +1,6 @@
 #pragma once
-#ifndef COVERAGESRC_H
-#define COVERAGESRC_H
+#ifndef COVERAGE_SRC_H
+#define COVERAGE_SRC_H
 
 #include <SomeEnum.h>
 #include <SomeStruct.h>
@@ -59,11 +59,8 @@ public:
     //  for loop or
     static void forLoopOr(int i1, int i2);
 
-    //  switch case single return
-    static int switchCaseSingle(SomeEnum e);
-
-    //  switch case multiple return (not allowed with SIL4)
-    static int switchCaseMulti(SomeEnum e);
+    //  switch case
+    static int switchCase(SomeEnum e);
 
     static void tryCatch(bool b);
 

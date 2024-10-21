@@ -23,7 +23,7 @@ void Test01()
 
 int main(const int argc, const char**)
 {
-    setTest("cpp 2017", argc);
+    setTest("Modern C++ Code", argc);
     runTest(Test01);
     return 0;
 }

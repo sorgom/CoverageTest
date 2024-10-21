@@ -1,6 +1,6 @@
 #pragma once
-#ifndef COVERAGFDSET_H
-#define COVERAGFDSET_H
+#ifndef COVERAGE_FD_SET_H
+#define COVERAGE_FD_SET_H
 
 #include <coverage.h>
 

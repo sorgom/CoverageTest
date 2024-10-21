@@ -26,7 +26,7 @@ void Test01()
 
 int main(const int argc, const char**)
 {
-    setTest("B() macro", argc);
+    setTest("B Macro", argc);
     runTest(Test01);
     return 0;
 }

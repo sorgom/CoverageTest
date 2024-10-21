@@ -1,7 +1,7 @@
 
 #pragma once
-#ifndef COVERAGEMACRO_H
-#define COVERAGEMACRO_H
+#ifndef COVERAGE_MACRO_H
+#define COVERAGE_MACRO_H
 
 #include <coding.h>
 #include <coverage.h>
@@ -11,7 +11,7 @@
 //  private members and public getters
 #define MEMBER(TYPE, NAME, VAL) \
 private: TYPE m ## NAME = VAL; \
-public: inline TYPE get ## NAME() const { return m ## NAME; } 
+public: inline TYPE get ## NAME() const { return m ## NAME; }
 
 //  in module test also public setters
 #ifdef MODULE_TEST
@@ -36,10 +36,9 @@ public:
 
     SETTER(bool, Bool1)
     SETTER(int, Int1)
-    
+
     #pragma CTC ENDSKIP
     BULLSEY_RESUME
 };
 
 #endif // _H
-

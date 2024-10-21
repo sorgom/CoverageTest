@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SOMEENUM_H
-#define SOMEENUM_H
+#ifndef SOME_ENUM_H
+#define SOME_ENUM_H
 
 enum SomeEnum : unsigned char
 {

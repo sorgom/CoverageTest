@@ -12,7 +12,7 @@ set repoDir=%cd%
 cd %makeDir%
 
 set covArg=
-set config=1998
+set config=standard
 for %%p in (%*) do (
     if "%%p" == "-h" (
         echo.
@@ -40,4 +40,5 @@ set trg=%project%
 
 set buildReport=%buildDir%\%_who%_build.log
 set covReport=%buildDir%\%_who%_%config%%covArg%.log
+set covHtm=%buildDir%\%_who%_%config%%covArg%.html
 set htmlFolder=%buildDir%\html_%_who%_%config%%covArg%

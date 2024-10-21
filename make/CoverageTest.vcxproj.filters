@@ -21,19 +21,25 @@
     <ClCompile Include="..\testlib\test.cpp">
       <Filter>testlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\tests\Tests_1998.cpp">
+    <ClCompile Include="..\tests\Tests_B_Macro.cpp">
       <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\tests\Tests_2017.cpp">
+    <ClCompile Include="..\tests\Tests_Count.cpp">
       <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\tests\Tests_B.cpp">
+    <ClCompile Include="..\tests\Tests_Exclude.cpp">
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="..\tests\Tests_FD_SET.cpp">
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="..\tests\Tests_Macro.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\Tests_Mod_Cpp.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\Tests_standard.cpp">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>

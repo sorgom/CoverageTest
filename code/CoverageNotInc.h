@@ -1,6 +1,6 @@
 #pragma once
-#ifndef COVERAGENOTINC_H
-#define COVERAGENOTINC_H
+#ifndef COVERAGE_NOT_INC_H
+#define COVERAGE_NOT_INC_H
 
 #include <use.h>
 
