@@ -32,8 +32,16 @@ public:
     inline CoverageHead(const bool b, const int i):
         // constructor or
         mBool(b or i != 0),
-        mInt(i)
+        mInt(i),
+         // ternary in new array
+       mData(new int[b and i > 0? 20 : 10])
     {}
+
+    //  destructor with if statement
+    ~CoverageHead()
+    {
+        if (mData != nullptr) delete[] mData;
+    }    
 
     //  full coverage
     //  b true / false
@@ -226,6 +234,7 @@ public:
 
     const bool mBool;
     const int mInt;
+    const int* mData = nullptr;
 };
 
 #endif // _H
