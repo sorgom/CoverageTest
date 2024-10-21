@@ -23,6 +23,9 @@ public:
     //  b false / true
     CoverageSrc(bool b, int i);
 
+    //  destructor with if statement
+    ~CoverageSrc();
+
     //  full coverage
     //  b true / false
     //  i 0 / 1 / -1
@@ -66,6 +69,7 @@ public:
 
     const bool mBool;
     const int mInt;
+    const int* mData = nullptr;
 };
 
 #endif // _H

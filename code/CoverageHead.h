@@ -33,8 +33,8 @@ public:
         // constructor or
         mBool(b or i != 0),
         mInt(i),
-         // ternary in new array
-       mData(new int[b and i > 0? 20 : 10])
+        // bool and ternary in new array
+        mData(new int[b and i > 0? 20 : 10])
     {}
 
     //  destructor with if statement
@@ -49,25 +49,14 @@ public:
     static void ifElse(const bool b, const int i)
     {
         // bool var
-        if (b)
-        {
-            pass();
-        }
+        if (b) { pass(); }
         // bool simple
-        if (i > 0)
-        {
-            pass();
-        }
+        if (i > 0) { pass(); }
         // bool and
-        if (b and i > 0)
-        {
-            pass();
-        }
+        if (b and i > 0) { pass(); }
         // bool or
-        if (b or i > 0)
-        {
-            pass();
-        }
+        if (b or i > 0) { pass(); }
+        else { pass(); }
     }
 
     //  return bool simple
@@ -169,6 +158,20 @@ public:
         SomeStruct vs3 = { vb2, vb3, i2 > i1 ? i2 : i1 };
 
         use(cs1, cs2, cs3, vs1, vs2, vs3);
+
+        //  new statements
+        //  bool simple
+        const bool* nbs = new bool(i1 > 0);
+        delete nbs;
+        //  bool and
+        const bool* nba = new bool((i1 > 0) and (i2 > 0));
+        delete nba;
+        //  bool or
+        const bool* nbo = new bool((i1 > 0) or (i2 > 0));
+        delete nbo;
+        //  ternary array size
+        const int* data = new int[i1 > 0 ? 20 : 10];
+        delete [] data;
     }
 
     //  for loop simple
