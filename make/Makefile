@@ -11,6 +11,9 @@ endif
 ifeq ($(config),standard)
   CoverageTest_config = standard
 endif
+ifeq ($(config),standard_part)
+  CoverageTest_config = standard_part
+endif
 ifeq ($(config),mod_cpp)
   CoverageTest_config = mod_cpp
 endif
@@ -50,6 +53,7 @@ help:
 	@echo ""
 	@echo "CONFIGURATIONS:"
 	@echo "  standard"
+	@echo "  standard_part"
 	@echo "  mod_cpp"
 	@echo "  macro"
 	@echo "  b_macro"

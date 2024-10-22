@@ -5,6 +5,10 @@
       <Configuration>standard</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="standard_part|Win32">
+      <Configuration>standard_part</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="mod_cpp|Win32">
       <Configuration>mod_cpp</Configuration>
       <Platform>Win32</Platform>
@@ -38,6 +42,12 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='standard|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
@@ -85,6 +95,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -108,6 +121,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\build\</OutDir>
     <IntDir>..\build\obj\standard\</IntDir>
+    <TargetName>CoverageTest</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\build\</OutDir>
+    <IntDir>..\build\obj\standard_part\</IntDir>
     <TargetName>CoverageTest</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
@@ -154,6 +174,19 @@
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\testlib;..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <AdditionalOptions>/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
@@ -247,6 +280,7 @@
   <ItemGroup>
     <ClCompile Include="..\code\CoverageMacro.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
@@ -264,6 +298,7 @@
     <ClCompile Include="..\testlib\test.cpp" />
     <ClCompile Include="..\tests\Tests_B_Macro.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
@@ -272,6 +307,7 @@
     </ClCompile>
     <ClCompile Include="..\tests\Tests_Count.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
@@ -280,6 +316,7 @@
     </ClCompile>
     <ClCompile Include="..\tests\Tests_Exclude.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
@@ -288,6 +325,7 @@
     </ClCompile>
     <ClCompile Include="..\tests\Tests_FD_SET.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
@@ -296,6 +334,7 @@
     </ClCompile>
     <ClCompile Include="..\tests\Tests_Macro.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
@@ -304,6 +343,7 @@
     </ClCompile>
     <ClCompile Include="..\tests\Tests_Mod_Cpp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
@@ -311,6 +351,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='count|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\tests\Tests_standard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard_part|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='fd_set|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='exclude|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='count|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\tests\Tests_standard_Part.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='standard|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='mod_cpp|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='macro|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='b_macro|Win32'">true</ExcludedFromBuild>

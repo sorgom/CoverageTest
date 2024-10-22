@@ -37,6 +37,33 @@ all: prebuild prelink $(TARGET)
 
 endif
 
+ifeq ($(config),standard_part)
+  RESCOMP = windres
+  TARGETDIR = ../build
+  TARGET = $(TARGETDIR)/CoverageTest.exe
+  OBJDIR = ../build/obj/standard_part
+  DEFINES += -DNDEBUG
+  INCLUDES += -I../testlib -I../code
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -s
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: prebuild prelink $(TARGET)
+	@:
+
+endif
+
 ifeq ($(config),mod_cpp)
   RESCOMP = windres
   TARGETDIR = ../build
@@ -213,6 +240,13 @@ ifeq ($(config),standard)
 
 endif
 
+ifeq ($(config),standard_part)
+  OBJECTS += \
+	$(OBJDIR)/CoverageSrc.o \
+	$(OBJDIR)/Tests_standard_Part.o \
+
+endif
+
 ifeq ($(config),mod_cpp)
   OBJECTS += \
 	$(OBJDIR)/Tests_Mod_Cpp.o \
@@ -331,6 +365,9 @@ $(OBJDIR)/Tests_Mod_Cpp.o: ../tests/Tests_Mod_Cpp.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Tests_standard.o: ../tests/Tests_standard.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Tests_standard_Part.o: ../tests/Tests_standard_Part.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

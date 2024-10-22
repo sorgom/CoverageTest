@@ -36,8 +36,7 @@ with open(headerIn, 'r') as fh:
     decls = rxParams.sub(remConst, decls)
     decls = decls.replace('CoverageSrc&', 'const CoverageSrc&')
     decls = decls.replace('COVERAGE_HEAD_H', 'COVERAGE_SRC_H')
-    print('\n// ##### decls\n')
-    print(decls)
+
     # definitions
     defs = re.sub(r'^ {4}', '', cont, flags=re.M)
     defs = re.sub(r'^static +', '', defs, flags=re.M)
@@ -46,8 +45,6 @@ with open(headerIn, 'r') as fh:
     defs = re.sub(r'^.*\npublic:', '', defs, flags=re.S)
     defs = re.sub(r'\s*\nconst.*$', '', defs, flags=re.S|re.M)
     defs = f'#include <CoverageSrc.h>\n{defs.strip()}\n'
-    print('\n// ##### defs\n')
-    print(defs)
 
     with open(headerOut, 'w') as fh:
         fh.write(decls)

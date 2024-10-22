@@ -8,7 +8,7 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
 workspace 'CoverageTest'
 
     configurations { 
-        'standard', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count' 
+        'standard', 'standard_part', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count' 
     }
     language 'C++'
     targetdir '../build'
@@ -26,6 +26,9 @@ workspace 'CoverageTest'
 
     filter { 'configurations:standard' }
         files { '../tests/Tests_standard.cpp', '../code/CoverageSrc.cpp' }
+        
+    filter { 'configurations:standard_part' }
+        files { '../tests/Tests_standard_Part.cpp', '../code/CoverageSrc.cpp' }
         
     filter { 'configurations:mod_cpp' }
         files { '../tests/Tests_Mod_Cpp.cpp' }

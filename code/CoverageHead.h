@@ -170,7 +170,7 @@ public:
         const bool* nbo = new bool((i1 > 0) or (i2 > 0));
         delete nbo;
         //  ternary array size
-        const int* data = new int[i1 > 0 ? 20 : 10];
+        const int* data = new int[cb1 ? 20 : 10];
         delete [] data;
     }
 
