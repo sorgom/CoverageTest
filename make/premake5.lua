@@ -7,13 +7,13 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
 
 workspace 'CoverageTest'
 
-    configurations { 
-        'standard', 'standard_part', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count' 
+    configurations {
+        'standard', 'standard_part', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count'
     }
     language 'C++'
     targetdir '../build'
     objdir  '../build/obj/%{cfg.name}'
-    
+
     includedirs { '../testlib', '../code' }
     files { '../testlib/*.cpp' }
 
@@ -26,10 +26,10 @@ workspace 'CoverageTest'
 
     filter { 'configurations:standard' }
         files { '../tests/Tests_standard.cpp', '../code/CoverageSrc.cpp' }
-        
+
     filter { 'configurations:standard_part' }
         files { '../tests/Tests_standard_Part.cpp', '../code/CoverageSrc.cpp' }
-        
+
     filter { 'configurations:mod_cpp' }
         files { '../tests/Tests_Mod_Cpp.cpp' }
 
@@ -51,4 +51,3 @@ workspace 'CoverageTest'
     project 'CoverageTest'
         kind 'ConsoleApp'
         defines { 'NDEBUG' }
-       
