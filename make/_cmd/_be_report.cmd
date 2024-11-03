@@ -16,4 +16,4 @@ call covsrc -qm --srcdir . | tee %covReport%
 
 call covbr -q -u -c3 --srcdir . | sed "s|^.*/code/||" > %covTodo%
 
-if exist %covbr2html% call %covbr2html% %covTodo%
+if exist %covbr2html% call %covbr2html% -c %covTodo%
