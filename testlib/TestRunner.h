@@ -4,9 +4,11 @@
 
 struct Test
 {
-    Test();
-    virtual void run() = 0;
+    Test(const char* const name = nullptr);
+    void run();
+    virtual void body() = 0;
     Test* next = nullptr;
+    const char* const name = nullptr;
 };
 
 class TestRunner
@@ -17,10 +19,5 @@ public:
     static void add(Test* test);
     static void run();
 };
-
-inline Test::Test()
-{
-    TestRunner::add(this);
-}
 
 #endif // _H
