@@ -1,4 +1,4 @@
-#   generate coverage source and header code from header only
+"""generate coverage source and header code from header only"""
 #   (quick, dirty and uncommented)
 
 import re
