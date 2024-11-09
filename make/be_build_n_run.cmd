@@ -34,15 +34,14 @@ rem call executable without tests
 %exe%
 rem reports
 covbr -qu --srcdir . > %buildDir%\todo_%target%.txt
-if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_%target%
+if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_be_%target%
 %exe% X
 covdir -q --srcdir . --checkmin 100,100
 if %errorlevel% neq 0 (
     covbr -qu --srcdir . > %buildDir%\todo_%target%_cov.txt
+    if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_be_%target%_cov
 )
-
 echo.
 covsrc -q --srcdir .
-if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_%target%_cov
 
 echo.

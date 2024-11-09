@@ -1,5 +1,5 @@
 options:
 -c  clean build and report folders
--x  generate HTML
+-H  generate HTML
 -l  list targets
 -h  this help

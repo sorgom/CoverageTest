@@ -20,6 +20,12 @@ set tmpCmd=%buildDir%\tmp.cmd
 set solution=%myDir%\Tests.sln
 set runSub=%myDir%\be_build_n_run.cmd
 
+if not exist %solution% (
+    echo %solution% not found
+    echo use premake5 to generate
+    exit /b 1
+)
+
 rem required tools
 set docopts=%binDir%\somcpp\docopts.exe
 set covbr2html=%binDir%\covbr2html\covbr2html.exe
@@ -29,6 +35,8 @@ for %%f in (%docopts% %covbr2html%) do (
         exit /b 1
     )
 )
+
+md %buildDir% 2>NUL
 
 set optsTxt=%myDir%\be_options.txt
 
@@ -50,7 +58,7 @@ if %_c% (
     del /Q /S %buildDir% >NUL 2>&1
     del /Q /S %reportsDir% >NUL 2>&1
 )
-set _html=%_x%
+set _html=%_Hu%
 
 md %reportsDir% 2>NUL
 
@@ -62,6 +70,4 @@ if "%_args%"=="" (
     for %%f in (%_args%) do call %runSub% %%f
 )
 
-@REM %covbr2html% -o %reportsDir% %buildDir%\todo_*.txt
-%covbr2html% %buildDir%\todo_*.txt
-mv %buildDir%\todo_*.html %reportsDir%/
+%covbr2html% -co %reportsDir% %buildDir%\todo_*.txt
