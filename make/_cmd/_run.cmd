@@ -14,7 +14,6 @@ call %buildCmd% >> %buildReport% 2>&1
 
 call %subsDir%\_be_restore.cmd
 
-echo - eval
 if not exist %executable% (
     echo - build failed
     cat %buildReport%
