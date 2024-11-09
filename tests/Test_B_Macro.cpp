@@ -1,9 +1,9 @@
 #include <CoverageB.h>
 
 #include <use.h>
-#include <test.h>
+#include <Test.h>
 
-void Test01()
+TEST(B_Macro)
 {
     {
         CoverageB c0(0);
@@ -22,11 +22,4 @@ void Test01()
     CoverageB::assignments(0, 1);
     CoverageB::assignments(1, 0);
     CoverageB::assignments(1, 1);
-}
-
-int main(const int argc, const char**)
-{
-    setTest("B Macro", argc);
-    runTest(Test01);
-    return 0;
 }

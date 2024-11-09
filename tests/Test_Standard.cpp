@@ -3,7 +3,7 @@
 #include <CoverageTpl.h>
 
 #include <use.h>
-#include <test.h>
+#include <Test.h>
 
 //  same tests for header and src based classes
 template <class COVCL>
@@ -104,7 +104,13 @@ void TestCov()
     use(b, i);
 }
 
-void Test03()
+TEST(Standard_1)
+{
+    TestCov<CoverageHead>();
+    TestCov<CoverageSrc>();
+}
+
+TEST(Standard_2)
 {
     bool b = false;
     int i = 0;
@@ -119,13 +125,4 @@ void Test03()
 
     ByteBuffer<long int, short> bb;
     use(b, i, bb);
-}
-
-int main(const int argc, const char**)
-{
-    setTest("Standard Code", argc);
-    runTest(TestCov<CoverageHead>);
-    runTest(TestCov<CoverageSrc>);
-    runTest(Test03);
-    return 0;
 }

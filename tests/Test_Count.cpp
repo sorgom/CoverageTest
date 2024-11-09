@@ -1,8 +1,8 @@
 #include <CoverageCount.h>
 
-#include <test.h>
+#include <Test.h>
 
-void Test01()
+TEST(Count)
 {
     oneFunc();
 
@@ -15,11 +15,4 @@ void Test01()
     switchCaseMulti(VALUE_B);
     switchCaseMulti(VALUE_C);
     switchCaseMulti(static_cast<SomeEnum>(VALUE_C + 1));
-} 
-
-int main(const int argc, const char**)
-{
-    setTest("Count", argc);
-    runTest(Test01);
-    return 0;
 }

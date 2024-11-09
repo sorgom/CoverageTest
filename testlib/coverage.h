@@ -10,8 +10,10 @@
 #ifndef COVERAGE_H
 #define COVERAGE_H
 
+#include <iso646.h>
+
 //  bullseye coverage
-#if _BullseyeCoverage
+#ifdef _BullseyeCoverage
     // pause coverage instrumentation
     #define BULLSEY_PAUSE _Pragma("BullseyeCoverage off")
     // resume coverage instrumentation
@@ -24,7 +26,7 @@
 // force coverage of simple boolean expressions
 // by converting them to ternary expressions
 // TODO: does CTC define something equivalent to _BullseyeCoverage?
-#if _BullseyeCoverage or _COVERAGE_ON
+#if defined(_BullseyeCoverage) or defined(_COVERAGE_ON)
     #define B(SIMPLE_EXPR) (SIMPLE_EXPR ? true : false)
 #else
     #define B(SIMPLE_EXPR) SIMPLE_EXPR

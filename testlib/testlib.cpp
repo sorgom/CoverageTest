@@ -13,10 +13,7 @@ Test::Test(const char* const name):
 
 void Test::run()
 {
-    if (name != nullptr)
-    {
-        cout << "TEST(" << name << ')' << '\n';
-    }
+    cout << "TEST(" << name << ')' << '\n';
     body();
 }
 

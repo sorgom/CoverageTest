@@ -1,4 +1,4 @@
-#include <TestRunner.h>
+#include <Test.h>
 #include <iostream>
 
 struct Runner_01 : Test

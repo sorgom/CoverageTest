@@ -2,9 +2,9 @@
 #include <CoverageExSkip.h>
 
 #include <use.h>
-#include <test.h>
+#include <Test.h>
 
-void Test01()
+TEST(Exclude)
 {
     switchCaseSkip(VALUE_A);
     switchCaseSkip(VALUE_B);
@@ -15,11 +15,4 @@ void Test01()
     switchCaseJust(VALUE_B);
     switchCaseJust(VALUE_C);
     switchCaseJust(static_cast<SomeEnum>(VALUE_C + 1));
-}
-
-int main(const int argc, const char**)
-{
-    setTest("Exclude Code", argc);
-    runTest(Test01);
-    return 0;
 }

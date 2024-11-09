@@ -2,66 +2,20 @@
 --  premake5 build rules for coverage test
 --  ============================================================
 
-buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /D_COVERAGE_ON'
+buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /wd4068 /D_COVERAGE_ON'
 buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
-
--- workspace 'CoverageTest'
-
---     configurations {
---         'standard', 'standard_part', 'mod_cpp', 'macro', 'b_macro', 'fd_set', 'exclude', 'count'
---     }
---     language 'C++'
---     targetdir '../build'
---     objdir  '../build/%{_TARGET_OS}/%{cfg.name}'
-
---     includedirs { '../testlib', '../code' }
---     files { '../testlib/*.cpp' }
-
---     filter { 'action:vs*' }
---         warnings 'high'
---         buildoptions { buildoptions_vs }
-
---     filter { 'action:gmake*' }
---         buildoptions { buildoptions_gcc }
-
---     filter { 'configurations:standard' }
---         files { '../tests/Tests_standard.cpp', '../code/CoverageSrc.cpp' }
-
---     filter { 'configurations:standard_part' }
---         files { '../tests/Tests_standard_Part.cpp', '../code/CoverageSrc.cpp' }
-
---     filter { 'configurations:mod_cpp' }
---         files { '../tests/Tests_Mod_Cpp.cpp' }
-
---     filter { 'configurations:macro' }
---         files { '../tests/Tests_Macro.cpp', '../code/CoverageMacro.cpp' }
-
---     filter { 'configurations:b_macro' }
---         files { '../tests/Tests_B_Macro.cpp' }
-
---     filter { 'configurations:exclude' }
---         files { '../tests/Tests_Exclude.cpp' }
-
---     filter { 'configurations:fd_set' }
---         files { '../tests/Tests_FD_SET.cpp' }
-
---     filter { 'configurations:count' }
---         files { '../tests/Tests_Count.cpp' }
-
---     project 'CoverageTest'
---         kind 'ConsoleApp'
---         defines { 'NDEBUG' }
 
 workspace 'Tests'
 
         configurations { 'ci' }
         language 'C++'
         targetdir '../build'
-        objdir  '../build/%{_TARGET_OS}/%{cfg.name}'
+        objdir  '../build/%{_TARGET_OS}'
         defines { 'NDEBUG' }
+        kind 'ConsoleApp'
 
         includedirs { '../testlib', '../code' }
-        files { '../testlib/TestRunner.cpp', '../testlib/testMain.cpp' }
+        files { '../testlib/*.cpp' }
 
         filter { 'action:vs*' }
             warnings 'high'
@@ -70,6 +24,26 @@ workspace 'Tests'
         filter { 'action:gmake*' }
             buildoptions { buildoptions_gcc }
 
-        project 'Test_Runner'
-            kind 'ConsoleApp'
-            files { '../tests/Test_Runner.cpp' }
+        project 'Test_Standard'
+            files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
+
+        project 'Test_Standard_Part'
+            files { '../tests/Test_Standard_Part.cpp', '../code/CoverageSrc.cpp' }
+
+        project 'Test_B_Macro'
+            files { '../tests/Test_B_Macro.cpp' }
+
+        project 'Test_Count'
+            files { '../tests/Test_Count.cpp' }
+
+        project 'Test_Exclude'
+            files { '../tests/Test_Exclude.cpp' }
+
+        project 'Test_FD_SET'
+            files { '../tests/Test_FD_SET.cpp' }
+
+        project 'Test_Macro'
+            files { '../tests/Test_Macro.cpp', '../code/CoverageMacro.cpp' }
+
+        project 'Test_Mod_Cpp'
+            files { '../tests/Test_Mod_Cpp.cpp' }

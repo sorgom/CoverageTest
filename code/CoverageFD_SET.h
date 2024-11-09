@@ -6,6 +6,8 @@
 
 #ifdef _WIN32
 #include <winsock2.h>
+#pragma warning(push)
+#pragma warning(disable: 4389)
 #else
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -29,4 +31,9 @@ void selectSocket2(const int socket)
     #pragma CTC ENDSKIP
     BULLSEY_RESUME
 }
+
+#ifdef _WIN32
+#pragma warning(pop)
+#endif
+
 #endif // _H

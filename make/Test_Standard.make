@@ -20,8 +20,8 @@ endif
 
 RESCOMP = windres
 TARGETDIR = ../build
-TARGET = $(TARGETDIR)/Test_Runner
-OBJDIR = ../build/linux/ci/ci/Test_Runner
+TARGET = $(TARGETDIR)/Test_Standard
+OBJDIR = ../build/linux/ci/Test_Standard
 DEFINES += -DNDEBUG
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
@@ -50,10 +50,12 @@ endef
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/Test_Runner.o
+GENERATED += $(OBJDIR)/CoverageSrc.o
+GENERATED += $(OBJDIR)/Test_Standard.o
 GENERATED += $(OBJDIR)/testMain.o
 GENERATED += $(OBJDIR)/testlib.o
-OBJECTS += $(OBJDIR)/Test_Runner.o
+OBJECTS += $(OBJDIR)/CoverageSrc.o
+OBJECTS += $(OBJDIR)/Test_Standard.o
 OBJECTS += $(OBJDIR)/testMain.o
 OBJECTS += $(OBJDIR)/testlib.o
 
@@ -65,7 +67,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking Test_Runner
+	@echo Linking Test_Standard
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -86,7 +88,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Test_Runner
+	@echo Cleaning Test_Standard
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -119,13 +121,16 @@ endif
 # File Rules
 # #############################################
 
+$(OBJDIR)/CoverageSrc.o: ../code/CoverageSrc.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/testMain.o: ../testlib/testMain.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Test_Runner.o: ../tests/Test_Runner.cpp
+$(OBJDIR)/Test_Standard.o: ../tests/Test_Standard.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

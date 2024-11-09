@@ -20,8 +20,8 @@ endif
 
 RESCOMP = windres
 TARGETDIR = ../build
-TARGET = $(TARGETDIR)/Test_Runner
-OBJDIR = ../build/linux/ci/ci/Test_Runner
+TARGET = $(TARGETDIR)/Test_Exclude
+OBJDIR = ../build/linux/ci/Test_Exclude
 DEFINES += -DNDEBUG
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
@@ -50,10 +50,10 @@ endef
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/Test_Runner.o
+GENERATED += $(OBJDIR)/Test_Exclude.o
 GENERATED += $(OBJDIR)/testMain.o
 GENERATED += $(OBJDIR)/testlib.o
-OBJECTS += $(OBJDIR)/Test_Runner.o
+OBJECTS += $(OBJDIR)/Test_Exclude.o
 OBJECTS += $(OBJDIR)/testMain.o
 OBJECTS += $(OBJDIR)/testlib.o
 
@@ -65,7 +65,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking Test_Runner
+	@echo Linking Test_Exclude
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -86,7 +86,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Test_Runner
+	@echo Cleaning Test_Exclude
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -125,7 +125,7 @@ $(OBJDIR)/testMain.o: ../testlib/testMain.cpp
 $(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Test_Runner.o: ../tests/Test_Runner.cpp
+$(OBJDIR)/Test_Exclude.o: ../tests/Test_Exclude.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

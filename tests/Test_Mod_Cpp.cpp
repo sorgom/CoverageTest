@@ -1,9 +1,9 @@
 #include <CoverageMcpp.h>
 
 #include <use.h>
-#include <test.h>
+#include <Test.h>
 
-void Test01()
+TEST(Mod_Cpp)
 {
     {
         CoverageMcpp c0(0);
@@ -19,11 +19,4 @@ void Test01()
     CoverageMcpp::assignments(0, 1);
     CoverageMcpp::assignments(1, 0);
     CoverageMcpp::assignments(1, 1);
-}
-
-int main(const int argc, const char**)
-{
-    setTest("Modern C++ Code", argc);
-    runTest(Test01);
-    return 0;
 }
