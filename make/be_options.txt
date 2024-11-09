@@ -1,0 +1,5 @@
+options:
+-c  clean build and report folders
+-x  generate HTML
+-l  list targets
+-h  this help
