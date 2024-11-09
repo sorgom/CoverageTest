@@ -1,7 +1,7 @@
 #include <CoverageMacro.h>
 
 #include <use.h>
-#include <Test.h>
+#include <testlib.h>
 
 TEST(Macro)
 {

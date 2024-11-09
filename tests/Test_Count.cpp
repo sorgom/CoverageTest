@@ -1,6 +1,6 @@
 #include <CoverageCount.h>
 
-#include <Test.h>
+#include <testlib.h>
 
 TEST(Count)
 {

@@ -1,7 +1,7 @@
 #include <CoverageMcpp.h>
 
 #include <use.h>
-#include <Test.h>
+#include <testlib.h>
 
 TEST(Mod_Cpp)
 {

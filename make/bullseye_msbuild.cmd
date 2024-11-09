@@ -14,15 +14,14 @@ set testsDir=%cd%\tests
 set srcDir=%cd%\code
 set buildDir=%cd%\build
 set binDir=%cd%\submodules\sombin
-set reportsDir=%CD%\reports
+set reportsDir=%CD%\reports_bullseye
 
-set tmpCmd=%buildDir%\tmp.cmd
+set tmpCmd=%myDir%\tmp.cmd
 set solution=%myDir%\Tests.sln
 set runSub=%myDir%\be_build_n_run.cmd
 
 if not exist %solution% (
-    echo %solution% not found
-    echo use premake5 to generate
+    echo use premake5 to generate %solution%
     exit /b 1
 )
 
@@ -42,27 +41,38 @@ set optsTxt=%myDir%\be_options.txt
 
 %docopts% %optsTxt% %* > %tmpCmd%
 call %tmpCmd%
+del %tmpCmd% 2>NUL
 
+rem help
 if %_h% (
     echo usage: %_me% [options] [targets]
     type %optsTxt%
     exit /b 0
 )
+
+rem list targets
 if %_l% (
     echo targets:
     for %%f in (%testsDir%\*.cpp) do echo %%~nf
     exit /b 0
 )
 
+rem clean build and reports
 if %_c% (
     del /Q /S %buildDir% >NUL 2>&1
     del /Q /S %reportsDir% >NUL 2>&1
 )
+
+rem enable HTML (uppercase H option)
 set _html=%_Hu%
 
-md %reportsDir% 2>NUL
+@REM md %reportsDir% 2>NUL
 
+rem rebase to source dir
+rem enable macros
 set covcopt=--srcdir %srcDir% --macro
+
+set start=%time%
 
 if "%_args%"=="" (
     for %%f in (%testsDir%\*.cpp) do call %runSub% %%~nf
@@ -71,3 +81,6 @@ if "%_args%"=="" (
 )
 
 %covbr2html% -co %reportsDir% %buildDir%\todo_*.txt
+
+echo %start%
+echo %time%

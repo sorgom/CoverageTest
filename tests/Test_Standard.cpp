@@ -3,7 +3,7 @@
 #include <CoverageTpl.h>
 
 #include <use.h>
-#include <Test.h>
+#include <testlib.h>
 
 //  same tests for header and src based classes
 template <class COVCL>

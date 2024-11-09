@@ -2,7 +2,7 @@
 #include <CoverageExSkip.h>
 
 #include <use.h>
-#include <Test.h>
+#include <testlib.h>
 
 TEST(Exclude)
 {

@@ -39,7 +39,7 @@ exe
 obj
 bin
 build
-reports
+reports*/
 html_*
 MON.*
 # Makefile

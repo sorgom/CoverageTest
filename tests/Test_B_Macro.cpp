@@ -1,7 +1,7 @@
 #include <CoverageB.h>
 
 #include <use.h>
-#include <Test.h>
+#include <testlib.h>
 
 TEST(B_Macro)
 {
