@@ -9,10 +9,14 @@ struct Runner_01 : Test
     void body() override;
 };
 
+Runner_01 __Runner_01;
 
 void Runner_01::body()
 {
     std::cout << "running ..." << '\n';
 }
 
-Runner_01 __Runner_01();
+TEST(Runner_02)
+{
+    std::cout << "running ..." << '\n';
+}

@@ -20,4 +20,15 @@ public:
     static void run();
 };
 
+#define TEST(name) \
+struct name : Test \
+{ \
+    name(): \
+        Test(#name) \
+    {} \
+    void body() override; \
+}; \
+name __##name; \
+void name::body()
+
 #endif // _H

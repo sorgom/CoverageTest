@@ -9,10 +9,6 @@ Test::Test(const char* const name):
     name(name)
 {
     TestRunner::add(this);
-    if (name != nullptr)
-    {
-        cout << "Adding test: " << name << '\n';
-    }
 }
 
 void Test::run()
@@ -26,7 +22,6 @@ void Test::run()
 
 void TestRunner::add(Test* test)
 {
-    cout << "Adding test\n";
     if (pCurr == nullptr)
     {
         pStart = test;
