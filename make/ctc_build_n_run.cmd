@@ -7,12 +7,10 @@ if "%_me%"=="" exit /b 1
 
 set target=%1
 
-echo target: %target%
-echo - clean
+echo - %target%
 del /Q %monFile% %datFile% 2>NUL
 msbuild %solution% -t:clean >NUL
 
-echo - build
 set buildLog=%buildDir%\ctc_build_%target%.log
 
 cd %myDir%
@@ -25,7 +23,6 @@ if %errorlevel% neq 0 (
 ) else (
     del %buildLog%
 )
-echo - run and reports
 set exe=%buildDir%\%target%.exe
 
 rem call executable without tests
@@ -35,7 +32,6 @@ rem call executable with tests
 %exe% X
 ctcreport.exe %ctcreportParams% -D ProjectName=%target%_cov -template %myDir%\ctc_report.htm -o %reportsDir%\%target%_cov.html >NUL
 if %_html% (
-    echo - html
     ctcreport.exe %ctcreportParams%  -D ProjectName=%target%_cov -o %reportsDir%\html_%target%_cov >NUL
 )
 del %exe%

@@ -7,14 +7,13 @@ if "%_me%"=="" exit /b 1
 
 set target=%1
 
-echo. | tee -a %covReport%
-echo target: %target% | tee -a %covReport%
+echo - %target%
+echo. >> %covReport%
+echo === %target% >> %covReport%
 set covfile=%buildDir%\%target%.cov
-echo - clean
 del /Q %covfile% 2>NUL
 msbuild %solution% -t:clean >NUL
 
-echo - build
 set buildLog=%buildDir%\be_build_%target%.log
 cov01 -q1
 msbuild %solution% -t:%target% > %buildLog%
@@ -27,7 +26,6 @@ if %elevel% neq 0 (
 ) else (
     del %buildLog%
 )
-echo - run and reports
 set exe=%buildDir%\%target%.exe
 cd %srcDir%
 rem reset coverage data
@@ -38,11 +36,11 @@ rem call executable without tests
 rem reports
 covbr -qu --srcdir . > %buildDir%\todo_%target%.txt
 if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_%target%
-%exe% X | tee -a %covReport%
+%exe% X >> %covReport%
 covdir -q --srcdir . --checkmin 100,100
 if %errorlevel% neq 0 (
     covbr -qu --srcdir . > %buildDir%\todo_%target%_cov.txt
     if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_%target%_cov
 )
-covsrc -q --srcdir . | tee -a %covReport%
+covsrc -q --srcdir . >> %covReport%
 del %exe%
