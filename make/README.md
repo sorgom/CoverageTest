@@ -9,7 +9,10 @@
 ### build and run scripts
 - Bullseye_msbuild.cmd
   - requires Bullseye coverage
+  - generates reports_bullseye folder
 - CTC_msbuild.cmd
   - requires CTC++
+  - generates reports_ctc folder
 ## linux
 currently only build and run script for github CI
+- no tools required
