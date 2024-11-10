@@ -1,6 +1,5 @@
 #include <testlib.h>
 #include <iostream>
-using std::cout;
 
 Test* TestRunner::pStart = nullptr;
 Test* TestRunner::pCurr = nullptr;
@@ -13,7 +12,7 @@ Test::Test(const char* const name):
 
 void Test::run()
 {
-    cout << "TEST(" << name << ')' << '\n';
+    std::cout << "TEST(" << name << ')' << '\n';
     body();
 }
 
@@ -22,13 +21,12 @@ void TestRunner::add(Test* test)
     if (pCurr == nullptr)
     {
         pStart = test;
-        pCurr = test;
     }
     else
     {
         pCurr->next = test;
-        pCurr = test;
     }
+    pCurr = test;
 }
 
 void TestRunner::run()

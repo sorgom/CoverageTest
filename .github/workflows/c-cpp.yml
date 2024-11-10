@@ -1,5 +1,5 @@
 #   ============================================================
-#   continuous integration setup 
+#   continuous integration setup
 #   ============================================================
 #   created by Manfred Sorgo
 name: C/C++ CI
@@ -11,13 +11,13 @@ on:
     branches: [ "dev", "release" ]
 
 jobs:
-  buildApp:
+  buildAndRun:
 
     runs-on: ubuntu-latest
-      
+
     steps:
     - name: "Checkout repository"
       uses: actions/checkout@v3
 
-    - name: build
-      run: cd make; make clean; make -j config=ci
+    - name: ci
+      run: cd make; chmod +x ci.sh; ./ci.sh

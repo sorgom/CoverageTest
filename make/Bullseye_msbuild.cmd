@@ -26,5 +26,8 @@ if "%_args%"=="" (
 
 %covbr2html% -co %reportsDir% %buildDir%\todo_*.txt
 
+echo.
+echo report: %covReport%
+echo.
 echo %start%
 echo %time%
