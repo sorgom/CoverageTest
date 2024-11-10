@@ -39,8 +39,8 @@ workspace 'Tests'
         project 'Test_Exclude'
             files { '../tests/Test_Exclude.cpp' }
 
-        project 'Test_FD_SET'
-            files { '../tests/Test_FD_SET.cpp' }
+        project 'Test_FD_SET_Macro'
+            files { '../tests/Test_FD_SET_Macro.cpp' }
 
         project 'Test_Macro'
             files { '../tests/Test_Macro.cpp', '../code/CoverageMacro.cpp' }

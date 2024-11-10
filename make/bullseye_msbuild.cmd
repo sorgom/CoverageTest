@@ -11,6 +11,8 @@ call %~dp0setup.cmd %*
 if %errorlevel% NEQ 0 exit /b 0
 
 set runSub=%myDir%\be_build_n_run.cmd
+set covReport=%reportsDir%\coverage.txt
+echo %DATE% %TIME% > %covReport%
 
 rem rebase to source dir
 rem enable macros

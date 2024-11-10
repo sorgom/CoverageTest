@@ -20,8 +20,8 @@ endif
 
 RESCOMP = windres
 TARGETDIR = ../build
-TARGET = $(TARGETDIR)/Test_FD_SET
-OBJDIR = ../build/linux/ci/Test_FD_SET
+TARGET = $(TARGETDIR)/Test_FD_SET_Macro
+OBJDIR = ../build/linux/ci/Test_FD_SET_Macro
 DEFINES += -DNDEBUG
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
@@ -50,10 +50,10 @@ endef
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/Test_FD_SET.o
+GENERATED += $(OBJDIR)/Test_FD_SET_Macro.o
 GENERATED += $(OBJDIR)/testMain.o
 GENERATED += $(OBJDIR)/testlib.o
-OBJECTS += $(OBJDIR)/Test_FD_SET.o
+OBJECTS += $(OBJDIR)/Test_FD_SET_Macro.o
 OBJECTS += $(OBJDIR)/testMain.o
 OBJECTS += $(OBJDIR)/testlib.o
 
@@ -65,7 +65,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking Test_FD_SET
+	@echo Linking Test_FD_SET_Macro
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -86,7 +86,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Test_FD_SET
+	@echo Cleaning Test_FD_SET_Macro
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -125,7 +125,7 @@ $(OBJDIR)/testMain.o: ../testlib/testMain.cpp
 $(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Test_FD_SET.o: ../tests/Test_FD_SET.cpp
+$(OBJDIR)/Test_FD_SET_Macro.o: ../tests/Test_FD_SET_Macro.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

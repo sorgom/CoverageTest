@@ -9,17 +9,22 @@ set tool=ctc
 call %~dp0setup.cmd %*
 if %errorlevel% NEQ 0 exit /b 0
 
-echo OK
+call %myDir%\be_off.cmd
 
 set runSub=%myDir%\ctc_build_n_run.cmd
 set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m
-set ctcreportParams=-t 98 -nsb -include-justifications -restrict-to-files "*/code/*" -measures f,mcdc -D ProjectName=%config%%covArg%
+set ctcreportParams=-t 98 -nsb -shorten-path %rootDir%\ -include-justifications -restrict-to-files "*/code/*" -measures f,mcdc
 set msbuildParams=-p:TrackFileAccess=false
-set monFile=%makeDir%\MON.sym
-set datFile=%makeDir%\MON.dat
+set monFile=%myDir%\MON.sym
+set datFile=%myDir%\MON.dat
 
 if "%_args%"=="" (
     for %%f in (%testsDir%\*.cpp) do call %runSub% %%~nf
 ) else (
     for %%f in (%_args%) do call %runSub% %%f
 )
+
+del /Q %monFile% %datFile% 2>NUL
+
+echo %start%
+echo %time%

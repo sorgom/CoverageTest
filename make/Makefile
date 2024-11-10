@@ -14,7 +14,7 @@ ifeq ($(config),ci)
   Test_B_Macro_config = ci
   Test_Count_config = ci
   Test_Exclude_config = ci
-  Test_FD_SET_config = ci
+  Test_FD_SET_Macro_config = ci
   Test_Macro_config = ci
   Test_Mod_Cpp_config = ci
 
@@ -22,7 +22,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET Test_Macro Test_Mod_Cpp
+PROJECTS := Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET_Macro Test_Macro Test_Mod_Cpp
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -58,10 +58,10 @@ ifneq (,$(Test_Exclude_config))
 	@${MAKE} --no-print-directory -C . -f Test_Exclude.make config=$(Test_Exclude_config)
 endif
 
-Test_FD_SET:
-ifneq (,$(Test_FD_SET_config))
-	@echo "==== Building Test_FD_SET ($(Test_FD_SET_config)) ===="
-	@${MAKE} --no-print-directory -C . -f Test_FD_SET.make config=$(Test_FD_SET_config)
+Test_FD_SET_Macro:
+ifneq (,$(Test_FD_SET_Macro_config))
+	@echo "==== Building Test_FD_SET_Macro ($(Test_FD_SET_Macro_config)) ===="
+	@${MAKE} --no-print-directory -C . -f Test_FD_SET_Macro.make config=$(Test_FD_SET_Macro_config)
 endif
 
 Test_Macro:
@@ -82,7 +82,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f Test_B_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Count.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Exclude.make clean
-	@${MAKE} --no-print-directory -C . -f Test_FD_SET.make clean
+	@${MAKE} --no-print-directory -C . -f Test_FD_SET_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Mod_Cpp.make clean
 
@@ -100,7 +100,7 @@ help:
 	@echo "   Test_B_Macro"
 	@echo "   Test_Count"
 	@echo "   Test_Exclude"
-	@echo "   Test_FD_SET"
+	@echo "   Test_FD_SET_Macro"
 	@echo "   Test_Macro"
 	@echo "   Test_Mod_Cpp"
 	@echo ""
