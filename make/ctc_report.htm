@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>$ProjectName$</title>
+</head>
+<body>
+    <style type="text/css">
+        table {border-collapse: collapse;}
+        td {border: 1px solid black; padding: 5px; text-align: center;}
+        td.l {text-align: left;}
+        thead { background-color: lightgray; }
+        * { font-family: Arial, sans-serif; }
+   </style>
+   <table>
+    <thead>
+    <tr>
+        <td></td>
+        <td>function</td><td></td><td></td>
+        <td>MC/DC</td><td></td><td></td>
+    </tr>
+    <tr>
+        <td class="l">Source</td>
+        <td>points</td>
+        <td>hits</td>
+        <td>cov</td>
+        <td>points</td>
+        <td>hits</td>
+        <td>cov</td>
+    </tr>
+    </thead>
+    {CTC_LOOP("Directories")}
+    {CTC_LOOP("SourceFiles")}
+    <tr>
+        <td class="l">$SourceFileName$</td>
+        {CTC_LOOP("CoverageMeasures")}
+        <td>$Checkpoints$</td><td>$Hits$</td><td>$TER$%</td>
+        {CTC_LOOP_END("CoverageMeasures")}
+    </tr>
+    {CTC_LOOP_END("SourceFiles")}{CTC_LOOP_END("Directories")}
+    <tr>
+        <td class="l">Total</td>
+        {CTC_LOOP("CoverageMeasures")}
+        <td>$Checkpoints$</td><td>$Hits$</td><td>$TER$%</td>
+        {CTC_LOOP_END("CoverageMeasures")}
+    </tr>
+   </table> 
+</body>
+</html>
+

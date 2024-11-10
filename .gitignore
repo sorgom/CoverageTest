@@ -1,3 +1,23 @@
+# local
+.vs
+.vscode
+*.pdb
+exe
+obj
+bin
+build
+reports*/
+html_*
+MON.*
+# Makefile
+# *.make
+*.vcxproj
+*.vcxproj.*
+*.sln
+*.log
+tmp*
+*.ctc
+
 # Prerequisites
 *.d
 
@@ -31,20 +51,3 @@
 *.out
 *.app
 
-# make
-.vs
-.vscode
-*.pdb
-exe
-obj
-bin
-build
-html_*
-MON.*
-# Makefile
-# *.make
-*.vcxproj.user
-*.vcxproj.filters
-*.log
-tmp*
-*.ctc

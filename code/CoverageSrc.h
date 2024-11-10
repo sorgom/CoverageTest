@@ -1,61 +1,75 @@
 #pragma once
-#ifndef COVERAGESRC_H
-#define COVERAGESRC_H
+#ifndef COVERAGE_SRC_H
+#define COVERAGE_SRC_H
 
+#include <SomeEnum.h>
 #include <SomeStruct.h>
-#include <coding.h>
+#include <use.h>
+#include <coverage.h>
 
 class CoverageSrc
 {
 public:
+    //  full coverage
+    //  b true / false
     CoverageSrc(bool b = false);
+
+    //  full coverage
+    //  i 0 / 1
     CoverageSrc(int i);
-    CoverageSrc(int i, bool b);
 
-    INSTANCE_DEC(CoverageSrc)
+    //  full coverage
+    //  i 0 / 1
+    //  b false / true
+    CoverageSrc(bool b, int i);
 
-    int ifElse(int i, bool b = false) const;
+    //  destructor with if statement
+    ~CoverageSrc();
 
-    void assignments(int i1, int i2) const;
+    //  full coverage
+    //  b true / false
+    //  i 0 / 1 / -1
+    static void ifElse(bool b, int i);
 
     //  return bool simple
-    bool operator<(const CoverageSrc& other) const;
-    //  return bool and
-    bool operator==(const CoverageSrc& other) const;
-    //  return bool or
-    bool operator!=(const CoverageSrc& other) const;
-    //  return ternary
-    int realVal() const;
+    static bool retBoolSimple(int i1, int i2);
 
-    //  bool parameter
-    static void call(bool b);
+    //  return bool and
+    static bool retBoolAnd(int i1, int i2);
+    //  return bool or
+    static bool retBoolOr(int i1, int i2);
+    //  return ternary
+    static int retTernary(int i1, int i2);
 
     //  call bool simple
-    void callBoolSimple() const;
+    static void callBoolSimple(int i1, int i2);
     //  call bool and
-    void callBoolAnd() const;
+    static void callBoolAnd(int i1, int i2);
     //  call bool or
-    void callBoolOr() const;
+    static void callBoolOr(int i1, int i2);
     //  call ternary
-    void callTernary() const;
+    static void callTernary(int i1, int i2);
+
+    //  full coverage
+    //  i1 0 / 1
+    //  i2 0 / 1
+    static void assignments(int i1, int i2);
 
     //  for loop simple
-    void forLoopSimple() const;
+    static void forLoopSimple(int i1);
     //  for loop and
-    void forLoopAnd(int lim) const;
+    static void forLoopAnd(int i1, int i2);
     //  for loop or
-    void forLoopOr(int lim) const;
+    static void forLoopOr(int i1, int i2);
 
-    //  switch case single return
-    static int switchCaseSingle(int i);
+    //  switch case
+    static int switchCase(SomeEnum e);
 
-    //  switch case multiple return (not allowed with SIL4)
-    static int switchCaseMulti(int i);
-
-    void tryCatch(int i) const;
+    static void tryCatch(bool b);
 
     const bool mBool;
     const int mInt;
+    const int* mData = nullptr;
 };
 
 #endif // _H
