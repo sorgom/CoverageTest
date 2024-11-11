@@ -25,9 +25,8 @@ if "%_args%"=="" (
     for %%f in (%_args%) do call %runSub% %%f
 )
 
+echo finish
 %binDir%\covbr2html.exe -co %reportsDir% %buildDir%\todo_*.txt
-
-echo.
 echo report: %covReport%
 echo.
 echo %start%

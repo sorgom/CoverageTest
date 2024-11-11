@@ -17,7 +17,7 @@ msbuild %solution% -t:clean -m >NUL
 
 set buildLog=%buildDir%\be_build_%target%.log
 cov01 -q1
-msbuild %solution% -t:%target% -m > %buildLog%
+msbuild %solution% -t:%target% -m > %buildLog% 2>&1
 set elevel=%errorlevel%
 cov01 -q0
 if %elevel% neq 0 (
