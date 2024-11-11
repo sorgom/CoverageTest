@@ -1,7 +1,7 @@
 #!/bin/bash
-
+# build & run for github CI
 cd $(dirname $0)
-make clean
+make -j clean
 make -j
 echo ""
 

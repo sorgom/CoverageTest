@@ -7,10 +7,11 @@ if "%_me%"=="" exit /b 1
 
 set target=%1
 
-echo - %target%
+echo %target%
+echo - build
 echo. >> %covReport%
 echo === %target% >> %covReport%
-set covfile=%buildDir%\%target%.cov
+set covfile=%reportsDir%\%target%.cov
 del /Q %covfile% 2>NUL
 msbuild %solution% -t:clean >NUL
 
@@ -26,6 +27,7 @@ if %elevel% neq 0 (
 ) else (
     del %buildLog%
 )
+echo - report
 set exe=%buildDir%\%target%.exe
 cd %srcDir%
 rem reset coverage data

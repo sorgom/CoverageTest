@@ -7,6 +7,7 @@ SETLOCAL
 
 set _me=%~nx0
 set tool=bullseye
+set required=covbr2html
 call %~dp0setup.cmd %*
 if %errorlevel% NEQ 0 exit /b 0
 
@@ -24,7 +25,7 @@ if "%_args%"=="" (
     for %%f in (%_args%) do call %runSub% %%f
 )
 
-%covbr2html% -co %reportsDir% %buildDir%\todo_*.txt
+%binDir%\covbr2html.exe -co %reportsDir% %buildDir%\todo_*.txt
 
 echo.
 echo report: %covReport%

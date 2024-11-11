@@ -10,7 +10,7 @@
 #ifndef COVERAGE_H
 #define COVERAGE_H
 
-#include <iso646.h>
+#include <ciso646>
 
 //  bullseye coverage
 #ifdef _BullseyeCoverage

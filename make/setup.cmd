@@ -23,11 +23,9 @@ if not exist %solution% (
 )
 
 rem required tools
-set docopts=%binDir%\somcpp\docopts.exe
-set covbr2html=%binDir%\covbr2html\covbr2html.exe
-for %%f in (%docopts% %covbr2html%) do (
-    if not exist %%f (
-        echo %%~nxf not found
+for %%f in (%required% docopts) do (
+    if not exist %binDir%\%%f.exe (
+        echo %%f tool not found
         exit /b 1
     )
 )
@@ -36,7 +34,7 @@ md %buildDir% 2>NUL
 
 set optsTxt=%myDir%\options.txt
 
-%docopts% %optsTxt% %* > %tmpCmd%
+%binDir%\docopts.exe %optsTxt% %* > %tmpCmd%
 call %tmpCmd%
 del %tmpCmd% 2>NUL
 

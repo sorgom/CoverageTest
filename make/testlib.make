@@ -20,8 +20,8 @@ endif
 
 RESCOMP = windres
 TARGETDIR = ../build
-TARGET = $(TARGETDIR)/Test_Count
-OBJDIR = ../build/linux/ci/Test_Count
+TARGET = $(TARGETDIR)/libtestlib.a
+OBJDIR = ../build/linux/ci/testlib
 DEFINES += -DNDEBUG
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
@@ -29,10 +29,10 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS += ../build/libtestlib.a
-LDDEPS += ../build/libtestlib.a
+LIBS +=
+LDDEPS +=
 ALL_LDFLAGS += $(LDFLAGS) -L../build -s
-LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
 define PREBUILDCMDS
 endef
 define PRELINKCMDS
@@ -50,8 +50,10 @@ endef
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/Test_Count.o
-OBJECTS += $(OBJDIR)/Test_Count.o
+GENERATED += $(OBJDIR)/testMain.o
+GENERATED += $(OBJDIR)/testlib.o
+OBJECTS += $(OBJDIR)/testMain.o
+OBJECTS += $(OBJDIR)/testlib.o
 
 # Rules
 # #############################################
@@ -61,7 +63,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking Test_Count
+	@echo Linking testlib
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -82,7 +84,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Test_Count
+	@echo Cleaning testlib
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -115,7 +117,10 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/Test_Count.o: ../tests/Test_Count.cpp
+$(OBJDIR)/testMain.o: ../testlib/testMain.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
