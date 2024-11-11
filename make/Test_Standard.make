@@ -29,9 +29,9 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS += ../build/libtestlib.a
-LDDEPS += ../build/libtestlib.a
-ALL_LDFLAGS += $(LDFLAGS) -L../build -s
+LIBS +=
+LDDEPS +=
+ALL_LDFLAGS += $(LDFLAGS) -s
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -52,8 +52,12 @@ OBJECTS :=
 
 GENERATED += $(OBJDIR)/CoverageSrc.o
 GENERATED += $(OBJDIR)/Test_Standard.o
+GENERATED += $(OBJDIR)/testMain.o
+GENERATED += $(OBJDIR)/testlib.o
 OBJECTS += $(OBJDIR)/CoverageSrc.o
 OBJECTS += $(OBJDIR)/Test_Standard.o
+OBJECTS += $(OBJDIR)/testMain.o
+OBJECTS += $(OBJDIR)/testlib.o
 
 # Rules
 # #############################################
@@ -118,6 +122,12 @@ endif
 # #############################################
 
 $(OBJDIR)/CoverageSrc.o: ../code/CoverageSrc.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/testMain.o: ../testlib/testMain.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Test_Standard.o: ../tests/Test_Standard.cpp

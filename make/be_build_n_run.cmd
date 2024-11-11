@@ -13,11 +13,11 @@ echo. >> %covReport%
 echo === %target% >> %covReport%
 set covfile=%reportsDir%\%target%.cov
 del /Q %covfile% 2>NUL
-msbuild %solution% -t:clean >NUL
+msbuild %solution% -t:clean -m >NUL
 
 set buildLog=%buildDir%\be_build_%target%.log
 cov01 -q1
-msbuild %solution% -t:%target% > %buildLog%
+msbuild %solution% -t:%target% -m > %buildLog%
 set elevel=%errorlevel%
 cov01 -q0
 if %elevel% neq 0 (

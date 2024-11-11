@@ -14,7 +14,7 @@ call %myDir%\be_off.cmd
 set runSub=%myDir%\ctc_build_n_run.cmd
 set ctclaunchParams=-C "NO_EXCLUDE+*\code\*" -C "CONST_INSTR = ON" -i m
 set ctcreportParams=-t 98 -nsb -shorten-path %rootDir%\ -include-justifications -restrict-to-files "*/code/*" -measures f,mcdc
-set msbuildParams=-p:TrackFileAccess=false
+set msbuildParams=-p:TrackFileAccess=false -m
 set monFile=%myDir%\MON.sym
 set datFile=%myDir%\MON.dat
 

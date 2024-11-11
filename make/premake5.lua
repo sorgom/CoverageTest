@@ -13,7 +13,7 @@ workspace 'Tests'
     defines { 'NDEBUG' }
     kind 'ConsoleApp'
     includedirs { '../testlib', '../code' }
-    libdirs { '../build' }
+    files { '../testlib/*.cpp' }
 
     filter { 'action:vs*' }
         warnings 'high'
@@ -22,38 +22,26 @@ workspace 'Tests'
     filter { 'action:gmake*' }
         buildoptions { buildoptions_gcc }
 
-    project 'testlib'
-        kind 'StaticLib'
-        files { '../testlib/*.cpp' }
-
     project 'Test_Standard'
         files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
-        links { 'testlib' }
 
     project 'Test_Standard_Part'
         files { '../tests/Test_Standard_Part.cpp', '../code/CoverageSrc.cpp' }
-        links { 'testlib' }
 
     project 'Test_B_Macro'
         files { '../tests/Test_B_Macro.cpp' }
-        links { 'testlib' }
 
     project 'Test_Count'
         files { '../tests/Test_Count.cpp' }
-        links { 'testlib' }
 
     project 'Test_Exclude'
         files { '../tests/Test_Exclude.cpp' }
-        links { 'testlib' }
 
     project 'Test_FD_SET_Macro'
         files { '../tests/Test_FD_SET_Macro.cpp' }
-        links { 'testlib' }
 
     project 'Test_Macro'
         files { '../tests/Test_Macro.cpp', '../code/CoverageMacro.cpp' }
-        links { 'testlib' }
 
     project 'Test_Mod_Cpp'
         files { '../tests/Test_Mod_Cpp.cpp' }
-        links { 'testlib' }
