@@ -9,7 +9,6 @@ set rootDir=%cd%
 set testsDir=%cd%\tests
 set srcDir=%cd%\code
 set buildDir=%cd%\build
-set binDir=%cd%\submodules\sombin
 set pyDir=%cd%\submodules\sompy
 set reportsDir=%CD%\reports_%tool%
 
@@ -27,7 +26,8 @@ md %buildDir% 2>NUL
 
 set optsTxt=%myDir%\options.txt
 
-%binDir%\docopts.exe %optsTxt% %* > %tmpCmd%
+%pyDir%\somutil\docopts.py %optsTxt% %* > %tmpCmd%
+if %errorlevel% neq 0 exit /b 1
 call %tmpCmd%
 del %tmpCmd% 2>NUL
 
