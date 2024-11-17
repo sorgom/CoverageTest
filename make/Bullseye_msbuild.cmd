@@ -7,7 +7,6 @@ SETLOCAL
 
 set _me=%~nx0
 set tool=bullseye
-set required=covbr2html
 call %~dp0setup.cmd %*
 if %errorlevel% NEQ 0 exit /b 0
 
@@ -26,7 +25,7 @@ if "%_args%"=="" (
 )
 
 echo finish
-%binDir%\covbr2html.exe -co %reportsDir% %buildDir%\todo_*.txt
+%pyDir%\covbr2html\covbr2html.py -co %reportsDir% %buildDir%\todo_*.txt
 echo report: %covReport%
 echo.
 echo %start%

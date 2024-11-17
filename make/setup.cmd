@@ -10,6 +10,7 @@ set testsDir=%cd%\tests
 set srcDir=%cd%\code
 set buildDir=%cd%\build
 set binDir=%cd%\submodules\sombin
+set pyDir=%cd%\submodules\sompy
 set reportsDir=%CD%\reports_%tool%
 
 set tmpCmd=%buildDir%\tmp.cmd
@@ -20,14 +21,6 @@ set solution=%myDir%\Tests.sln
 if not exist %solution% (
     echo use premake5 to generate %solution%
     exit /b 1
-)
-
-rem required tools
-for %%f in (%required% docopts) do (
-    if not exist %binDir%\%%f.exe (
-        echo %%f tool not found
-        exit /b 1
-    )
 )
 
 md %buildDir% 2>NUL
