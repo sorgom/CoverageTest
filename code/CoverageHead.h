@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_HEAD_H
 #define COVERAGE_HEAD_H
 
@@ -41,7 +40,7 @@ public:
     ~CoverageHead()
     {
         if (mData != nullptr) delete[] mData;
-    }    
+    }
 
     //  full coverage
     //  b true / false

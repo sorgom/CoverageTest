@@ -1,5 +1,4 @@
 
-#pragma once
 #ifndef COVERAGE_MACRO_H
 #define COVERAGE_MACRO_H
 

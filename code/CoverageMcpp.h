@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_MCPP_H
 #define COVERAGE_MCPP_H
 

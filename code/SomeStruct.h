@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef SOME_STRUCT_H
 #define SOME_STRUCT_H
 

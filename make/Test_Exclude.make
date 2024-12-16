@@ -29,9 +29,9 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS +=
-LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -s
+LIBS += ../build/linux/lib/libtestlib.a
+LDDEPS += ../build/linux/lib/libtestlib.a
+ALL_LDFLAGS += $(LDFLAGS) -L../build/linux/lib -s
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -51,11 +51,7 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/Test_Exclude.o
-GENERATED += $(OBJDIR)/testMain.o
-GENERATED += $(OBJDIR)/testlib.o
 OBJECTS += $(OBJDIR)/Test_Exclude.o
-OBJECTS += $(OBJDIR)/testMain.o
-OBJECTS += $(OBJDIR)/testlib.o
 
 # Rules
 # #############################################
@@ -119,12 +115,6 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/testMain.o: ../testlib/testMain.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/testlib.o: ../testlib/testlib.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Test_Exclude.o: ../tests/Test_Exclude.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
