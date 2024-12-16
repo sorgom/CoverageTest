@@ -13,7 +13,6 @@ workspace 'Tests'
     defines { 'NDEBUG' }
     kind 'ConsoleApp'
     includedirs { '../testlib', '../code' }
-    files { '../testlib/*.cpp' }
 
     filter { 'action:vs*' }
         warnings 'high'
@@ -21,6 +20,10 @@ workspace 'Tests'
 
     filter { 'action:gmake*' }
         buildoptions { buildoptions_gcc }
+
+    filter { 'kind:ConsoleApp' }
+        libdirs { '../build/%{_TARGET_OS}/lib' }
+        links { 'testlib' }
 
     project 'Test_Standard'
         files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
@@ -45,3 +48,8 @@ workspace 'Tests'
 
     project 'Test_Mod_Cpp'
         files { '../tests/Test_Mod_Cpp.cpp' }
+
+    project 'testlib'
+        kind 'StaticLib'
+        targetdir '../build/%{_TARGET_OS}/lib'
+        files { '../testlib/*.cpp' }

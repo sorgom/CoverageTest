@@ -17,63 +17,70 @@ ifeq ($(config),ci)
   Test_FD_SET_Macro_config = ci
   Test_Macro_config = ci
   Test_Mod_Cpp_config = ci
+  testlib_config = ci
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET_Macro Test_Macro Test_Mod_Cpp
+PROJECTS := Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET_Macro Test_Macro Test_Mod_Cpp testlib
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-Test_Standard:
+Test_Standard: testlib
 ifneq (,$(Test_Standard_config))
 	@echo "==== Building Test_Standard ($(Test_Standard_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Standard.make config=$(Test_Standard_config)
 endif
 
-Test_Standard_Part:
+Test_Standard_Part: testlib
 ifneq (,$(Test_Standard_Part_config))
 	@echo "==== Building Test_Standard_Part ($(Test_Standard_Part_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Standard_Part.make config=$(Test_Standard_Part_config)
 endif
 
-Test_B_Macro:
+Test_B_Macro: testlib
 ifneq (,$(Test_B_Macro_config))
 	@echo "==== Building Test_B_Macro ($(Test_B_Macro_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_B_Macro.make config=$(Test_B_Macro_config)
 endif
 
-Test_Count:
+Test_Count: testlib
 ifneq (,$(Test_Count_config))
 	@echo "==== Building Test_Count ($(Test_Count_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Count.make config=$(Test_Count_config)
 endif
 
-Test_Exclude:
+Test_Exclude: testlib
 ifneq (,$(Test_Exclude_config))
 	@echo "==== Building Test_Exclude ($(Test_Exclude_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Exclude.make config=$(Test_Exclude_config)
 endif
 
-Test_FD_SET_Macro:
+Test_FD_SET_Macro: testlib
 ifneq (,$(Test_FD_SET_Macro_config))
 	@echo "==== Building Test_FD_SET_Macro ($(Test_FD_SET_Macro_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_FD_SET_Macro.make config=$(Test_FD_SET_Macro_config)
 endif
 
-Test_Macro:
+Test_Macro: testlib
 ifneq (,$(Test_Macro_config))
 	@echo "==== Building Test_Macro ($(Test_Macro_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Macro.make config=$(Test_Macro_config)
 endif
 
-Test_Mod_Cpp:
+Test_Mod_Cpp: testlib
 ifneq (,$(Test_Mod_Cpp_config))
 	@echo "==== Building Test_Mod_Cpp ($(Test_Mod_Cpp_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Test_Mod_Cpp.make config=$(Test_Mod_Cpp_config)
+endif
+
+testlib:
+ifneq (,$(testlib_config))
+	@echo "==== Building testlib ($(testlib_config)) ===="
+	@${MAKE} --no-print-directory -C . -f testlib.make config=$(testlib_config)
 endif
 
 clean:
@@ -85,6 +92,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f Test_FD_SET_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Mod_Cpp.make clean
+	@${MAKE} --no-print-directory -C . -f testlib.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -103,5 +111,6 @@ help:
 	@echo "   Test_FD_SET_Macro"
 	@echo "   Test_Macro"
 	@echo "   Test_Mod_Cpp"
+	@echo "   testlib"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

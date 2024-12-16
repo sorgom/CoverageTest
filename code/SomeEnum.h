@@ -1,4 +1,3 @@
-#pragma once
 #ifndef SOME_ENUM_H
 #define SOME_ENUM_H
 

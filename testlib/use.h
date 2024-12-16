@@ -1,4 +1,3 @@
-#pragma once
 #ifndef USE_H
 #define USE_H
 

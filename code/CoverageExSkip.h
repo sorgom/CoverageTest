@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_EX_SKIP_H
 #define COVERAGE_EX_SKIP_H
 

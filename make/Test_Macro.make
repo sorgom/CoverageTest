@@ -29,9 +29,9 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS +=
-LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -s
+LIBS += ../build/linux/lib/libtestlib.a
+LDDEPS += ../build/linux/lib/libtestlib.a
+ALL_LDFLAGS += $(LDFLAGS) -L../build/linux/lib -s
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -52,12 +52,8 @@ OBJECTS :=
 
 GENERATED += $(OBJDIR)/CoverageMacro.o
 GENERATED += $(OBJDIR)/Test_Macro.o
-GENERATED += $(OBJDIR)/testMain.o
-GENERATED += $(OBJDIR)/testlib.o
 OBJECTS += $(OBJDIR)/CoverageMacro.o
 OBJECTS += $(OBJDIR)/Test_Macro.o
-OBJECTS += $(OBJDIR)/testMain.o
-OBJECTS += $(OBJDIR)/testlib.o
 
 # Rules
 # #############################################
@@ -122,12 +118,6 @@ endif
 # #############################################
 
 $(OBJDIR)/CoverageMacro.o: ../code/CoverageMacro.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/testMain.o: ../testlib/testMain.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/testlib.o: ../testlib/testlib.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Test_Macro.o: ../tests/Test_Macro.cpp

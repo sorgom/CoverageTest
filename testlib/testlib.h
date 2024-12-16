@@ -1,5 +1,4 @@
 //  CppUTest style test "framework"
-#pragma once
 #ifndef TESTLIB_H
 #define TESTLIB_H
 

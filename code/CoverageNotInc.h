@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_NOT_INC_H
 #define COVERAGE_NOT_INC_H
 

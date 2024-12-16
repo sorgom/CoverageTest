@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_FD_SET_H
 #define COVERAGE_FD_SET_H
 

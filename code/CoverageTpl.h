@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COVERAGE_TPL_H
 #define COVERAGE_TPL_H
 
