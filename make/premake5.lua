@@ -13,7 +13,6 @@ workspace 'Tests'
     defines { 'NDEBUG' }
     kind 'ConsoleApp'
     includedirs { '../testlib', '../code' }
-    libdirs { '../build/%{_TARGET_OS}/lib' }
 
     filter { 'action:vs*' }
         warnings 'high'
@@ -22,39 +21,35 @@ workspace 'Tests'
     filter { 'action:gmake*' }
         buildoptions { buildoptions_gcc }
 
+    filter { 'kind:ConsoleApp' }
+        libdirs { '../build/%{_TARGET_OS}/lib' }
+        links { 'testlib' }
+
+    project 'Test_Standard'
+        files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
+
+    project 'Test_Standard_Part'
+        files { '../tests/Test_Standard_Part.cpp', '../code/CoverageSrc.cpp' }
+
+    project 'Test_B_Macro'
+        files { '../tests/Test_B_Macro.cpp' }
+
+    project 'Test_Count'
+        files { '../tests/Test_Count.cpp' }
+
+    project 'Test_Exclude'
+        files { '../tests/Test_Exclude.cpp' }
+
+    project 'Test_FD_SET_Macro'
+        files { '../tests/Test_FD_SET_Macro.cpp' }
+
+    project 'Test_Macro'
+        files { '../tests/Test_Macro.cpp', '../code/CoverageMacro.cpp' }
+
+    project 'Test_Mod_Cpp'
+        files { '../tests/Test_Mod_Cpp.cpp' }
+
     project 'testlib'
         kind 'StaticLib'
         targetdir '../build/%{_TARGET_OS}/lib'
         files { '../testlib/*.cpp' }
-
-    project 'Test_Standard'
-        files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
-        links { 'testlib' }
-
-    project 'Test_Standard_Part'
-        files { '../tests/Test_Standard_Part.cpp', '../code/CoverageSrc.cpp' }
-        links { 'testlib' }
-
-    project 'Test_B_Macro'
-        files { '../tests/Test_B_Macro.cpp' }
-        links { 'testlib' }
-
-    project 'Test_Count'
-        files { '../tests/Test_Count.cpp' }
-        links { 'testlib' }
-
-    project 'Test_Exclude'
-        files { '../tests/Test_Exclude.cpp' }
-        links { 'testlib' }
-
-    project 'Test_FD_SET_Macro'
-        files { '../tests/Test_FD_SET_Macro.cpp' }
-        links { 'testlib' }
-
-    project 'Test_Macro'
-        files { '../tests/Test_Macro.cpp', '../code/CoverageMacro.cpp' }
-        links { 'testlib' }
-
-    project 'Test_Mod_Cpp'
-        files { '../tests/Test_Mod_Cpp.cpp' }
-        links { 'testlib' }

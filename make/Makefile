@@ -9,7 +9,6 @@ ifndef verbose
 endif
 
 ifeq ($(config),ci)
-  testlib_config = ci
   Test_Standard_config = ci
   Test_Standard_Part_config = ci
   Test_B_Macro_config = ci
@@ -18,22 +17,17 @@ ifeq ($(config),ci)
   Test_FD_SET_Macro_config = ci
   Test_Macro_config = ci
   Test_Mod_Cpp_config = ci
+  testlib_config = ci
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := testlib Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET_Macro Test_Macro Test_Mod_Cpp
+PROJECTS := Test_Standard Test_Standard_Part Test_B_Macro Test_Count Test_Exclude Test_FD_SET_Macro Test_Macro Test_Mod_Cpp testlib
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
-
-testlib:
-ifneq (,$(testlib_config))
-	@echo "==== Building testlib ($(testlib_config)) ===="
-	@${MAKE} --no-print-directory -C . -f testlib.make config=$(testlib_config)
-endif
 
 Test_Standard: testlib
 ifneq (,$(Test_Standard_config))
@@ -83,8 +77,13 @@ ifneq (,$(Test_Mod_Cpp_config))
 	@${MAKE} --no-print-directory -C . -f Test_Mod_Cpp.make config=$(Test_Mod_Cpp_config)
 endif
 
+testlib:
+ifneq (,$(testlib_config))
+	@echo "==== Building testlib ($(testlib_config)) ===="
+	@${MAKE} --no-print-directory -C . -f testlib.make config=$(testlib_config)
+endif
+
 clean:
-	@${MAKE} --no-print-directory -C . -f testlib.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Standard.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Standard_Part.make clean
 	@${MAKE} --no-print-directory -C . -f Test_B_Macro.make clean
@@ -93,6 +92,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f Test_FD_SET_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Macro.make clean
 	@${MAKE} --no-print-directory -C . -f Test_Mod_Cpp.make clean
+	@${MAKE} --no-print-directory -C . -f testlib.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -103,7 +103,6 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   testlib"
 	@echo "   Test_Standard"
 	@echo "   Test_Standard_Part"
 	@echo "   Test_B_Macro"
@@ -112,5 +111,6 @@ help:
 	@echo "   Test_FD_SET_Macro"
 	@echo "   Test_Macro"
 	@echo "   Test_Mod_Cpp"
+	@echo "   testlib"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

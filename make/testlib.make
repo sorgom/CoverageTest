@@ -31,7 +31,7 @@ ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVER
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -L../build/linux/lib -s
+ALL_LDFLAGS += $(LDFLAGS) -s
 LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
 define PREBUILDCMDS
 endef
