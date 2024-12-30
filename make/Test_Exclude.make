@@ -22,12 +22,12 @@ RESCOMP = windres
 TARGETDIR = ../build
 TARGET = $(TARGETDIR)/Test_Exclude
 OBJDIR = ../build/linux/ci/Test_Exclude
-DEFINES += -DNDEBUG
+DEFINES += -DNDEBUG -D_COVERAGE_ON
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS += ../build/linux/lib/libtestlib.a
 LDDEPS += ../build/linux/lib/libtestlib.a

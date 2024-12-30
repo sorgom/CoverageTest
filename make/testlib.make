@@ -22,12 +22,12 @@ RESCOMP = windres
 TARGETDIR = ../build/linux/lib
 TARGET = $(TARGETDIR)/libtestlib.a
 OBJDIR = ../build/linux/ci/testlib
-DEFINES += -DNDEBUG
+DEFINES += -DNDEBUG -D_COVERAGE_ON
 INCLUDES += -I../testlib -I../code
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -D_COVERAGE_ON
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=

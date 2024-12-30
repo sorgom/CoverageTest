@@ -16,7 +16,7 @@ echo %DATE% %TIME% > %covReport%
 
 rem rebase to source dir
 rem enable macros
-set covcopt=--srcdir %srcDir% --macro
+set covcopt=--srcdir %srcDir% --macro --no-banner
 
 if "%_args%"=="" (
     for %%f in (%testsDir%\*.cpp) do call %runSub% %%~nf

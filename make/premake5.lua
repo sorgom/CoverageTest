@@ -2,8 +2,8 @@
 --  premake5 build rules for coverage test
 --  ============================================================
 
-buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /wd4068 /D_COVERAGE_ON'
-buildoptions_gcc = '-std=c++17 -pedantic-errors -D_COVERAGE_ON'
+buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /wd4068'
+buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas'
 
 workspace 'Tests'
     configurations { 'ci' }
@@ -13,6 +13,7 @@ workspace 'Tests'
     defines { 'NDEBUG' }
     kind 'ConsoleApp'
     includedirs { '../testlib', '../code' }
+    defines { '_COVERAGE_ON' }
 
     filter { 'action:vs*' }
         warnings 'high'
