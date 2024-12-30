@@ -18,7 +18,6 @@ set(EXECUTABLE_OUTPUT_PATH  ${CMAKE_CURRENT_LIST_DIR})
 include_directories (
     ${CODE_PATH}
     ${TESTLIB_PATH}
-    # ${TESTS_PATH}
 )
 
 set(CMAKE_CXX_COMPILER_FORCED TRUE)
