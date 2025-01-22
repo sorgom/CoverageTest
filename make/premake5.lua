@@ -50,6 +50,9 @@ workspace 'Tests'
     project 'Test_Mod_Cpp'
         files { '../tests/Test_Mod_Cpp.cpp' }
 
+    project 'Test_All'
+        files { '../tests/*.cpp', '../code/*.cpp' }
+
     project 'testlib'
         kind 'StaticLib'
         targetdir '../build/%{_TARGET_OS}/lib'

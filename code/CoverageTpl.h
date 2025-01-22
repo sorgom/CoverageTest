@@ -18,16 +18,24 @@ private:
 #define MAX(V1, V2) (((V1) > (V2)) ? (V1) : (V2))
 
 template <typename T1, typename T2>
-class ByteBuffer
+class ByteBufferHeap
 {
 public:
-    inline ByteBuffer():
+    inline ByteBufferHeap():
         mBytes(new unsigned char[MAX(sizeof(T1), sizeof(T2))])
     {}
-    inline ~ByteBuffer() { delete[] mBytes; }
+    inline ~ByteBufferHeap() { delete[] mBytes; }
 private:
     unsigned char* mBytes;
 };
 
+template <typename T1, typename T2>
+class ByteBufferStack
+{
+public:
+    inline ByteBufferStack() = default;
+private:
+    unsigned char mBytes[MAX(sizeof(T1), sizeof(T2))];
+};
 
 #endif // _H

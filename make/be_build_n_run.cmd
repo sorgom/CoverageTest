@@ -45,5 +45,5 @@ if %errorlevel% neq 0 (
     if %_html% covhtml -q --allNum --srcdir . %reportsDir%\html_%target%_cov
 )
 covsrc -q --srcdir . >> %covReport%
-covsrc -q -c --srcdir . > %reportsDir%\csv_%target%_cov.csv
+covsrc -q -c --srcdir . | sed "s/,/;/g" > %reportsDir%\csv_%target%_cov.csv
 del %exe%
