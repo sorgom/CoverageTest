@@ -8,7 +8,6 @@ buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragm
 workspace 'Tests'
     configurations { 'ci' }
     language 'C++'
-    targetdir '../build'
     objdir  '../build/%{_TARGET_OS}'
     defines { 'NDEBUG' }
     kind 'ConsoleApp'
@@ -18,13 +17,19 @@ workspace 'Tests'
     filter { 'action:vs*' }
         warnings 'high'
         buildoptions { buildoptions_vs }
+        location '../vs'
 
     filter { 'action:gmake*' }
         buildoptions { buildoptions_gcc }
+        location '../make'
 
     filter { 'kind:ConsoleApp' }
+        targetdir '../build/%{_TARGET_OS}'
         libdirs { '../build/%{_TARGET_OS}/lib' }
         links { 'testlib' }
+
+    filter { 'kind:StaticLib' }
+        targetdir '../build/%{_TARGET_OS}/lib'
 
     project 'Test_Standard'
         files { '../tests/Test_Standard.cpp', '../code/CoverageSrc.cpp' }
@@ -55,5 +60,4 @@ workspace 'Tests'
 
     project 'testlib'
         kind 'StaticLib'
-        targetdir '../build/%{_TARGET_OS}/lib'
         files { '../testlib/*.cpp' }

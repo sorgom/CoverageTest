@@ -28,7 +28,7 @@ if %elevel% neq 0 (
     del %buildLog%
 )
 echo - report
-set exe=%buildDir%\%target%.exe
+set exe=%exeDir%\%target%.exe
 cd %srcDir%
 rem reset coverage data
 covclear -q

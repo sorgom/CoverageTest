@@ -5,17 +5,19 @@ if %_me%=="" exit /b 1
 cd %~dp0
 set myDir=%cd%
 cd ..
-set rootDir=%cd%
-set testsDir=%cd%\tests
-set srcDir=%cd%\code
-set buildDir=%cd%\build
-set pyDir=%cd%\submodules\sompy
-set reportsDir=%CD%\reports_%tool%
+set repo=%cd%
+set buildDir=%repo%\build
+set exeDir=%buildDir%\windows
+set pyDir=%repo%\submodules\sompy
+set reportsDir=%repo%\reports_%tool%
+set srcDir=%repo%\code
+set testsDir=%repo%\tests
+set vsDir=%repo%\vs
 
 set tmpCmd=%buildDir%\tmp.cmd
 set tmpFile=%buildDir%\tmp.tmp
 
-set solution=%myDir%\Tests.sln
+set solution=%vsDir%\Tests.sln
 
 if not exist %solution% (
     echo use premake5 to generate %solution%

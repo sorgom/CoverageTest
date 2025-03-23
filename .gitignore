@@ -17,6 +17,7 @@ MON.*
 *.log
 tmp*
 *.ctc
+vs
 
 # Prerequisites
 *.d
@@ -50,4 +51,3 @@ tmp*
 *.exe
 *.out
 *.app
-
