@@ -1,3 +1,4 @@
+"""ms build run all available tests with CTC coverage"""
 from coverage_common import testList, sysCall, myDir, repo, exeDir, vsSolution
 from os import chdir, makedirs, remove
 from os.path import join, isfile

@@ -6,25 +6,16 @@ from os import chdir, makedirs, environ
 from os.path import join
 from sys import argv
 
-
 reportsDir = join(repo, 'reports_bullseye')
 report = join(reportsDir, 'coverage.md')
 excludeFile = join(myDir, 'BullseyeCoverageExclusions')
-
-makedirs(reportsDir, exist_ok=True)
-
-fh = open(report, 'w')
-
-environ['COVCOPT'] = f'--srcdir {srcDir} --macro -q'
 
 def covRestore():
     """restore cov01 setting"""
     sysCall('cov01 -q --pop')
 
-atexit.register(covRestore)
-
-def buildAndRun(test:str):
-    """build and run test"""
+def buildAndRun(test:str, fh):
+    """build, run and report"""
     chdir(vsDir)
     environ['COVFILE'] = join(reportsDir, f'{test}.cov')
     vsBuild(test)
@@ -36,10 +27,23 @@ def buildAndRun(test:str):
     proc(f'covsrc -q --by-name', fh)
     fh.write('```\n\n')
 
-sysCall('cov01 -q --push')
-sysCall('cov01 -q --on')
+def run(tests):
+    """run tests"""
+    makedirs(reportsDir, exist_ok=True)
+    with open(report, 'w') as fh:
+        atexit.register(covRestore)
+        environ['COVCOPT'] = f'--srcdir {srcDir} --macro -q'
+        sysCall('cov01 -q --push')
 
-# vsBuild('Clean')
+        sysCall('cov01 -q --off')
+        vsBuild('testlib')
 
-for test in argv[1:] or testList():
-    buildAndRun(test)
+        sysCall('cov01 -q --on')
+        for test in tests:
+            buildAndRun(test, fh)
+
+        fh.close()
+
+if __name__ == '__main__':
+    vsBuild('Clean')
+    run(argv[1:] or testList())
