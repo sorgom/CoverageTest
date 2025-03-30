@@ -6,7 +6,7 @@ from os import chdir, makedirs, environ
 from os.path import join
 from sys import argv
 
-reportsDir = join(repo, 'reports_bullseye')
+reportsDir = join(repo, 'reports_Bullseye')
 report = join(reportsDir, 'coverage.md')
 excludeFile = join(myDir, 'BullseyeCoverageExclusions')
 

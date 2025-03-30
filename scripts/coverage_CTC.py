@@ -1,5 +1,5 @@
 """ms build run all available tests with CTC coverage"""
-from coverage_common import testList, sysCall, myDir, repo, exeDir, vsSolution
+from coverage_common import testList, sysCall, vsBuild, myDir, repo, exeDir, vsDir, vsSolution
 from os import chdir, makedirs, remove
 from os.path import join, isfile
 from sys import argv
@@ -9,8 +9,8 @@ reportsDir = join(repo, 'reports_CTC')
 ctcLaunchParams = '-C "NO_EXCLUDE+*/code/*" -C "CONST_INSTR = ON" -i m'
 ctcReportParams = f'-t 98 -nsb -shorten-path {repo}/ -include-justifications -restrict-to-files "*/code/*" -measures f,mcdc'
 msBuildParams = '-p:TrackFileAccess=false -m'
-monFile = join(myDir, 'MON.sym')
-datFile = join(myDir, 'MON.dat')
+monFile = 'MON.sym'
+datFile = 'MON.dat'
 
 makedirs(reportsDir, exist_ok=True)
 
@@ -20,7 +20,7 @@ def reportTemplate(target):
 
 def buildAndRun(test:str):
     """build, run and report"""
-    chdir(myDir)
+    chdir(vsDir)
     if isfile(monFile): remove(monFile)
     if isfile(datFile): remove(datFile)
     sysCall(f'ctclaunch {ctcLaunchParams} msbuild {vsSolution} -t:{test} {msBuildParams}')
@@ -33,7 +33,7 @@ def buildAndRun(test:str):
     htmlDir = join(reportsDir, f'html_{test}_cov')
     sysCall(f'ctcreport.exe {ctcReportParams} -D ProjectName={test}_cov -o {htmlDir}')
 
-# vsBuild('Clean')
+vsBuild('Clean')
 
 for test in argv[1:] or testList():
     buildAndRun(test)
