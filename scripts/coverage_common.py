@@ -1,6 +1,6 @@
 from glob import glob
 from os import chdir, getcwd, system
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath, join, isfile
 from subprocess import Popen, PIPE
 
 chdir(dirname(abspath(__file__)))
@@ -13,6 +13,10 @@ srcDir = join(repo, 'code')
 testsDir = join(repo, 'tests')
 vsDir = join(repo, 'vs')
 vsSolution = join(vsDir, 'Tests.sln')
+
+if not isfile(vsSolution):
+    print(f'{vsSolution} not found', 'use premake5 to generate', sep='\n')
+    exit(1)
 
 def testList():
     """return list of tests"""

@@ -22,6 +22,7 @@ vs
 # python
 *.pyc
 __pycache__/
+*/__pycache__/
 
 # Prerequisites
 *.d
