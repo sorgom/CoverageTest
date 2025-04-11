@@ -6,7 +6,7 @@ buildoptions_vs = '/std:c++17 /MP /W4 /wd4100 /wd4103 /wd4068'
 buildoptions_gcc = '-std=c++17 -pedantic-errors -Werror -Wall -Wno-unknown-pragmas'
 
 workspace 'Tests'
-    configurations { 'ci' }
+    configurations { 'release' }
     language 'C++'
     objdir  '../build/%{_TARGET_OS}'
     defines { 'NDEBUG' }

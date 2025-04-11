@@ -6,6 +6,6 @@ make -j clean
 make -j
 echo ""
 
-for cpp in $(ls ../tests/); do
-    ../build/linux/${cpp%.cpp} X
+for cpp in $(ls Test_*.make); do
+    ../build/linux/${cpp%.make} X
 done

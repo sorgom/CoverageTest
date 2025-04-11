@@ -1,5 +1,5 @@
-"""ms build run all available tests with Bullseye coverage"""
-from coverage_common import testList, sysCall, proc, vsBuild, myDir, repo, exeDir, srcDir, vsDir, vsSolution
+"""ms build and run available tests with Bullseye coverage"""
+from coverage_common import testList, sysCall, proc, vsBuild, checkArgs, myDir, repo, exeDir, srcDir, vsDir
 
 import atexit
 from os import chdir, makedirs, environ
@@ -45,5 +45,6 @@ def run(tests):
         fh.close()
 
 if __name__ == '__main__':
-    vsBuild('Clean')
+    checkArgs()
+    vsBuild('clean')
     run(argv[1:] or testList())
