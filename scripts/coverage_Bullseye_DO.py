@@ -9,7 +9,7 @@ options:
 """
 if __name__ == '__main__':
     from coverage_Bullseye import run, reportsDir
-    from coverage_common import testList, vsBuild, showTests
+    from coverage_common import testList, build, showTests
     import sompy
     from docopts import docopts
 
@@ -19,6 +19,6 @@ if __name__ == '__main__':
     if opts.get('c'):
         from shutil import rmtree
         rmtree(reportsDir, ignore_errors=True)
-        vsBuild('clean')
+        build('clean')
 
     run(args or testList())

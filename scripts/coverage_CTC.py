@@ -1,5 +1,5 @@
 """ms build and run available tests with CTC coverage"""
-from coverage_common import testList, sysCall, vsBuild, checkArgs, myDir, repo, exeDir, vsDir, vsSolution
+from coverage_common import testList, call, build, checkArgs, myDir, repo, binDir, vsDir, vsSolution
 from os import chdir, makedirs, remove
 from os.path import join, isfile
 from sys import argv
@@ -14,26 +14,26 @@ datFile = 'MON.dat'
 
 def reportTemplate(target):
     """build report using template"""
-    sysCall(f'ctcreport.exe {ctcReportParams} -D ProjectName={target} -template {join(myDir, 'ctc_report.htm')} -o {join(reportsDir, target)}.html')
+    call(f'ctcreport.exe {ctcReportParams} -D ProjectName={target} -template {join(myDir, 'ctc_report.htm')} -o {join(reportsDir, target)}.html')
 
 def buildAndRun(test:str):
     """build, run and report"""
     chdir(vsDir)
     if isfile(monFile): remove(monFile)
     if isfile(datFile): remove(datFile)
-    sysCall(f'ctclaunch {ctcLaunchParams} msbuild {vsSolution} -t:{test} {msBuildParams}')
+    call(f'ctclaunch {ctcLaunchParams} msbuild {vsSolution} -t:{test} {msBuildParams}')
 
-    exe = join(exeDir, f'{test}.exe')
-    sysCall(exe)
+    exe = join(binDir, f'{test}.exe')
+    call(exe)
     reportTemplate(test)
-    sysCall(f'{exe} X')
+    call(f'{exe} X')
     reportTemplate(f'{test}_cov')
     htmlDir = join(reportsDir, f'html_{test}_cov')
-    sysCall(f'ctcreport.exe {ctcReportParams} -D ProjectName={test}_cov -o {htmlDir}')
+    call(f'ctcreport.exe {ctcReportParams} -D ProjectName={test}_cov -o {htmlDir}')
 
 if __name__ == '__main__':
     checkArgs()
     makedirs(reportsDir, exist_ok=True)
-    vsBuild('clean')
+    build('clean')
     for test in argv[1:] or testList():
         buildAndRun(test)

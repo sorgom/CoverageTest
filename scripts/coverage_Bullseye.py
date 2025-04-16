@@ -1,29 +1,28 @@
 """ms build and run available tests with Bullseye coverage"""
-from coverage_common import testList, sysCall, proc, vsBuild, checkArgs, myDir, repo, exeDir, srcDir, vsDir
+from coverage_common import testList, call, proc, build, checkArgs, myDir, repo, srcDir, vsDir
 
 import atexit
 from os import chdir, makedirs, environ
-from os.path import join
+# from os.path import join
 from sys import argv
 
-reportsDir = join(repo, 'reports_Bullseye')
-report = join(reportsDir, 'coverage.md')
-excludeFile = join(myDir, 'BullseyeCoverageExclusions')
+reportsDir  = f'{repo}/reports_Bullseye'
+report      = f'{reportsDir}/coverage.md'
+excludeFile = f'{myDir}/BullseyeCoverageExclusions'
 
 def covRestore():
     """restore cov01 setting"""
-    sysCall('cov01 -q --pop')
+    call('cov01 -q --pop')
 
 def buildAndRun(test:str, fh):
     """build, run and report"""
-    chdir(vsDir)
-    environ['COVFILE'] = join(reportsDir, f'{test}.cov')
-    vsBuild(test)
-    sysCall('covclear -q')
+    environ['COVFILE'] = f'{reportsDir}/{test}.cov'
+    build(test)
+    call('covclear -q')
     fh.write(f'### {test}\n```\n')
-    proc(join(exeDir, f'{test}.exe X'), fh)
+    proc(f'{test} X', fh)
     chdir(reportsDir)
-    sysCall(f'covselect -qd --import {excludeFile}')
+    call(f'covselect -qd --import {excludeFile}')
     proc(f'covsrc -q --by-name', fh)
     fh.write('```\n\n')
 
@@ -33,12 +32,12 @@ def run(tests):
     with open(report, 'w') as fh:
         atexit.register(covRestore)
         environ['COVCOPT'] = f'--srcdir {srcDir} --macro -q'
-        sysCall('cov01 -q --push')
+        call('cov01 -q --push')
 
-        sysCall('cov01 -q --off')
-        vsBuild('testlib')
+        call('cov01 -q --off')
+        build('testlib')
 
-        sysCall('cov01 -q --on')
+        call('cov01 -q --on')
         for test in tests:
             buildAndRun(test, fh)
 
@@ -46,5 +45,5 @@ def run(tests):
 
 if __name__ == '__main__':
     checkArgs()
-    vsBuild('clean')
+    build('clean')
     run(argv[1:] or testList())
