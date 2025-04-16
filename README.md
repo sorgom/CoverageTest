@@ -5,4 +5,4 @@ C++ code collection to evaluate coverage tools
   - headers
   - sources
 - test execution code
-- [make and run section](make/README.md) for Bullseye and CTC++
+- [make and run section](scripts/README.md) for Bullseye and CTC++

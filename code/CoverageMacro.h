@@ -3,41 +3,30 @@
 #define COVERAGE_MACRO_H
 
 #include <coding.h>
-#include <coverage.h>
 
-#define MODULE_TEST
+#define MAX(V1, V2) (((V1) > (V2)) ? (V1) : (V2))
 
-//  private members and public getters
+//  private members, public getters and setters
 #define MEMBER(TYPE, NAME, VAL) \
 private: TYPE m ## NAME = VAL; \
-public: inline TYPE get ## NAME() const { return m ## NAME; }
-
-//  in module test also public setters
-#ifdef MODULE_TEST
-#define SETTER(TYPE, NAME) \
-public: inline void set ## NAME(const TYPE val) { m ## NAME = val; }
-#else
-#define SETTER(TYPE, NAME)
-#endif
+public: \
+inline TYPE get ## NAME() const { return m ## NAME; } \
+inline void set ## NAME(const TYPE val) { m ## NAME = val; }
 
 class CoverageMacro
 {
 public:
     INSTANCE_DEC(CoverageMacro)
 
+    inline CoverageMacro(int i1=1, int i2=2):
+        mInt(MAX(i1, i2))
+    {}
+
     // members and getters
     MEMBER(bool, Bool1, false)
     MEMBER(int, Int1, 11)
 
-    // test code setters: no coverage
-    BULLSEY_PAUSE
-    #pragma CTC SKIP
-
-    SETTER(bool, Bool1)
-    SETTER(int, Int1)
-
-    #pragma CTC ENDSKIP
-    BULLSEY_RESUME
+    const int mInt;
 };
 
 #endif // _H

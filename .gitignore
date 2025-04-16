@@ -17,6 +17,11 @@ MON.*
 *.log
 tmp*
 *.ctc
+vs
+
+# python
+*.pyc
+__pycache__
 
 # Prerequisites
 *.d
@@ -50,4 +55,3 @@ tmp*
 *.exe
 *.out
 *.app
-

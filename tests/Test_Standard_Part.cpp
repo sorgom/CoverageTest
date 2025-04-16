@@ -123,6 +123,6 @@ TEST(Standard_Part_2)
     // b = CoverageTpl<true,  -1>::isNeg();
     // i = CoverageTpl<true,  -1>::val();
 
-    ByteBuffer<long int, short> bb;
-    use(b, i, bb);
+    ByteBufferStack<long int, short> bbs;
+    use(b, i, bbs);
 }

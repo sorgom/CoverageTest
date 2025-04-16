@@ -69,4 +69,57 @@ public:
     const SomeStruct mStruct;
 };
 
+template <bool B, int I>
+class CoverageInline
+{
+public:
+    CoverageInline() = delete;
+    inline static bool isNeg() { return IsNeg or I < 0; }
+    inline static int val() { return IsNeg ? Val : -Val; }
+    inline static bool func()
+    {
+        if constexpr (I < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+private:
+    //  static const bool and
+    const static bool IsNeg = B and I < 0;
+    //  static const int ternary
+    const static int Val = IsNeg ? I : -I;
+};
+
+template <bool B, int I>
+class CoverageConstExpr
+{
+public:
+    CoverageConstExpr() = delete;
+    constexpr static bool isNeg() { return IsNeg or I < 0; }
+    constexpr static int val() { return IsNeg ? Val : -Val; }
+    constexpr static bool func()
+    {
+        if constexpr (I < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+private:
+    //  static const bool and
+    constexpr static bool IsNeg = B and I < 0;
+    //  static const int ternary
+    constexpr static int Val = IsNeg ? I : -I;
+};
+
+
+
 #endif // _H
